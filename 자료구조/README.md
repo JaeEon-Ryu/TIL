@@ -39,7 +39,7 @@
   
 <br>
 
-###### 출처 : http://www.tcpschool.com/c/c_array_oneDimensional , https://codedragon.tistory.com/7468 
+###### 출처 : http://www.tcpschool.com/c/c_array_oneDimensional , https://codedragon.tistory.com/7468 , https://daimhada.tistory.com/106?category=820522
 
 ------------
 ------------
