@@ -1,8 +1,18 @@
 # 파이썬으로 구현하는 자료구조
 
 ## 목록
-+ 배열
-+ 리스트
++ [배열 ( Array )](#배열-array)
++ 리스트 ( List ) 
+  +  단일리스트 ( Singly Linked List )
+  +  다중 연결리스트 ( Doubly Linked List )
++ 스택 ( Stack )
++ 큐 ( Queue )
+  + 우선순위 큐 ( Priority Queue )
++ 맵 ( Map )
++ 셋 ( Set )
++ 트리 ( Tree ) 
+  + 이진 트리 ( Binary Tree )
++ 그래프 ( Graph )
 
 <br>
 
@@ -10,7 +20,7 @@
 
 <br>
 
-## 배열(Array)
+## 배열 (Array)
 
 + ### 1. 개요
   > + 같은 타입의 변수들로 이루어진 유한 집합
