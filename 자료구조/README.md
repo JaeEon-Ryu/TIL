@@ -34,7 +34,7 @@
 + ### 2. 장점
   + 구현이 쉬움
   + 참조를 위한 추가적인 메모리 할당이 필요없음
-  + 운영체제의 캐시 
+  + 운영체제의 캐시 지역성 활용 가능
   + 검색 성능이 좋음 ( index를 이용한 random access 가능 )
   
     -> 순차 접근인 경우에도 연결 리스트보다 빠른 성능 
@@ -65,7 +65,7 @@
   
 <br>
 
-######  : http://www.tcpschool.com/c/c_array_oneDimensional , https://codedragon.tistory.com/7468 , https://daimhada.tistory.com/106?category=820522
+> ###### 참고 : http://www.tcpschool.com/c/c_array_oneDimensional , https://codedragon.tistory.com/7468 , https://daimhada.tistory.com/106?category=820522
 
 ------------
 ------------
@@ -73,133 +73,326 @@
 
 ## 리스트 (List)
 
-+ ### 1. 개요
-  + 데이터를 노드의 형태로 저장
-  + 노드의 구성 : 데이터, 다음 노드를 가르키는 포인터
-  + 선형 데이터 자료구조
-  
-+ ### 2. 장점
-  + Linked list의 길이를 동적으로 조절 가능
-  + 데이터의 삽입과 삭제가 쉬움
-  
-+ ### 3. 단점
-  + 임의의 노드에 바로 접근할 수 없음
-  + 다음 노드의 위치를 저장하기 위한 추가 공간이 필요함
-  + Cache locality를 활용해 근접 데이터를 사전에 캐시에 저장하기 어려움
-  + Linked list를 거꾸로 탐색하기 어려움
-  
-+ ### 배열과 다른점
-  + 배열은 물리적인 배치 구조 자체가 연속적으로 저장
-  + Linked list는 다음 노드를 가르키는 포인터에 다음 노드의 위치를 저장
-  
 + ## 단일 연결 리스트 ( Singly Linked List )
-  + 각 노드의 구성 : 자료 공간 + 한개의 포인터 공간
-  
-    ( 각 노드의 포인터는 다음 노드를 가리킴 )
+
+  + ### 1. 개요
+    + 동일한 타입의 항목들이 일렬로 연결된 것 
+    + 데이터를 노드의 형태로 저장
+    + 노드의 구성 : 데이터 + 다음 노드를 가르키는 포인터
+    + 선형 데이터 자료구조
+
+  + ### 2. 장점
+    + Linked list의 길이를 동적으로 조절 가능
+    + 데이터의 삽입과 삭제가 쉬움
+
+  + ### 3. 단점
+    + 임의의 노드에 바로 접근할 수 없음
+    + 다음 노드의 위치를 저장하기 위한 추가 공간이 필요함
+    + Cache locality를 활용해 근접 데이터를 사전에 캐시에 저장하기 어려움
+    + Linked list를 거꾸로 탐색하기 어려움
+
+  + ### 배열과 다른점
+    + 배열은 물리적인 배치 구조 자체가 연속적으로 저장
+    + Linked list는 다음 노드를 가르키는 포인터에 다음 노드의 위치를 저장
   
   + 구현
   
 <pre><code>
 
-# 노드 클래스 생성
-class Node():
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-
-    def __str__(self): # 실제 값을 보기 위해 필요 # 없을 시 주소값을 보게 된다
-        return str(self.data)
-
-# 단일 연결 리스트 생성
-class singly_linked_list:
-    def __init__(self):
+# GeeksforGeeks에서 가져온 코드 입니다.
+# A complete working Python program to demonstrate all 
+# insertion methods of linked list 
+  
+# Node class 
+class Node: 
+  
+    # Function to initialise the node object 
+    def __init__(self, data): 
+        self.data = data  # Assign data 
+        self.next = None  # Initialize next as null 
+  
+  
+# Linked List class contains a Node object 
+class LinkedList: 
+  
+    # Function to initialize head 
+    def __init__(self): 
         self.head = None
-        self.size = 0
-
-    # 인덱스에 해당하는 노드의 값 얻기
-    def select_node(self, index):
-   
-        current = self.head # 처음부터 탐색
-        for _ in range(index):
-            current = current.next
-        return current.data
-
-    # 매개변수로 받은 인덱스에 노드 추가
-    def insert_node(self, index, data):
-
-        node = Node(data)
-        if index == 0:
-            node.next = self.head
-            self.head = node
-            self.size += 1
+  
+  
+    # Functio to insert a new node at the beginning 
+    def push(self, new_data): 
+  
+        # 1 & 2: Allocate the Node & 
+        #        Put in the data 
+        new_node = Node(new_data) 
+  
+        # 3. Make next of new Node as head 
+        new_node.next = self.head 
+  
+        # 4. Move the head to point to new Node 
+        self.head = new_node 
+  
+  
+    # This function is in LinkedList class. Inserts a 
+    # new node after the given prev_node. This method is 
+    # defined inside LinkedList class shown above */ 
+    def insertAfter(self, prev_node, new_data): 
+  
+        # 1. check if the given prev_node exists 
+        if prev_node is None: 
+            print "The given previous node must inLinkedList."
             return
-
-        current = self.head
-        for _ in range(1, index):
-            current = current.next
-
-        node.next = current.next
-        current.next = node
-        self.size += 1
-
-    # 앞쪽에 추가
-    def push_left(self, val):
-        self.insert_node(0, val)
-
-    # 뒷쪽에 추가
-    def push_right(self, val):
-        self.insert_node(self.size, val)
-
-    # 매개변수로 받은 인덱스 부분 삭제
-    def delete_node(self, index):
-
-        if index == 0:
-            self.head = self.head.next
-            self.size -= 1
+  
+        #  2. create new node & 
+        #      Put in the data 
+        new_node = Node(new_data) 
+  
+        # 4. Make next of new Node as next of prev_node 
+        new_node.next = prev_node.next
+  
+        # 5. make next of prev_node as new_node 
+        prev_node.next = new_node 
+  
+  
+    # This function is defined in Linked List class 
+    # Appends a new node at the end.  This method is 
+    # defined inside LinkedList class shown above */ 
+    def append(self, new_data): 
+  
+        # 1. Create a new node 
+        # 2. Put in the data 
+        # 3. Set next as None 
+        new_node = Node(new_data) 
+  
+        # 4. If the Linked List is empty, then make the 
+        #    new node as head 
+        if self.head is None: 
+            self.head = new_node 
             return
+  
+        # 5. Else traverse till the last node 
+        last = self.head 
+        while (last.next): 
+            last = last.next
+  
+        # 6. Change the next of last node 
+        last.next =  new_node 
+  
+  
+    # Utility function to print the linked list 
+    def printList(self): 
+        temp = self.head 
+        while (temp): 
+            print temp.data, 
+            temp = temp.next
+  
+  
+  
+# Code execution starts here 
+if __name__=='__main__': 
+  
+    # Start with the empty list 
+    llist = LinkedList() 
+  
+    # Insert 6.  So linked list becomes 6->None 
+    llist.append(6) 
+  
+    # Insert 7 at the beginning. So linked list becomes 7->6->None 
+    llist.push(7); 
+  
+    # Insert 1 at the beginning. So linked list becomes 1->7->6->None 
+    llist.push(1); 
+  
+    # Insert 4 at the end. So linked list becomes 1->7->6->4->None 
+    llist.append(4) 
+  
+    # Insert 8, after 7. So linked list becomes 1 -> 7-> 8-> 6-> 4-> None 
+    llist.insertAfter(llist.head.next, 8) 
+  
+    print 'Created linked list is:', 
+    llist.printList() 
+  
+# This code is contributed by Manikantan Narasimhan 
 
-        current = self.head 
-        for _ in range(1, index): 
-            current = current.next 
 
-        current.next = current.next.next
-        self.size -= 1
-
-if __name__ == "__main__":
-    s_list = singly_linked_list()
-    s_list.push_right(Node(1))
-    s_list.push_right(Node(2))
-    s_list.push_right(Node(3))
-    s_list.push_right(Node(4))
-    s_list.push_right(Node(5))
-    s_list.delete_node(0)
-    print(s_list.select_node(0)) # 2
-    print(s_list.select_node(3)) # 5
-
+# 출처 : https://www.geeksforgeeks.org/linked-list-set-1-introduction/ 
 </code></pre>
 
 <br> 
 
-###### 참고 : https://daimhada.tistory.com/72, https://deep-learning-study.tistory.com/146, https://blex.me/@baealex/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%9C-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8
+> ###### 참고 : https://daimhada.tistory.com/72, https://deep-learning-study.tistory.com/146, https://blex.me/@baealex/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%9C-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8, https://m.blog.naver.com/beaqon/221240103226 
 
 <br>
 
 + ## 이중 연결 리스트 ( Doubly Linked List )
-  + 
   
+  + ### 1. 개요
+    + 노드의 구성 : 이전 노드를 가리키는 포인터 + 자료 공간 + 다음 노드를 가리키는 포인터 
+ 
+  + ### 2. 장점
+    + 단일 연결리스트의 단점을 보완 
+    + ( 오직 한 쪽 방향으로만 탐색색하는 것이 아닌 양방향 탐색이 가능함 ) 
     
+  + ### 3. 단점
+    + 두개의 레퍼런스를 요구함 ( ex: prev, next )
+
+  + ### 단일 연결 리스트와 다른점 
+    + 이전 노드에 대한 정보를 알 수 있음  
+    + ( 특정 노드의 이전 노드를 삭제하거나 특정 노드의 이전에 삽입 가능 )
   
-   
-  
+  + 구현
+
 <pre><code>
 
+# GeeksforGeeks에서 가져온 코드 입니다.
+# A complete working Python program to demonstrate all
+# insertion methods
+ 
+# A linked list node
+class Node:
+ 
+    # Constructor to create a new node
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+ 
+# Class to create a Doubly Linked List
+class DoublyLinkedList:
+ 
+    # Constructor for empty Doubly Linked List
+    def __init__(self):
+        self.head = None
+ 
+    # Given a reference to the head of a list and an
+    # integer, inserts a new node on the front of list
+    def push(self, new_data):
+ 
+        # 1. Allocates node
+        # 2. Put the data in it
+        new_node = Node(new_data)
+ 
+        # 3. Make next of new node as head and
+        # previous as None (already None)
+        new_node.next = self.head
+ 
+        # 4. change prev of head node to new_node
+        if self.head is not None:
+            self.head.prev = new_node
+ 
+        # 5. move the head to point to the new node
+        self.head = new_node
+ 
+    # Given a node as prev_node, insert a new node after
+    # the given node
+    def insertAfter(self, prev_node, new_data):
+ 
+        # 1. Check if the given prev_node is None
+        if prev_node is None:
+            print "the given previous node cannot be NULL"
+            return
+ 
+        # 2. allocate new node
+        # 3. put in the data
+        new_node = Node(new_data)
+ 
+        # 4. Make net of new node as next of prev node
+        new_node.next = prev_node.next
+ 
+        # 5. Make prev_node as previous of new_node
+        prev_node.next = new_node
+ 
+        # 6. Make prev_node ass previous of new_node
+        new_node.prev = prev_node
+ 
+        # 7. Change previous of new_nodes's next node
+        if new_node.next is not None:
+            new_node.next.prev = new_node
+ 
+    # Given a reference to the head of DLL and integer,
+    # appends a new node at the end
+    def append(self, new_data):
+ 
+        # 1. Allocates node
+        # 2. Put in the data
+        new_node = Node(new_data)
+ 
+        # 3. This new node is going to be the last node,
+        # so make next of it as None
+        new_node.next = None
+ 
+        # 4. If the Linked List is empty, then make the
+        # new node as head
+        if self.head is None:
+            new_node.prev = None
+            self.head = new_node
+            return
+ 
+        # 5. Else traverse till the last node
+        last = self.head
+        while(last.next is not None):
+            last = last.next
+ 
+        # 6. Change the next of last node
+        last.next = new_node
+ 
+        # 7. Make last node as previous of new node
+        new_node.prev = last
+ 
+        return
+ 
+    # This function prints contents of linked list
+    # starting from the given node
+    def printList(self, node):
+ 
+        print "\nTraversal in forward direction"
+        while(node is not None):
+            print " % d" %(node.data),
+            last = node
+            node = node.next
+ 
+        print "\nTraversal in reverse direction"
+        while(last is not None):
+            print " % d" %(last.data),
+            last = last.prev
+ 
+# Driver program to test above functions
+ 
+# Start with empty list
+llist = DoublyLinkedList()
+ 
+# Insert 6. So the list becomes 6->None
+llist.append(6)
+ 
+# Insert 7 at the beginning.
+# So linked list becomes 7->6->None
+llist.push(7)
+ 
+# Insert 1 at the beginning.
+# So linked list becomes 1->7->6->None
+llist.push(1)
+ 
+# Insert 4 at the end.
+# So linked list becomes 1->7->6->4->None
+llist.append(4)
+ 
+# Insert 8, after 7.
+# So linked list becomes 1->7->8->6->4->None
+llist.insertAfter(llist.head.next, 8)
+ 
+print "Created DLL is: ",
+llist.printList(llist.head)
+ 
+# This code is contributed by Nikhil Kumar Singh(nickzuck_007)
+# 출처 : https://www.geeksforgeeks.org/doubly-linked-list/ 
 
 </code></pre>
 
   
 <br>
 
-###### 참고 : https://daimhada.tistory.com/72
+> ###### 참고 : https://daimhada.tistory.com/72, https://scarletbreeze.github.io/articles/2019-07/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0(10), https://m.blog.naver.com/PostView.nhn?blogId=beaqon&logNo=221240197476&proxyReferer=https:%2F%2Fwww.google.com%2F
 
 <br>
 
