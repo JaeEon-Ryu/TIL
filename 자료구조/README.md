@@ -485,7 +485,7 @@ cllist.printList()
   
 <br>
 
-###### 참고 : https://daimhada.tistory.com/72, https://ehrn35.tistory.com/8
+###### 참고 : https://daimhada.tistory.com/72, https://ehrn35.tistory.com/8, https://jwlee010523.tistory.com/entry/%EC%9B%90%ED%98%95-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8Circular-Linked-List 
 
 <br>
 
