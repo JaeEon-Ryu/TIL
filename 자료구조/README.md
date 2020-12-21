@@ -1,10 +1,13 @@
 # 파이썬으로 구현하는 자료구조
 
+<br>
+
 ## 목록
 + [배열 ( Array )](#배열-array)
-+ 리스트 ( List ) 
-  +  단일리스트 ( Singly Linked List )
-  +  다중 연결리스트 ( Doubly Linked List )
++ [리스트 ( List )](#리스트-list)
+  +  [단일 연결 리스트 ( Singly Linked List )](#단일-연결-리스트--singly-linked-list-)
+  +  [이중 연결 리스트 ( Doubly Linked List )](#이중-연결-리스트--doubly-linked-list-)
+  +  [환형 연결 리스트 ( Circular Linked List )](#환형-연결-리스트--circular-linked-list-)
 + 스택 ( Stack )
 + 큐 ( Queue )
   + 우선순위 큐 ( Priority Queue )
@@ -68,7 +71,7 @@
 ------------
 <br>
 
-## 리스트(List): Singly Linked List / Doubly Linked List / Circular linked List
+## 리스트 (List)
 
 + ### 1. 개요
   > + 데이터를 노드의 형태로 저장
@@ -175,11 +178,49 @@ if __name__ == "__main__":
 
 </code></pre>
 
-  
+<br> 
+
+###### 참고 : https://daimhada.tistory.com/72, https://deep-learning-study.tistory.com/146, https://blex.me/@baealex/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%9C-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8
+
+<br>
+
++ ## 이중 연결 리스트 ( Doubly Linked List )
+  > + 
+  >
+  >   
+  >
+  > 
+  >
+<pre><code>
+
+
+</code></pre>
+
   
 <br>
 
-###### 참고 : https://daimhada.tistory.com/72, https://deep-learning-study.tistory.com/146, https://blex.me/@baealex/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%9C-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8
+###### 참고 : https://daimhada.tistory.com/72
+
+<br>
+
++ ## 환형 연결 리스트 ( Circular Linked List )
+  > + 
+  >
+  >   
+  >
+  > 
+  >
+<pre><code>
+
+
+</code></pre>
+
+  
+<br>
+
+###### 참고 : https://daimhada.tistory.com/72
+
+<br>
 
 ------------
 ------------
