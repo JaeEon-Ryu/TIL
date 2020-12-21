@@ -7,7 +7,7 @@
 + [리스트 ( List )](#리스트-list)
   +  [단일 연결 리스트 ( Singly Linked List )](#단일-연결-리스트--singly-linked-list-)
   +  [이중 연결 리스트 ( Doubly Linked List )](#이중-연결-리스트--doubly-linked-list-)
-  +  [환형 연결 리스트 ( Circular Linked List )](#환형-연결-리스트--circular-linked-list-)
+  +  [원형 연결 리스트 ( Circular Linked List )](#원형-연결-리스트--circular-linked-list-)
 + [스택 ( Stack )](#스택--stack-)
 + [큐 ( Queue )](큐--queue-)
   + [우선순위 큐 ( Priority Queue )](#우선순위-큐--priority-queue-)
@@ -99,7 +99,6 @@
   
 <pre><code>
 
-# GeeksforGeeks에서 가져온 코드 입니다.
 # A complete working Python program to demonstrate all 
 # insertion methods of linked list 
   
@@ -245,7 +244,6 @@ if __name__=='__main__':
 
 <pre><code>
 
-# GeeksforGeeks에서 가져온 코드 입니다.
 # A complete working Python program to demonstrate all
 # insertion methods
  
@@ -396,22 +394,98 @@ llist.printList(llist.head)
 
 <br>
 
-+ ## 환형 연결 리스트 ( Circular Linked List )
-  + 
++ ## 원형 연결 리스트 ( Circular Linked List )
+  + ### 1. 개요
+    + 모든 노드가 연결되어 원을 형석하는 연결 리스트 ( NULL이 없음 )
+ 
+  + ### 2. 장점
+    + 한 노드에서 다른 모든 노드로의 접근이 가능함
+      ( 노드의 삽입, 삭제가 자유로움 )
+    
+  + ### 3. 단점
+    + 노드의 삽입, 삭제 시 선행 노드의 포인터가 필요
+    + 원형으로 순환하기 때문에 무한 루프에 빠질 가능성이 있음
+
+  + ### 단일 연결 리스트와 다른점 
+    + 단일 연결 리스트의 마지막 노드는 NULL을 가리켰음
+    + 하지만 원형 연결 리스트의 마지막 노드는 첫 번째 노드를 가리킴
   
-     
-  
-   
+  + 구현 
   
 <pre><code>
 
+# Python program to demonstrate  
+# circular linked list traversal  
+  
+# Structure for a Node 
+class Node: 
+      
+    # Constructor to create  a new node 
+    def __init__(self, data): 
+        self.data = data  
+        self.next = None
+  
+class CircularLinkedList: 
+      
+    # Constructor to create a empty circular linked list 
+    def __init__(self): 
+        self.head = None
+  
+    # Function to insert a node at the beginning of a 
+    # circular linked list 
+    def push(self, data): 
+        ptr1 = Node(data) 
+        temp = self.head 
+          
+        ptr1.next = self.head 
+  
+        # If linked list is not None then set the next of 
+        # last node 
+        if self.head is not None: 
+            while(temp.next != self.head): 
+                temp = temp.next 
+            temp.next = ptr1 
+  
+        else: 
+            ptr1.next = ptr1 # For the first node 
+  
+        self.head = ptr1  
+  
+    # Function to print nodes in a given circular linked list 
+    def printList(self): 
+        temp = self.head 
+        if self.head is not None: 
+            while(True): 
+                print "%d" %(temp.data), 
+                temp = temp.next
+                if (temp == self.head): 
+                    break 
+  
+  
+# Driver program to test above function 
+  
+# Initialize list as empty 
+cllist = CircularLinkedList() 
+  
+# Created linked list will be 11->2->56->12 
+cllist.push(12) 
+cllist.push(56) 
+cllist.push(2) 
+cllist.push(11) 
+  
+print "Contents of circular Linked List"
+cllist.printList() 
+            
+# This code is contributed by  
+# Nikhil Kumar Singh(nickzuck_007) 
+# 출처 : https://www.geeksforgeeks.org/circular-linked-list-set-2-traversal/ 
 
 </code></pre>
 
   
 <br>
 
-###### 참고 : https://daimhada.tistory.com/72
+###### 참고 : https://daimhada.tistory.com/72, https://ehrn35.tistory.com/8
 
 <br>
 
