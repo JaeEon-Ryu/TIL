@@ -497,7 +497,8 @@
 
 + ### 1. 개요
   + 한 쪽으로만 자료를 넣고 뺄 수 있는 구조
-    ( FILO - First in Last Out ( 선입후출 == 후입선출 ) )
+  + 구조 : FILO - First in Last Out 
+  + 활용 예 ) 재귀 알고리즘, 괄호 검사, 역순 문자열 등 
   
 + ### 2. 장점
   + 히스토리 역추적에 최적화
@@ -588,7 +589,7 @@
 
 <br>
 
-> ###### 참고 : https://galid1.tistory.com/178, https://cloudstudying.kr/lectures/141
+> ###### 참고 : https://galid1.tistory.com/178, https://cloudstudying.kr/lectures/141, https://velog.io/@choiiis/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%8A%A4%ED%83%9DStack%EA%B3%BC-%ED%81%90Queue 
 
 ------------
 <br>
@@ -596,34 +597,146 @@
 ## 큐 ( Queue )
 
   + ### 1. 개요
-    + 
+    + 데이터의 삽입 삭제가 서로 다른 방향에서 이루어짐
+    + 구조 : FIFO - First in First Out ( 선입선출 ) 
+    + 활용 예 ) BFS, 캐싱 처리, 프린터 출력 처리 등
 
   + ### 2. 장점
-    + 
+    + 입력 데이터들의 순서를 정하는데 최적화
 
   + ### 3. 단점
-    +
+    + front, rear 부분 인덱스를 증가시키면 문제 발생
+      ( front 부분이 배열 끝에 도달 -> 공간이 남아있는데도 쓰지 못하는 경우 발생 )
+        -> 원형 큐로 해결 가능
  
   + 구현
   
   <pre><code>
+  # Python3 program for array implementation of queue 
+  
+  # Class Queue to represent a queue 
+  class Queue: 
+
+      # __init__ function 
+      def __init__(self, capacity): 
+          self.front = self.size = 0
+          self.rear = capacity -1
+          self.Q = [None]*capacity 
+          self.capacity = capacity 
+
+      # Queue is full when size becomes 
+      # equal to the capacity  
+      def isFull(self): 
+          return self.size == self.capacity 
+
+      # Queue is empty when size is 0 
+      def isEmpty(self): 
+          return self.size == 0
+
+      # Function to add an item to the queue.  
+      # It changes rear and size 
+      def EnQueue(self, item): 
+          if self.isFull(): 
+              print("Full") 
+              return
+          self.rear = (self.rear + 1) % (self.capacity) 
+          self.Q[self.rear] = item 
+          self.size = self.size + 1
+          print("% s enqueued to queue"  % str(item)) 
+
+      # Function to remove an item from queue.  
+      # It changes front and size 
+      def DeQueue(self): 
+          if self.isEmpty(): 
+              print("Empty") 
+              return
+
+          print("% s dequeued from queue" % str(self.Q[self.front])) 
+          self.front = (self.front + 1) % (self.capacity) 
+          self.size = self.size -1
+
+      # Function to get front of queue 
+      def que_front(self): 
+          if self.isEmpty(): 
+              print("Queue is empty") 
+
+          print("Front item is", self.Q[self.front]) 
+
+      # Function to get rear of queue 
+      def que_rear(self): 
+          if self.isEmpty(): 
+              print("Queue is empty") 
+          print("Rear item is",  self.Q[self.rear]) 
+
+
+  # Driver Code 
+  if __name__ == '__main__': 
+
+      queue = Queue(30) 
+      queue.EnQueue(10) 
+      queue.EnQueue(20) 
+      queue.EnQueue(30) 
+      queue.EnQueue(40) 
+      queue.DeQueue() 
+      queue.que_front() 
+      queue.que_rear() 
+      
+  # 출처 : https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/ 
   </code></pre> 
+  
+> ###### 참고 : https://syundev.tistory.com/34, https://velog.io/@choiiis/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%8A%A4%ED%83%9DStack%EA%B3%BC-%ED%81%90Queue 
 
 ## 우선순위 큐 ( Priority Queue )
   
   + ### 1. 개요
-    + 
+    + 활용 예 ) CPU 스케줄링, Dijkstra의 최단 경로 알고리즘, 대기열 응용프로그램 등 
+    + 주로 힙으로 구현
 
   + ### 2. 장점
-    + 
+    + 들어간 순서에 상관없이 우선순위가 높은 데이터가 먼저 나옴
 
   + ### 3. 단점
-    +
+    + 배열로 구현할 시 ( 최악의 경우 )
+      1) 데이터 삽입 과정에서 인덱스를 모두 밀어야 함 
+      2) 삽입 위치를 찾기 위해 모든 인덱스를 탐색해야 함
+    + 연결 리스트로 구현할 시 ( 최악의 경우 )
+      1) 삽입 위치를 찾기 위해 모든 인덱스를 탐색해야 함
  
   + 구현
 
   <pre><code>
+  
+  import heapq
+  class PriorityQueue():
+      def __init__(self):
+          self.queue = []
+          self.count = 0
+
+      def enqueue(self, priority, v):
+          self.count += 1
+          heapq.heappush(self.queue,(priority, self.count,  v))
+
+      def dequeue(self):
+          heapq.heappop(self.queue)
+
+      def display(self):
+          print(self.queue)
+
+
+  if __name__ == "__main__":
+      pq = PriorityQueue()
+      print(pq.enqueue(1, 'test1'))
+      print(pq.enqueue(4, 'test2'))
+      print(pq.enqueue(3, 'test3'))
+      print(pq.enqueue(1, 'test4'))
+      print(pq.enqueue(2, 'test5'))
+      print(pq.enqueue(1, 'test6'))
+      pq.display() # [(1, 1, 'test1'), (1, 4, 'test4'), (1, 6, 'test6'), (4, 2, 'test2'), (2, 5, 'test5'), (3, 3, 'test3')]
+
+  #출처 : https://daimhada.tistory.com/169
   </code></pre> 
+
+> ###### 참고 : https://hannom.tistory.com/36 
 
 <br>
 
