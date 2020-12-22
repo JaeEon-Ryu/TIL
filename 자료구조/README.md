@@ -485,7 +485,7 @@ cllist.printList()
   
 <br>
 
-###### 참고 : https://daimhada.tistory.com/72, https://ehrn35.tistory.com/8, https://jwlee010523.tistory.com/entry/%EC%9B%90%ED%98%95-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8Circular-Linked-List 
+> ###### 참고 : https://daimhada.tistory.com/72, https://ehrn35.tistory.com/8, https://jwlee010523.tistory.com/entry/%EC%9B%90%ED%98%95-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8Circular-Linked-List 
 
 <br>
 
@@ -495,7 +495,100 @@ cllist.printList()
 
 ## 스택 ( Stack )
 
++ ### 1. 개요
+  + 한 쪽으로만 자료를 넣고 뺄 수 있는 구조
+    ( FILO - First in Last Out ( 선입후출 == 후입선출 ) )
+  
++ ### 2. 장점
+  + 히스토리 역추적에 최적화
+    ( ex : 실행 취소(Undo), 복구(Redo) 등 )
+    
++ ### 3. 단점
+  + 크기가 불확실 할 때 확장시 확장연산이 오래걸림
+  + 데이터 탐색이 오래 
+  
++ ### 구현
+
+<pre><code>
+
+# Python program to demonstrate 
+# stack implementation using a linked list. 
+# node class
+class Node:
+   def __init__(self, value):
+      self.value = value
+      self.next = None
+ 
+class Stack:
+    
+   # Initializing a stack. 
+   # Use a dummy node, which is 
+   # easier for handling edge cases. 
+   def __init__(self):
+      self.head = Node("head")
+      self.size = 0
+ 
+   # String representation of the stack
+   def __str__(self):
+      cur = self.head.next
+      out = ""
+      while cur:
+         out += str(cur.value) + "->"
+         cur = cur.next
+      return out[:-3]   
+ 
+   # Get the current size of the stack
+   def getSize(self):
+      return self.size
+    
+   # Check if the stack is empty
+   def isEmpty(self):
+      return self.size == 0
+    
+   # Get the top item of the stack
+   def peek(self):
+       
+      # Sanitary check to see if we 
+      # are peeking an empty stack. 
+      if self.isEmpty():
+         raise Exception("Peeking from an empty stack")
+      return self.head.next.value
+ 
+   # Push a value into the stack. 
+   def push(self, value):
+      node = Node(value)
+      node.next = self.head.next
+      self.head.next = node
+      self.size += 1
+      
+   # Remove a value from the stack and return. 
+   def pop(self):
+      if self.isEmpty():
+         raise Exception("Popping from an empty stack")
+      remove = self.head.next
+      self.head.next = self.head.next.next
+      self.size -= 1
+      return remove.value
+ 
+# Driver Code
+if __name__ == "__main__":
+   stack = Stack()
+   for i in range(1, 11):
+      stack.push(i)
+   print(f"Stack: {stack}")
+ 
+   for _ in range(1, 6):
+      remove = stack.pop()
+      print(f"Pop: {remove}")
+   print(f"Stack: {stack}")
+   
+# 출처 : https://www.geeksforgeeks.org/stack-in-python/ 
+
+</code></pre>
+
 <br>
+
+> ###### 참고 : https://galid1.tistory.com/178, https://cloudstudying.kr/lectures/141
 
 ------------
 <br>
