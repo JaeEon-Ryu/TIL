@@ -11,7 +11,6 @@
 + [스택 ( Stack )](#스택--stack-)
 + [큐 ( Queue )](큐--queue-)
   + [우선순위 큐 ( Priority Queue )](#우선순위-큐--priority-queue-)
-+ [맵 ( Map )](#맵--map-)
 + [셋 ( Set )](#셋--set-)
 + [트리 ( Tree )](#트리--tree-)
   + [이진 트리 ( Binary Tree )](#이진-트리--binary-tree-)
@@ -738,30 +737,6 @@
 
 > ###### 참고 : https://hannom.tistory.com/36 
 
-<br>
-
-------------
-<br>
-
-## 맵 ( Map )
-
-  + ### 1. 개요
-    + 여러 사전을 하나의 단위로 함께 관리하기 위한 데이터 구조
-    + 중복 키 허용 X
-
-  + ### 2. 장점
-    + 
-
-  + ### 3. 단점
-    +
- 
-  + 구현
-  
-  <pre><code>
-  </code></pre> 
- 
-> ###### 참고 : https://lelumiere.tistory.com/3 
-  
 <br>
 
 ------------
