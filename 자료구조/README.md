@@ -766,18 +766,78 @@
 ## 트리 ( Tree )
 
   + ### 1. 개요
-    + 
+    + 노드로 이루어진 자료 구조
+    + 트리는 하나의 루트 노드를 가짐
+    + 루트 노드는 0개 이상의 자식 노드를 가짐
+    + 자식 노드 또한 0개 이상의 자식 노드를 가짐 ( 반복 ) 
+    + 활용 예 ) 리눅스, 윈도우 등의 파일 시스템 구조
+    
+  + ### 2. 용어 정리
+    + 루트 노드(root node): 부모가 없는 노드, 트리는 하나의 루트 노드만을 가짐
+    + 단말 노드(leaf node): 자식이 없는 노드, ‘말단 노드’ 또는 ‘잎 노드’라고도 불림
+    + 내부(internal) 노드: 단말 노드가 아닌 노드
+    + 간선(edge): 노드를 연결하는 선 (link, branch 라고도 부름)
+    + 형제(sibling): 같은 부모를 가지는 노드
+    + 노드의 크기(size): 자신을 포함한 모든 자손 노드의 개수
+    + 노드의 깊이(depth): 루트에서 어떤 노드에 도달하기 위해 거쳐야 하는 간선의 수
+    + 노드의 레벨(level): 트리의 특정 깊이를 가지는 노드의 집합
+    + 노드의 차수(degree): 하위 트리 개수 / 간선 수 (degree) = 각 노드가 지닌 가지의 수
+    + 트리의 차수(degree of tree): 트리의 최대 차수
+    + 트리의 높이(height): 루트 노드에서 가장 깊숙히 있는 노드의 깊이
 
-  + ### 2. 장점
-    + 
-
-  + ### 3. 단점
-    +
- 
+  + ### 3. 특징
+    + 그래프의 한 종류로 ‘최소 연결 트리’ 라고도 불림
+    + 계층 모델에 속함
+    + 사이클이 없음
+    + 루트에서 어떤 노드로 가는 경로는 유일함
+    + 종류 : 이진 트리, 이진 탐색 트리, 균형 트리 , 이진 힙 등 
+    
   + 구현
   
   <pre><code>
+  
+  # Python program to introduce Binary Tree 
+  
+  # A class that represents an individual node in a 
+  # Binary Tree 
+  class Node: 
+      def __init__(self,key): 
+          self.left = None
+          self.right = None
+          self.val = key 
+
+
+  # create root 
+  root = Node(1) 
+  ''' following is the tree after above statement 
+          1 
+        /   \ 
+       None  None'''
+
+  root.left      = Node(2); 
+  root.right     = Node(3); 
+
+  ''' 2 and 3 become left and right children of 1 
+             1 
+           /   \ 
+          2      3 
+       /    \    /  \ 
+     None None None None'''
+
+
+  root.left.left  = Node(4); 
+  '''4 becomes left child of 2 
+             1 
+         /       \ 
+        2          3 
+      /   \       /  \ 
+     4    None  None  None 
+    /  \ 
+  None None'''
+  # 출처 : https://www.geeksforgeeks.org/binary-tree-set-1-introduction/ 
   </code></pre> 
+  
+  > ###### 참조 : https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html , https://m.blog.naver.com/justkukaro/220548164184
 
 ## 이진 트리 ( Binary Tree )
 
