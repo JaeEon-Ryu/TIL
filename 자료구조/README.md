@@ -792,70 +792,99 @@
     + 루트에서 어떤 노드로 가는 경로는 유일함
     + 종류 : 이진 트리, 이진 탐색 트리, 균형 트리 , 이진 힙 등 
     
-  + 구현
-  
-  <pre><code>
-  
-  # Python program to introduce Binary Tree 
-  
-  # A class that represents an individual node in a 
-  # Binary Tree 
-  class Node: 
-      def __init__(self,key): 
-          self.left = None
-          self.right = None
-          self.val = key 
-
-
-  # create root 
-  root = Node(1) 
-  ''' following is the tree after above statement 
-          1 
-        /   \ 
-       None  None'''
-
-  root.left      = Node(2); 
-  root.right     = Node(3); 
-
-  ''' 2 and 3 become left and right children of 1 
-             1 
-           /   \ 
-          2      3 
-       /    \    /  \ 
-     None None None None'''
-
-
-  root.left.left  = Node(4); 
-  '''4 becomes left child of 2 
-             1 
-         /       \ 
-        2          3 
-      /   \       /  \ 
-     4    None  None  None 
-    /  \ 
-  None None'''
-  # 출처 : https://www.geeksforgeeks.org/binary-tree-set-1-introduction/ 
-  </code></pre> 
-  
   > ###### 참조 : https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html , https://m.blog.naver.com/justkukaro/220548164184
 
 ## 이진 트리 ( Binary Tree )
 
   + ### 1. 개요
-    + 
+    + 자식노드가 최대 두 개인 노드들로 구성
+    + 종류 : 정 이진트리, 완전 이진트리, 균형 이진트리 등
 
   + ### 2. 장점
-    + 
+    + 이상적인 이진 트리일 경우 탐색이 빠름
 
   + ### 3. 단점
-    +
+    + 편향 트리가 된다면 모든 면에서 성능이 떨어짐
+    
+  + ### 4. 이진트리 순회
+    + 1) 전위순회 (Pre-order traversal) - 루트 -> 왼쪽 서브트리 -> 오른쪽 서브트리
+    <pre><code> 
+        def preorder(self, n):
+          if n != None:
+              print(n.item,' ',end='') # 노드 방문
+              if n.left:
+                  self.preorder(n.left) # 왼쪽 서브트리 순회
+              if n.right:
+                  self.preorder(n.right) # 오른쪽 서브트리 순회
+    </code></pre>
+    + 2) 중위순회 (In-order traversal) - 왼쪽 서브트리 -> 루트 -> 오른쪽 서브트리
+    <pre><code> 
+        def inorder(self, n):
+          if n != None:
+              if n.left:
+                  self.preorder(n.left) # 왼쪽 서브트리 순회
+              print(n.item,' ',end='') # 노드 방문
+              if n.right:
+                  self.preorder(n.right) # 오른쪽 서브트리 순회
+    </code></pre>
+    + 3) 후위순회 (Post-order traversal) - 왼쪽서브트리 -> 오른쪽 서브트리 -> 루트
+    <pre><code> 
+        def postorder(self, n):
+          if n != None:
+              if n.left:
+                  self.preorder(n.left) # 왼쪽 서브트리 순회
+              if n.right:
+                  self.preorder(n.right) # 오른쪽 서브트리 순회
+              print(n.item,' ',end='') # 노드 방문
+    </code></pre>
  
   + 구현
   
   <pre><code>
+  
+  class Node:
+
+    def __init__(self, data):
+
+        self.left = None
+        self.right = None
+        self.data = data
+
+    def insert(self, data):
+  # Compare the new value with the parent node
+          if self.data:
+              if data < self.data:
+                  if self.left is None:
+                      self.left = Node(data)
+                  else:
+                      self.left.insert(data)
+              elif data > self.data:
+                  if self.right is None:
+                      self.right = Node(data)
+                  else:
+                      self.right.insert(data)
+          else:
+              self.data = data
+
+  # Print the tree
+      def PrintTree(self):
+          if self.left:
+              self.left.PrintTree()
+          print( self.data),
+          if self.right:
+              self.right.PrintTree()
+
+  # Use the insert method to add nodes
+  root = Node(12)
+  root.insert(6)
+  root.insert(14)
+  root.insert(3)
+
+  root.PrintTree()
+  # 출처 : https://www.tutorialspoint.com/python_data_structure/python_binary_tree.htm 
   </code></pre> 
 
-
+  > ###### 참고 : https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html , https://ratsgo.github.io/data%20structure&algorithm/2017/10/21/tree/ , https://coderkoo.tistory.com/9 
 <br>
 
 ------------
