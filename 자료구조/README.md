@@ -11,7 +11,6 @@
 + [스택 ( Stack )](#스택--stack-)
 + [큐 ( Queue )](큐--queue-)
   + [우선순위 큐 ( Priority Queue )](#우선순위-큐--priority-queue-)
-+ [셋 ( Set )](#셋--set-)
 + [트리 ( Tree )](#트리--tree-)
   + [이진 트리 ( Binary Tree )](#이진-트리--binary-tree-)
 + [그래프 ( Graph )](#그래프--graph-)
@@ -742,27 +741,6 @@
 ------------
 <br>
 
-## 셋 ( Set )
-
-  + ### 1. 개요
-    + 
-
-  + ### 2. 장점
-    + 
-
-  + ### 3. 단점
-    +
- 
-  + 구현
-
-  <pre><code>
-  </code></pre> 
-  
-<br>
-
-------------
-<br>
-
 ## 트리 ( Tree )
 
   + ### 1. 개요
@@ -790,6 +768,7 @@
     + 계층 모델에 속함
     + 사이클이 없음
     + 루트에서 어떤 노드로 가는 경로는 유일함
+    + 노드가 N인 트리는 항상 N-1의 간선을 가짐
     + 종류 : 이진 트리, 이진 탐색 트리, 균형 트리 , 이진 힙 등 
     
   > ###### 참조 : https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html , https://m.blog.naver.com/justkukaro/220548164184
@@ -893,18 +872,94 @@
 ## 그래프 ( Graph )
 
   + ### 1. 개요
-    + 
+    + 구성 : 노드 + 노드를 연결하는 간선
+    + 연결되어 있는 객체 간의 관계를 표현
+    + 활용 예 ) 지도, 지하철 노선도, 도로, 선수과목 등
 
-  + ### 2. 장점
-    + 
+  + ### 2. 특징
+    + 네트워크 모델에 속함
+    + self-loop 뿐 아니라 loop/circuit 모두 가능
+    + 2개 이상의 경로가 가능함
+    + 그래프에 따라 간선의 수가 다름
+    + 간선이 없을 수도 있음 
 
-  + ### 3. 단점
-    +
+  + ### 인접 리스트로 구현
+    + 1) 개요 
+      + 연결 리스트 방식 이용
+      + N개의 리스트, N개의 배열, 2E개의 노드가 필요
+      + 그래프에 간선이 적은 희소 그래프의 경우 사용
+    + 2) 장점
+      + 인접 행렬보다 빠름
+    + 3) 단점
+      + 인접 행렬보다 구현하기 어려움
+      + 인접한 노드를 찾기 위해서는 모든 노드를 전부 순회해야 함
+    + 4) 구현
+      <pre><code>
+      class graph:
+        def __init__(self,gdict=None):
+            if gdict is None:
+                gdict = {}
+            self.gdict = gdict
+
+        def edges(self):
+            return self.findedges()
+
+        # Add the new edge
+        def AddEdge(self, edge):
+            edge = set(edge)
+            (vrtx1, vrtx2) = tuple(edge)
+            if vrtx1 in self.gdict:
+                self.gdict[vrtx1].append(vrtx2)
+            else:
+                self.gdict[vrtx1] = [vrtx2]
+
+        # List the edge names
+        def findedges(self):
+            edgename = []
+            for vrtx in self.gdict:
+                for nxtvrtx in self.gdict[vrtx]:
+                    if {nxtvrtx, vrtx} not in edgename:
+                        edgename.append({vrtx, nxtvrtx})
+            return edgename
+
+      # Create the dictionary with graph elements
+      graph_elements = { "a" : ["b","c"],
+                      "b" : ["a", "d"],
+                      "c" : ["a", "d"],
+                      "d" : ["e"],
+                      "e" : ["d"]
+                      }
+
+      g = graph(graph_elements)
+      g.AddEdge({'a','e'})
+      g.AddEdge({'a','c'})
+      print(g.edges())
+      # 출처 : https://www.tutorialspoint.com/python_data_structure/python_graphs.htm 
+      </code></pre>
+      
+  + ### 인접 행렬로 구현
+    + 1) 개요 
+      + 이차원 배열 방식 이용
+      + 간선의 수와 무관하게 항상 n^2개의 메모리 공간 필요 
+      + 그래프에 간선이 많은 밀집 그래프의 경우 사용
+    + 2) 장점
+      + 구현하기 쉬움
+    + 3) 단점
+      + 인접 리스트보다 느림
+    + 4) 구현
+      <pre><code>
+      keys=sorted(g.keys())
+      size=len(keys)
+      M = [ [0]*size for i in range(size) ]
+      for a,b in [(keys.index(a), keys.index(b)) for a, row in g.items() for b in row]:
+           M[a][b] = 2 if (a==b) else 1
+      # 수정예정
+      # 참고 : https://www.python2.net/questions-120420.htm 
+      </code></pre>
  
-  + 구현
-  
-  <pre><code>
-  </code></pre>  
+ 
+
+  > ###### 참고 : https://gmlwjd9405.github.io/2018/08/13/data-structure-graph.html , https://coding-factory.tistory.com/610 , https://butter-shower.tistory.com/82 , https://velog.io/@gimtommang11/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%EA%B7%B8%EB%9E%98%ED%94%84 
 
 <br>
 
