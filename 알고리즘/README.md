@@ -4,6 +4,8 @@
 
 ## 목록
 + [탐색 알고리즘 ( Search Algorithms )](#탐색-알고리즘--searching-algorithms-)
+  + [선형 탐색법 ( Linear Search )](#선형-탐색법--linear-search-)
+  + [이진 탐색법 ( Binary Search )](#이진-탐색법--binary-search-)
 + [정렬 알고리즘 ( Sorting Algorithms )](#정렬-알고리즘--sorting-algorithms-)
 + [그래프 알고리즘 ( Graph Algorithms )](#그래프-알고리즘--graph-algorithms-)
 + [탐욕 알고리즘 ( Greedy Algorithms )](#탐욕-알고리즘--greedy-algorithms-)
