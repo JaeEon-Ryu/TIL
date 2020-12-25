@@ -73,7 +73,7 @@
     + 반복적으로 범위를 반으로 검색 후 원하는 데이터를 찾아냄
     + 사전에 정렬이 되어 있어야 함
     
-  + ### 구현 ( 재귀 )
+  + ### 이진트리의 재귀적 구현
     <pre><code>
     # Python3 Program for recursive binary search. 
 
@@ -118,7 +118,7 @@
     # 출처 : https://www.geeksforgeeks.org/binary-search/ 
     </code></pre>
   
-  + ### 구현 ( 반복 )
+  + ### 이진트리의 반복적 구현
     <pre><code>
     # Python3 code to implement iterative Binary  
     # Search. 
