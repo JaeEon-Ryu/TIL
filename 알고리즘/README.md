@@ -7,6 +7,11 @@
   + [선형 탐색법 ( Linear Search )](#선형-탐색법--linear-search-)
   + [이진 탐색법 ( Binary Search )](#이진-탐색법--binary-search-)
 + [정렬 알고리즘 ( Sorting Algorithms )](#정렬-알고리즘--sorting-algorithms-)
+  + [버블 정렬 ( Bubble Sort )](#버블-정렬--bubble-sort-)
+  + [병합 정렬 ( Merge Sort )](#병합-정렬--merge-sort-)
+  + [삽입 정렬 ( Insertion Sort )](#삽입-정렬--insertion-sort-)
+  + [셸 정렬 ( Shell's Sort )](#셸-정렬--shell's-sort-)
+  + [선택 정렬 (Selection Sort )](#선택-정렬--selection-sort-)
 + [그래프 알고리즘 ( Graph Algorithms )](#그래프-알고리즘--graph-algorithms-)
 + [탐욕 알고리즘 ( Greedy Algorithms )](#탐욕-알고리즘--greedy-algorithms-)
 + [동적 프로그래밍 ( Dynamic Programming )](#동적-프로그래밍--dynamic-programming-)
@@ -176,13 +181,40 @@
 ## 정렬 알고리즘 ( Sorting Algorithms )
 
 + ### 1. 개요
-  + 
+  + 원소들을 번호순이나 사전 순서와 같이 일정한 순서대로 열거하는 알고리즘
+  + 어떤 데이터들이 주어졌을 때 이를 정해진 순서대로 나열하는 알고리즘
+  + 얼마나 효과적으로 해결할 수 있느냐가 정렬 문제의 핵심
+  + 종류
+    + O(n²)
+      + [버블 정렬( Bubble Sort )](#버블-정렬--bubble-sort-)
+      + [선택 정렬( Selection sort )](#선택-정렬--selection-sort-)
+      + [삽입 정렬( Insertion sort )](#삽입-정렬--insertion-sort-)
+    + O( n log n )
+      + [병합 정렬( Merge sort )](#병합-정렬--merge-sort-)
+      + 힙 정렬( Heap sort )
+      + 퀵 정렬( Quick sort )
+      + 하이브리드 정렬
+      + 팀 정렬( Tim sort )
+      + 인트로 정렬( Intro sort )
+    + etc
+      + 기수 정렬( Radix sort )
+      + 카운팅 정렬( Counting sort )
+      + [셸 정렬( Shell's sort )](#셸-정렬--shell's-sort-)
+      + 보고 정렬( Bogo sort, stupid sort )
+      + 보고보고 정렬( Bogobogo sort )
+      + 대기 정렬( Sleep sort )
+      
+  + 버블 정렬 ( Bubble Sort )
+  + 병합 정렬 ( Merge Sort )
+  + 삽입 정렬 ( Insertion Sort )
+  + 셸 정렬 ( Shell Sort )
+  + 선택 정렬 ( Selection Sort )
 
 <pre><code>
 #코드 테스트
 </code></pre>
 
-> ###### 참고 : 
+> ###### 참고 : https://namu.wiki/w/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm , 
 
 <br>
 
