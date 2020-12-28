@@ -214,10 +214,11 @@
       
   + ### 버블 정렬 ( Bubble Sort )
     + 개요
-      + 인접한 두개의 요소를 비교, 순서가 맞지 않으면 요소를 교환함
-        ( 비교 기반 알고리즘 )
-      + 반복문이 한번 실행될 때마다 마지막 하나의 원소가 정렬되므로 
-        거품이 올라오는 것처럼 보여 버블 정렬이라 불림
+      + 인접한 두개의 요소를 비교, 순서가 맞지 않으면 요소를 교환함     
+        ( 비교 알고리즘 기반 )
+      + 반복문이 한번 실행될 때마다 마지막 하나의 원소가 정렬    
+        -> 거품이 올라오는 것처럼 보여 버블 정렬이라 불림
+        
     + 구현
       <pre><code>
       def bubblesort(list):
@@ -233,19 +234,150 @@
       list = [19,2,31,45,6,11,121,27]
       bubblesort(list)
       print(list)
+      
       # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm
       </code></pre>
       
   + ### 병합 정렬 ( Merge Sort )
+    + 개요
+      + 원소 개수가 1 또는 0이 될 때까지 두 부분으로 나눔   
+        -> 나눈 순서의 역순으로 크기를 비교 및 병합   
+        ( 분할-정복 알고리즘 기반 ) 
+        
+    + 구현
+      <pre><code>
+      def merge_sort(unsorted_list):
+          if len(unsorted_list) <= 1:
+              return unsorted_list
+      # Find the middle point and devide it
+          middle = len(unsorted_list) // 2
+          left_list = unsorted_list[:middle]
+          right_list = unsorted_list[middle:]
+
+          left_list = merge_sort(left_list)
+          right_list = merge_sort(right_list)
+          return list(merge(left_list, right_list))
+
+      # Merge the sorted halves
+
+      def merge(left_half,right_half):
+
+          res = []
+          while len(left_half) != 0 and len(right_half) != 0:
+              if left_half[0] < right_half[0]:
+                  res.append(left_half[0])
+                  left_half.remove(left_half[0])
+              else:
+                  res.append(right_half[0])
+                  right_half.remove(right_half[0])
+          if len(left_half) == 0:
+              res = res + right_half
+          else:
+              res = res + left_half
+          return res
+
+      unsorted_list = [64, 34, 25, 12, 22, 11, 90]
+
+      print(merge_sort(unsorted_list))
+      
+      # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm
+      </code></pre> 
+  
   + ### 삽입 정렬 ( Insertion Sort )
+    + 개요
+      + 아직 정렬되지 않은 값을 이미 정렬된 배열 사이에 끼워 넣는 과정을 반복
+      + 평균적으로 삽입정렬이 선택정렬과 버블정렬에 비해 빠름 
+      
+    + 구현
+      <pre><code>
+      def insertion_sort(InputList):
+          for i in range(1, len(InputList)):
+              j = i-1
+              nxt_element = InputList[i]
+      # Compare the current element with next one
+
+              while (InputList[j] > nxt_element) and (j >= 0):
+                  InputList[j+1] = InputList[j]
+                  j=j-1
+              InputList[j+1] = nxt_element
+
+      list = [19,2,31,45,30,11,121,27]
+      insertion_sort(list)
+      print(list)
+      
+      # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm 
+      </code></pre>
+  
   + ### 셸 정렬 ( Shell Sort )
+    + 개요
+      + 정렬 과정 
+        + 먼저 정렬해야 할 리스트를 일정한 기준에 따라 분류
+        + 연속적이지 않은 여러 개의 부분 리스트를 생성
+        + 각 부분 리스트를 삽입 정렬을 이용하여 정렬
+        + 모든 부분 리스트가 정렬되면 다시 전체 리스트를 더 적은 개수의 부분 리스트로 만든 후에 알고리즘을 반복
+        + 위의 과정을 부분 리스트의 개수가 1이 될 때까지 반복
+      + 삽입 정렬을 보완한 알고리즘
+      + 시간 복잡도가 명확하지 않음
+      
+    + 구현
+      <pre><code>
+      def shellSort(input_list):
+    
+          gap = len(input_list) // 2
+          while gap > 0:
+
+              for i in range(gap, len(input_list)):
+                  temp = input_list[i]
+                  j = i
+      # Sort the sub list for this gap
+
+                  while j >= gap and input_list[j - gap] > temp:
+                      input_list[j] = input_list[j - gap]
+                      j = j-gap
+                  input_list[j] = temp
+
+      # Reduce the gap for the next element
+
+              gap = gap//2
+
+      list = [19,2,31,45,30,11,121,27]
+
+      shellSort(list)
+      print(list)
+      
+      # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm 
+      </code></pre>
+    
+  
   + ### 선택 정렬 ( Selection Sort )
+    + 개요
+      + 주어진 배열에서 최댓값(최솟값)을 찾아 맨 오른쪽(왼쪽)값과 교체 - 반복
+      + 대체로 버블정렬보다 빠름
+      
+    + 구현
+      <pre><code>
+      def selection_sort(input_list):
 
-<pre><code>
-#코드 테스트
-</code></pre>
+        for idx in range(len(input_list)):
 
-> ###### 참고 : https://namu.wiki/w/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm , 
+            min_idx = idx
+            for j in range( idx +1, len(input_list)):
+                if input_list[min_idx] > input_list[j]:
+                    min_idx = j
+      # Swap the minimum value with the compared value
+
+            input_list[idx], input_list[min_idx] = input_list[min_idx], input_list[idx]
+
+
+      l = [19,2,31,45,30,11,121,27]
+      selection_sort(l)
+      print(l)
+      
+      # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm 
+      </code></pre>
+    
+
+> ###### 참고 : https://namu.wiki/w/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm , http://ejklike.github.io/2017/03/04/sorting-algorithms-with-python.html , https://gmlwjd9405.github.io/2018/05/08/algorithm-shell-sort.html 
 
 <br>
 
