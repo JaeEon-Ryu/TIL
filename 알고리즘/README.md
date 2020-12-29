@@ -16,8 +16,8 @@
   + [선택 정렬 (Selection Sort )](#선택-정렬--selection-sort-)
   
 + [그래프 알고리즘 ( Graph Algorithms )](#그래프-알고리즘--graph-algorithms-)
-  + [깊이 우선 탐색 ( Depth First Traversal )](#깊이-우선-탐색--depth-first-traversal-)
-  + [너비 우선 탐색 ( Breadth First Traversal )](#s너비-우선-탐색--breadth-first-traversal-)
+  + [깊이 우선 탐색 ( Depth First Search )](#깊이-우선-탐색--depth-first-search-)
+  + [너비 우선 탐색 ( Breadth First Search )](#s너비-우선-탐색--breadth-first-search-)
 
 + [탐욕 알고리즘 ( Greedy Algorithms )](#탐욕-알고리즘--greedy-algorithms-)
 
@@ -396,13 +396,17 @@
     + 무향 그래프 : 양쪽 방향 이동 가능
     + 사용 예 ) 도시-도로 통신망, 컴퓨터 통신망, SNS에서의 친구 관계 등
 
-  + ### 깊이 우선 탐색 ( Depth First Traversal )
+  + ### 깊이 우선 탐색 ( Depth First Search )
     + 개요
       + 한 방향으로 최대한 깊숙히 들어가서 확인 후 다시 돌아가 다른 방향을 탐색
       + 사용 예 ) traverse, backtracking 등 
       + 먼저 방문한 노드에 연결된 노드보다, 현재 방문한 노드에 연결된 노드를 방문해야 함    
         -> 자료구조 스택 사용 
+        
+      + <div><img src="https://user-images.githubusercontent.com/52907116/103291818-ede41c00-4a2f-11eb-8bb5-bef77a0f3fc8.gif" width = "25%"></img></div>
     
+      > ( WIKIPEDIA, BFS )
+      
     + 구현
       <pre><code>
         class graph:
@@ -435,11 +439,16 @@
         dfs(gdict, 'a')
       </code></pre>
     
-  + ### 너비 우선 탐색 ( Breadth First Traversal )
+  + ### 너비 우선 탐색 ( Breadth First Search )
     + 개요
       + 갈림길에 연결되어 있는 모든 길을 한번씩 탐색 후 그 다음에 연결되어 있는 길들을 넓게 탐색 
       + 현재 방문한 노드에 연결된 노드보다, 먼저 방문한 노드에 연결된 노드를 방문해야 함    
         -> 자료구조 큐 사용 
+        
+      <div><img src="https://user-images.githubusercontent.com/52907116/103291819-ee7cb280-4a2f-11eb-93ce-50257a49417d.gif" width = "25%"></img></div>   
+      
+      > ( WIKIPEDIA, BFS )
+      
     
     + 구현
       <pre><code>
