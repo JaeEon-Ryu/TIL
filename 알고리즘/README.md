@@ -405,7 +405,7 @@
         
       + <div><img src="https://user-images.githubusercontent.com/52907116/103291818-ede41c00-4a2f-11eb-8bb5-bef77a0f3fc8.gif" width = "25%"></img></div>
     
-      > ( WIKIPEDIA, BFS )
+      > ( WIKIPEDIA, DFS )
       
     + 구현
       <pre><code>
