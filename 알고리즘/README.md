@@ -20,6 +20,12 @@
   + [너비 우선 탐색 ( Breadth First Search )](#s너비-우선-탐색--breadth-first-search-)
 
 + [탐욕 알고리즘 ( Greedy Algorithms )](#탐욕-알고리즘--greedy-algorithms-)
+  + 기본 알고리즘
+    + [허프만 코드 ( Huffman code )](#허프만-코드--huffman-code-)
+  + 그래프 관련 알고리즘
+    + [다익스트라 알고리즘 ( Dijkstra’s Algorithm )](#다익스트라-알고리즘--dijkstra’s-algorithm-)
+    + [크루스칼 알고리즘 ( Kruskal’s algorithm )](#크루스칼-알고리즘--kruskal’s-algorithm-)
+    + [프림 알고리즘 ( Prim’s algorithm )](#프림-알고리즘--prim’s-algorithm-)
 
 + [동적 프로그래밍 ( Dynamic Programming )](#동적-프로그래밍--dynamic-programming-)
 
@@ -31,7 +37,7 @@
 
 ## 탐색 알고리즘 ( Searching Algorithms )
 
-+ ### 1. 개요
++ ### 개요
   + 방대한 데이터에서 목적에 맞는 데이터를 찾아내기 위한 알고리즘
   + 종류
     + Linear Search
@@ -187,7 +193,7 @@
 
 ## 정렬 알고리즘 ( Sorting Algorithms )
 
-+ ### 1. 개요
++ ### 개요
   + 원소들을 번호순이나 사전 순서와 같이 일정한 순서대로 열거하는 알고리즘
   + 어떤 데이터들이 주어졌을 때 이를 정해진 순서대로 나열하는 알고리즘
   + 얼마나 효과적으로 해결할 수 있느냐가 정렬 문제의 핵심
@@ -389,7 +395,7 @@
 
 ## 그래프 알고리즘 ( Graph Algorithms )
 
-+ ### 1. 개요
++ ### 개요
   + 개요
     + 구성 : 정점(Vertex) + 변(Edge)
     + 유향 그래프 : 한쪽 방향으로만 이동 가능
@@ -437,6 +443,8 @@
 
 
         dfs(gdict, 'a')
+        
+        # 출처 : https://www.tutorialspoint.com/python_data_structure/python_graph_algorithms.htm 
       </code></pre>
     
   + ### 너비 우선 탐색 ( Breadth First Search )
@@ -483,6 +491,9 @@
                         }
 
         bfs(gdict, "a")
+        
+        # 출처  : https://www.tutorialspoint.com/python_data_structure/python_graph_algorithms.htm 
+        
       </code></pre>
 
 <pre><code>
@@ -499,14 +510,51 @@
 
 ## 탐욕 알고리즘 ( Greedy Algorithms )
 
-+ ### 1. 개요
-  + 
++ ### 개요
+  + 목표 : 미래를 알지 못하는 상황에서 주어진 순간에 최적의 선택을 함   
+    ( 매 순간 최적이라고 생각되는 경우를 선택 ) 
+  + 최적의 해에 가까운 값을 구하기 위해 사용 
+  + 최적의 해를 구해준다는 보장을 하지 못함 
+  + 분할과 정복, 동적 프로그래밍보다 빠름  
+  
+  + ### 허프만 코드 ( Huffman code )
+    + 개요
+    
+    + 구현
+     <pre><code>
+     #코드 테스트
+     </code></pre>
+     
+  + ### 다익스트라 알고리즘 ( Dijkstra’s Algorithm )
+    + 개요 
+    
+    + 구현
+      <pre><code>
+      #코드 테스트
+      </code></pre>
+      
+  + ### 크루스칼 알고리즘 ( Kruskal’s algorithm )
+    + 개요
+    
+    + 구현
+      <pre><code>
+      #코드 테스트
+      </code></pre>
+      
+  + ### 프림 알고리즘 ( Prim’s algorithm ) 
+    + 개요
+    
+    + 구현
+      <pre><code>
+      #코드 테스트
+      </code></pre>
+  
 
 <pre><code>
 #코드 테스트
 </code></pre>
 
-> ###### 참고 : 
+> ###### 참고 : https://www.fun-coding.org/Chapter19-greedy-live.html , https://skerritt.blog/greedy-algorithms/ ,https://janghw.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Greedy-Algorithm-%ED%83%90%EC%9A%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.geeksforgeeks.org/greedy-algorithms/#standardGreedyAlgorithms 
 
 <br>
 
