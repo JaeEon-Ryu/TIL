@@ -16,6 +16,8 @@
   + [선택 정렬 (Selection Sort )](#선택-정렬--selection-sort-)
   
 + [그래프 알고리즘 ( Graph Algorithms )](#그래프-알고리즘--graph-algorithms-)
+  + [깊이 우선 탐색 ( Depth First Traversal )](#깊이-우선-탐색--depth-first-traversal-)
+  + [너비 우선 탐색 ( Breadth First Traversal )](#s너비-우선-탐색--breadth-first-traversal-)
 
 + [탐욕 알고리즘 ( Greedy Algorithms )](#탐욕-알고리즘--greedy-algorithms-)
 
@@ -388,13 +390,97 @@
 ## 그래프 알고리즘 ( Graph Algorithms )
 
 + ### 1. 개요
-  + 
+  + 개요
+    + 구성 : 정점(Vertex) + 변(Edge)
+    + 유향 그래프 : 한쪽 방향으로만 이동 가능
+    + 무향 그래프 : 양쪽 방향 이동 가능
+    + 사용 예 ) 도시-도로 통신망, 컴퓨터 통신망, SNS에서의 친구 관계 등
+
+  + ### 깊이 우선 탐색 ( Depth First Traversal )
+    + 개요
+      + 한 방향으로 최대한 깊숙히 들어가서 확인 후 다시 돌아가 다른 방향을 탐색
+      + 사용 예 ) traverse, backtracking 등 
+      + 먼저 방문한 노드에 연결된 노드보다, 현재 방문한 노드에 연결된 노드를 방문해야 함    
+        -> 자료구조 스택 사용 
+    
+    + 구현
+      <pre><code>
+        class graph:
+            def __init__(self,gdict=None):
+                if gdict is None:
+                    gdict = {}
+                self.gdict = gdict
+                
+        # Check for the visisted and unvisited nodes
+        def dfs(graph, start, visited = None):
+            if visited is None:
+                visited = set()
+                
+            visited.add(start)
+            print(start)
+            
+            for next in graph[start] - visited:
+                dfs(graph, next, visited)
+                
+            return visited
+
+        gdict = { "a" : set(["b","c"]),
+                        "b" : set(["a", "d"]),
+                        "c" : set(["a", "d"]),
+                        "d" : set(["e"]),
+                        "e" : set(["a"])
+                        }
+
+
+        dfs(gdict, 'a')
+      </code></pre>
+    
+  + ### 너비 우선 탐색 ( Breadth First Traversal )
+    + 개요
+      + 갈림길에 연결되어 있는 모든 길을 한번씩 탐색 후 그 다음에 연결되어 있는 길들을 넓게 탐색 
+      + 현재 방문한 노드에 연결된 노드보다, 먼저 방문한 노드에 연결된 노드를 방문해야 함    
+        -> 자료구조 큐 사용 
+    
+    + 구현
+      <pre><code>
+        import collections
+        class graph:
+            def __init__(self,gdict=None):
+                if gdict is None:
+                    gdict = {}
+                self.gdict = gdict
+
+        def bfs(graph, startnode):
+        # Track the visited and unvisited nodes using queue
+                seen, queue = set([startnode]), collections.deque([startnode])
+                while queue:
+                    vertex = queue.popleft()
+                    marked(vertex)
+                    
+                    for node in graph[vertex]:
+                        if node not in seen:
+                            seen.add(node)
+                            queue.append(node)
+
+        def marked(n):
+            print(n)
+
+        # The graph dictionary
+        gdict = { "a" : set(["b","c"]),
+                        "b" : set(["a", "d"]),
+                        "c" : set(["a", "d"]),
+                        "d" : set(["e"]),
+                        "e" : set(["a"])
+                        }
+
+        bfs(gdict, "a")
+      </code></pre>
 
 <pre><code>
 #코드 테스트
 </code></pre>
 
-> ###### 참고 : 
+> ###### 참고 : https://www.tutorialspoint.com/python_data_structure/python_graph_algorithms.htm , https://namu.wiki/w/%EA%B7%B8%EB%9E%98%ED%94%84(%EC%9D%B4%EC%82%B0%EC%88%98%ED%95%99) , https://cyc1am3n.github.io/2019/04/26/bfs_dfs_with_python.html 
 
 <br>
 
