@@ -703,12 +703,108 @@
      
   + ### 다익스트라 알고리즘 ( Dijkstra’s Algorithm )
     + 개요 
+      + 그래프의 한 정점에서 모든 정점까지의 최단거리를 구하는 알고리즘   
+        ( 최단 경로 문제 ) 
+      + PRIM 알고리즘과 유사함 
+      + 활용 예 ) 내비게이션, 미로탐색 알고리즘 등 
+      + 알고리즘 로직        
+        1) 최단 경로 트리에 포함된 정점을 추적하는 settSet(최단 경로 트리 세트)를 생성   
+          ( 소스와의 최소 거리가 계산되고 종료, 처음에는 이 집합이 비어 있음 )    
+        2) 입력 그래프의 모든 정점에 거리 모든 거리 값을 무한대로 초기화    
+          ( 소스 정점은 먼저 선택되도록 거리 값을 0으로 할당 ) 
+        3) sptSet이 모든 정점을 포함하지 않을동안 반복  
+          3-1) sptSet에 없고 최소 거리 값이 있는 꼭지점 u를 선택   
+          3-2) sptSet를 포함   
+          3-3) u의 모든 인접 정점의 거리 값을 업데이트    
+        인접한 모든 꼭지점 v에 대해, u(소스로부터)의 거리 값과 edge u-v의 무게의 합이 v의 거리 값보다 작으면, v의 거리 값을 업데이트 
+      
     
     + 구현
       <pre><code>
-      #코드 테스트
-      
-      # 출처 : https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/ 
+        # Python program for Dijkstra's single  
+        # source shortest path algorithm. The program is  
+        # for adjacency matrix representation of the graph 
+
+        # Library for INT_MAX 
+        import sys 
+
+        class Graph(): 
+
+            def __init__(self, vertices): 
+                self.V = vertices 
+                self.graph = [[0 for column in range(vertices)]  
+                            for row in range(vertices)] 
+
+            def printSolution(self, dist): 
+                print "Vertex \tDistance from Source"
+                for node in range(self.V): 
+                    print node, "\t", dist[node] 
+
+            # A utility function to find the vertex with  
+            # minimum distance value, from the set of vertices  
+            # not yet included in shortest path tree 
+            def minDistance(self, dist, sptSet): 
+
+                # Initilaize minimum distance for next node 
+                min = sys.maxint 
+
+                # Search not nearest vertex not in the  
+                # shortest path tree 
+                for v in range(self.V): 
+                    if dist[v] < min and sptSet[v] == False: 
+                        min = dist[v] 
+                        min_index = v 
+
+                return min_index 
+
+            # Funtion that implements Dijkstra's single source  
+            # shortest path algorithm for a graph represented  
+            # using adjacency matrix representation 
+            def dijkstra(self, src): 
+
+                dist = [sys.maxint] * self.V 
+                dist[src] = 0
+                sptSet = [False] * self.V 
+
+                for cout in range(self.V): 
+
+                    # Pick the minimum distance vertex from  
+                    # the set of vertices not yet processed.  
+                    # u is always equal to src in first iteration 
+                    u = self.minDistance(dist, sptSet) 
+
+                    # Put the minimum distance vertex in the  
+                    # shotest path tree 
+                    sptSet[u] = True
+
+                    # Update dist value of the adjacent vertices  
+                    # of the picked vertex only if the current  
+                    # distance is greater than new distance and 
+                    # the vertex in not in the shotest path tree 
+                    for v in range(self.V): 
+                        if self.graph[u][v] > 0 and sptSet[v] == False and \ 
+                        dist[v] > dist[u] + self.graph[u][v]: 
+                                dist[v] = dist[u] + self.graph[u][v] 
+
+                self.printSolution(dist) 
+
+        # Driver program 
+        g = Graph(9) 
+        g.graph = [[0, 4, 0, 0, 0, 0, 0, 8, 0], 
+                [4, 0, 8, 0, 0, 0, 0, 11, 0], 
+                [0, 8, 0, 7, 0, 4, 0, 0, 2], 
+                [0, 0, 7, 0, 9, 14, 0, 0, 0], 
+                [0, 0, 0, 9, 0, 10, 0, 0, 0], 
+                [0, 0, 4, 14, 10, 0, 2, 0, 0], 
+                [0, 0, 0, 0, 0, 2, 0, 1, 6], 
+                [8, 11, 0, 0, 0, 0, 1, 0, 7], 
+                [0, 0, 2, 0, 0, 0, 6, 7, 0] 
+                ]; 
+
+        g.dijkstra(0); 
+
+        # This code is contributed by Divyanshu Mehta 
+        # 출처 : https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/ 
       </code></pre>
       
   + ### 크루스칼 알고리즘 ( Kruskal’s algorithm )
@@ -736,7 +832,7 @@
 #코드 테스트
 </code></pre>
 
-> ###### 참고 : https://www.fun-coding.org/Chapter19-greedy-live.html , https://skerritt.blog/greedy-algorithms/ ,https://janghw.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Greedy-Algorithm-%ED%83%90%EC%9A%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.geeksforgeeks.org/greedy-algorithms/#standardGreedyAlgorithms 
+> ###### 참고 : https://www.fun-coding.org/Chapter19-greedy-live.html , https://skerritt.blog/greedy-algorithms/ ,https://janghw.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Greedy-Algorithm-%ED%83%90%EC%9A%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.geeksforgeeks.org/greedy-algorithms/#standardGreedyAlgorithms , https://namu.wiki/w/%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.fun-coding.org/Chapter20-shortest-live.html 
 
 <br>
 
