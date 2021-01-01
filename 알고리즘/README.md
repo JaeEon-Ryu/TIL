@@ -27,7 +27,7 @@
     + [크루스칼 알고리즘 ( Kruskal’s algorithm )](#크루스칼-알고리즘--kruskal’s-algorithm-)
     + [프림 알고리즘 ( Prim’s algorithm )](#프림-알고리즘--prim’s-algorithm-)
 
-+ [동적 프로그래밍 ( Dynamic Programming )](#동적-프로그래밍--dynamic-programming-)
++ [동적 계획법 ( Dynamic Programming )](#동적-계획법--dynamic-programming-)
 
 <br>
 
@@ -809,30 +809,243 @@
       
   + ### 크루스칼 알고리즘 ( Kruskal’s algorithm )
     + 개요
-    
+      + 최소 비용 신장 트리를 찾는 알고리즘    
+      + 최소 비용 신장 트리 ( Minimun Spanning Tree )     
+        -> 각 단계에서 사이클을 이루지 않는 최소 비용 간선 선택   
+        ( 최소 비용의 간선으로 구성, 사이클을 포함하지 않음 )  
+      + 간선 선택을 기반으로 하는 알고리즘   
+      + 그래프 내에 적은 숫자의 간선만을 가지는 ‘희소 그래프(Sparse Graph)’의 경우 쓰기 적합
+      + 알고리즘 로직    
+        1. 모든 엣지를 가중치의 오름차순으로 정렬   
+        2. 가장 작은 엣지를 골라서 지금까지 형성된 신장 트리로 사이클을 형성하는지 확인    
+          b-1. if 사이클이 형성되지 않은 경우      
+            해당 엣지를 포함   
+          b-2. 해당 엣지 삭제    
+        3. N-1개의 간선이 생성될때까지 2단계 반복      
+      
     + 구현
       <pre><code>
-      #코드 테스트
-      
-      # 출처 : https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/ 
+        # Python program for Kruskal's algorithm to find
+        # Minimum Spanning Tree of a given connected,
+        # undirected and weighted graph
+
+        from collections import defaultdict
+
+        # Class to represent a graph
+
+
+        class Graph:
+
+            def __init__(self, vertices):
+                self.V = vertices  # No. of vertices
+                self.graph = []  # default dictionary
+                # to store graph
+
+            # function to add an edge to graph
+            def addEdge(self, u, v, w):
+                self.graph.append([u, v, w])
+
+            # A utility function to find set of an element i
+            # (uses path compression technique)
+            def find(self, parent, i):
+                if parent[i] == i:
+                    return i
+                return self.find(parent, parent[i])
+
+            # A function that does union of two sets of x and y
+            # (uses union by rank)
+            def union(self, parent, rank, x, y):
+                xroot = self.find(parent, x)
+                yroot = self.find(parent, y)
+
+                # Attach smaller rank tree under root of
+                # high rank tree (Union by Rank)
+                if rank[xroot] < rank[yroot]:
+                    parent[xroot] = yroot
+                elif rank[xroot] > rank[yroot]:
+                    parent[yroot] = xroot
+
+                # If ranks are same, then make one as root
+                # and increment its rank by one
+                else:
+                    parent[yroot] = xroot
+                    rank[xroot] += 1
+
+            # The main function to construct MST using Kruskal's
+                # algorithm
+            def KruskalMST(self):
+
+                result = []  # This will store the resultant MST
+
+                # An index variable, used for sorted edges
+                i = 0
+
+                # An index variable, used for result[]
+                e = 0
+
+                # Step 1:  Sort all the edges in 
+                # non-decreasing order of their
+                # weight.  If we are not allowed to change the
+                # given graph, we can create a copy of graph
+                self.graph = sorted(self.graph, 
+                                    key=lambda item: item[2])
+
+                parent = []
+                rank = []
+
+                # Create V subsets with single elements
+                for node in range(self.V):
+                    parent.append(node)
+                    rank.append(0)
+
+                # Number of edges to be taken is equal to V-1
+                while e < self.V - 1:
+
+                    # Step 2: Pick the smallest edge and increment
+                    # the index for next iteration
+                    u, v, w = self.graph[i]
+                    i = i + 1
+                    x = self.find(parent, u)
+                    y = self.find(parent, v)
+
+                    # If including this edge does't
+                    #  cause cycle, include it in result 
+                    #  and increment the indexof result 
+                    # for next edge
+                    if x != y:
+                        e = e + 1
+                        result.append([u, v, w])
+                        self.union(parent, rank, x, y)
+                    # Else discard the edge
+
+                minimumCost = 0
+                print "Edges in the constructed MST"
+                for u, v, weight in result:
+                    minimumCost += weight
+                    print("%d -- %d == %d" % (u, v, weight))
+                print("Minimum Spanning Tree" , minimumCost)
+
+        # Driver code
+        g = Graph(4)
+        g.addEdge(0, 1, 10)
+        g.addEdge(0, 2, 6)
+        g.addEdge(0, 3, 5)
+        g.addEdge(1, 3, 15)
+        g.addEdge(2, 3, 4)
+
+        # Function call
+        g.KruskalMST()
+
+        # This code is contributed by Neelam Yadav
+        
+        # 출처 : https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/ 
       </code></pre>
       
   + ### 프림 알고리즘 ( Prim’s algorithm ) 
     + 개요
-    
+      + 시작 정점에서부터 출발하여 신장트리 집합을 단계적으로 확장해나가는 알고리즘 
+      + 정점 선택을 기반으로 하는 알고리즘  
+      + 인접한 정점들 중에서 최소 간선으로 연결된 정점을 선택하여 트리 확장
+      + 그래프에 간선이 많이 존재하는 ‘밀집 그래프(Dense Graph)’ 의 경우 쓰기 적합 
+      + 알고리즘 
+        1. 최소 신장 트리에 이미 포함된 정점을 추적하는 설정 mstSet를 생성
+        2. 입력 그래프의 모든 정점에 키 값 할당    
+          ( 모든 키 값을 무한대로 초기화, 첫 번째 꼭지점에 대해 키 값을 0으로 할당하여 먼저 선택 )   
+        3. mstSet이 모든 정점을 포함하지 않을 동안 반복
+          3-1. mstSet에 없고 최소 키 값이 있는 꼭지점 u를 선택
+          3-2. ustomstSet를 포함
+          3-3. u의 모든 인접 정점의 키 값을 업데이트
+          
     + 구현
       <pre><code>
-      #코드 테스트
-      
-      # 출처 : https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/ 
+        # A Python program for Prim's Minimum Spanning Tree (MST) algorithm. 
+        # The program is for adjacency matrix representation of the graph 
+
+        import sys # Library for INT_MAX 
+
+        class Graph(): 
+
+            def __init__(self, vertices): 
+                self.V = vertices 
+                self.graph = [[0 for column in range(vertices)]  
+                            for row in range(vertices)] 
+
+            # A utility function to print the constructed MST stored in parent[] 
+            def printMST(self, parent): 
+                print "Edge \tWeight"
+                for i in range(1, self.V): 
+                    print parent[i], "-", i, "\t", self.graph[i][ parent[i] ] 
+
+            # A utility function to find the vertex with  
+            # minimum distance value, from the set of vertices  
+            # not yet included in shortest path tree 
+            def minKey(self, key, mstSet): 
+
+                # Initilaize min value 
+                min = sys.maxint 
+
+                for v in range(self.V): 
+                    if key[v] < min and mstSet[v] == False: 
+                        min = key[v] 
+                        min_index = v 
+
+                return min_index 
+
+            # Function to construct and print MST for a graph  
+            # represented using adjacency matrix representation 
+            def primMST(self): 
+
+                # Key values used to pick minimum weight edge in cut 
+                key = [sys.maxint] * self.V 
+                parent = [None] * self.V # Array to store constructed MST 
+                # Make key 0 so that this vertex is picked as first vertex 
+                key[0] = 0 
+                mstSet = [False] * self.V 
+
+                parent[0] = -1 # First node is always the root of 
+
+                for cout in range(self.V): 
+
+                    # Pick the minimum distance vertex from  
+                    # the set of vertices not yet processed.  
+                    # u is always equal to src in first iteration 
+                    u = self.minKey(key, mstSet) 
+
+                    # Put the minimum distance vertex in  
+                    # the shortest path tree 
+                    mstSet[u] = True
+
+                    # Update dist value of the adjacent vertices  
+                    # of the picked vertex only if the current  
+                    # distance is greater than new distance and 
+                    # the vertex in not in the shotest path tree 
+                    for v in range(self.V): 
+
+                        # graph[u][v] is non zero only for adjacent vertices of m 
+                        # mstSet[v] is false for vertices not yet included in MST 
+                        # Update the key only if graph[u][v] is smaller than key[v] 
+                        if self.graph[u][v] > 0 and mstSet[v] == False and key[v] > self.graph[u][v]: 
+                                key[v] = self.graph[u][v] 
+                                parent[v] = u 
+
+                self.printMST(parent) 
+
+        g = Graph(5) 
+        g.graph = [ [0, 2, 0, 6, 0], 
+                    [2, 0, 3, 8, 5], 
+                    [0, 3, 0, 0, 7], 
+                    [6, 8, 0, 0, 9], 
+                    [0, 5, 7, 9, 0]] 
+
+        g.primMST(); 
+
+        # Contributed by Divyanshu Mehta
+        
+        # 출처 : https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/ 
       </code></pre>
   
 
-<pre><code>
-#코드 테스트
-</code></pre>
-
-> ###### 참고 : https://www.fun-coding.org/Chapter19-greedy-live.html , https://skerritt.blog/greedy-algorithms/ ,https://janghw.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Greedy-Algorithm-%ED%83%90%EC%9A%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.geeksforgeeks.org/greedy-algorithms/#standardGreedyAlgorithms , https://namu.wiki/w/%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.fun-coding.org/Chapter20-shortest-live.html 
+> ###### 참고 : https://www.fun-coding.org/Chapter19-greedy-live.html , https://skerritt.blog/greedy-algorithms/ ,https://janghw.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Greedy-Algorithm-%ED%83%90%EC%9A%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.geeksforgeeks.org/greedy-algorithms/#standardGreedyAlgorithms , https://namu.wiki/w/%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.fun-coding.org/Chapter20-shortest-live.html , https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html ,https://gmlwjd9405.github.io/2018/08/30/algorithm-prim-mst.html 
 
 <br>
 
@@ -840,16 +1053,39 @@
 
 <br>
 
-## 동적 프로그래밍 ( Dynamic Programming )
+## 동적 계획법 ( Dynamic Programming )
 
-+ ### 1. 개요
-  + 
++ ### 개요
+  +  복잡한 문제를 간단한 여러 개의 문제로 나누어 푸는 방법     
+    -> 주어진 문제를 풀기 위해서, 문제를 여러 개의 하위 문제(subproblem)로 나누어 푼 다음, 그것을 결합하여 최종적인 목적에 도달   
+  + 하위 문제의 수가 기하급수적으로 증가할 때 유용함 
+  + 메모이제이션(Memoization) : 동적계획법에서 아주 중요한 개념으로 함수의 값을 계산한 뒤 계산된 값을 배열에 저장하는 방식    
+    -> 이러한 메모이제이션은 필요한 때마다 함수를 다시 호출하지 않고 값을 빠르게 가져올 수 있음 
+   
++ 피보나치를 통해 구현방식 알아보기 
+  + Top-down - 큰 문제를 작은 문제로 쪼개면 해결 - 재귀로 구현
+    <pre><code>
+      def fibo(n):
+        if n < 3:
+            return 1
+        else:
+            return fibo(n - 1) + fibo(n - 2)
+    </code></pre>
+    
+  + Bottom-up : 작은 문제부터 차례대로 해결 - 반복문으로 구현
+    <pre><code>
+      def fibo(n):
+        li = []
+        for i in range(0,n):
+            if i < 2:
+                li.append(1)
+            else:
+                li.append(li[i-1] + li[i-2])
+                
+        return li[n-1]
+    </code></pre>
 
-<pre><code>
-#코드 테스트
-</code></pre>
-
-> ###### 참고 : 
+> ###### 참고 : https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95 ,https://wooder2050.medium.com/%EB%8F%99%EC%A0%81%EA%B3%84%ED%9A%8D%EB%B2%95-dynamic-programming-%EC%A0%95%EB%A6%AC-58e1dbcb80a0 ,https://velog.io/@polynomeer/%EB%8F%99%EC%A0%81-%EA%B3%84%ED%9A%8D%EB%B2%95Dynamic-Programming
 
 <br>
 
