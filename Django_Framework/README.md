@@ -36,18 +36,18 @@
       
   + 가상 환경 설정   
     1. 가상 환경 생성     
-      >  #### virtualenv env_site         
+      >  #### virtualenv my_env        
       
-        env_site는 가상환경 이름 -> 사용자 임의로 만들기 가능
+        env_env는 가상환경 이름 -> 사용자 임의로 만들기 가능
 
         필자의 경우 'FileNotFoundError: [Errno 2] No such file or directory: ~' 같은 에러가 나왔는데,
-        직접 폴더(C:\Users\Ryu)에 들어가보니 이미 env_site 폴더가 생성되어 있었음. 
+        직접 폴더(C:\Users\Ryu)에 들어가보니 이미 env_env 폴더가 생성되어 있었음. 
 
         위와 다르게 폴더가 생성되지 않는 에러의 경우 https://newbiecs.tistory.com/145 페이지 참고 권장함  
       
       
     2. 폴더 이동하기 1    
-      > ####  cd env_site    
+      > ####  cd my_env    
     3. 폴더 이동하기 2    
       > ####  cd Scripts  
     4. 가상 환경 활성화      
@@ -60,14 +60,14 @@
     + cmd에서 가상환경 폴더까지 이동
     + 가상 환경 활성화 하기 ( activate )
     + 명령어 입력
-      > #### django-admin startproject projectName
-        projectName은 프로젝트 이름 -> 사용자 임의로 만들기 가능 
+      > #### django-admin startproject mysite
+        mysite은 프로젝트 이름 -> 사용자 임의로 만들기 가능 
   + 폴더 이동하기
-    > #### cd projectName
+    > #### cd mysite
   + 실행하기
     > #### Python manage.py runserver
   + 웹 페이지 방문하기
     + http://localhost:8000/ 클릭 
  
- #### 참고 : https://www.geeksforgeeks.org/django-tutorial/, https://www.geeksforgeeks.org/django-basics/ 
+ #### 참고 : https://www.geeksforgeeks.org/django-tutorial/, https://www.geeksforgeeks.org/django-basics/ , https://docs.djangoproject.com/en/3.1/intro/tutorial01/ 
   
