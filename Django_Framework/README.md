@@ -1,5 +1,12 @@
-## Django Framework    
+# About Django Framework    
 
++ INDEX
+  + Django 앱 작성, 1부
+  + Django 앱 작성, 2부
+
+------------------------------- 
+
+## Django 앱 작성, 1부
 + ### 개요
   + Python 기반 웹 프레임 워크
   + 웹 애플리케이션을 효율적이고 신속하게 만들 수 있음
@@ -90,7 +97,7 @@
     + http://localhost:8000/ 클릭    
       ( 우주선 모양이 나오면 성공 ) 
 
-+ ### 설문조사 앱 만들기
++ polls 앱 만들기
   + 장고 프로젝트는 하나 이상의 애플리케이션으로 구성   
     ( 앱은 웹서비스 중 하나의 기능 의미 ) 
     
@@ -146,5 +153,16 @@
   
         <img src="https://user-images.githubusercontent.com/52907116/103541158-51fa5a80-4ede-11eb-9307-9cce567f5ad8.png" width="25%"></img>
  
- #### 참고 : https://www.geeksforgeeks.org/django-tutorial/, https://www.geeksforgeeks.org/django-basics/ , https://docs.djangoproject.com/en/3.1/intro/tutorial01/ , https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC , https://velog.io/@vlvksbdof12/Python-Django-%EA%B8%B0%EC%B4%88-%EC%A0%9C-2%EA%B0%95 
+ 
+#### 참고 : https://www.geeksforgeeks.org/django-tutorial/, https://www.geeksforgeeks.org/django-basics/, https://docs.djangoproject.com/en/3.1/intro/tutorial01/ , https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC , https://velog.io/@vlvksbdof12/Python-Django-%EA%B8%B0%EC%B4%88-%EC%A0%9C-2%EA%B0%95 
   
+  
+------------------------
+
+## Django 앱 작성, 2부
+
++ 데이터베이스 설정
+  + 기본적으로 SQLite 사용 ( Python에 내장되어 있음 ) 
+
+
+#### 참고 : https://docs.djangoproject.com/en/3.1/intro/tutorial02/, https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-part2 
