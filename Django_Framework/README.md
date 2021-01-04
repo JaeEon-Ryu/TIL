@@ -24,6 +24,15 @@
 
 + ### 장고 설치 ( 윈도우 기준 )
   + cmd 혹은 MINGW64 열기 
+    > 알고 있어야 하는 명령어
+    
+        1. cd ( change directory ) 
+          cd 폴더명 : 해당 폴더로 이동
+          cd .. : 해당 폴더 전의 경로로 돌아감
+        2. Ctrl + c 
+          Ctrl + c : 명령 중지 ( 향후 cmd 상에서 장고 웹 실행 중지 시 필요 )  
+        
+    
   + pip 설치 
     > #### python -m pip install --user pip
       
@@ -61,13 +70,49 @@
     + 가상 환경 활성화 하기 ( activate )
     + 명령어 입력
       > #### django-admin startproject mysite
-        mysite은 프로젝트 이름 -> 사용자 임의로 만들기 가능 
-  + 폴더 이동하기
+          mysite은 프로젝트 이름 -> 사용자 임의로 만들기 가능 
+          명령어가 입력된 후 파이참 같은 통합개발환경이나 파일 탐색기로 확인 시 다음과 같은 하위 목록이 만들어져 있음   
+        
+          mysite/
+            manage.py
+            mysite/
+                __init__.py
+                settings.py
+                urls.py
+                asgi.py
+                wsgi.py   
+        
+  + 폴더 이동하기 ( cmd 에서 ) 
     > #### cd mysite
   + 실행하기
     > #### Python manage.py runserver
   + 웹 페이지 방문하기
-    + http://localhost:8000/ 클릭 
+    + http://localhost:8000/ 클릭    
+      ( 우주선 모양이 나오면 성공 ) 
+
++ ### 설문조사 앱 만들기
+  + 장고 프로젝트는 하나 이상의 애플리케이션으로 구성   
+    ( 앱은 웹서비스 중 하나의 기능 의미 ) 
+    
+  + 앱 만들기
+    > #### python manage.py startapp polls    
+      ( cmd상에서 Ctrl + c 로 서버를 중지한 상태에서 명령어 입력 - manage.py 파일이 있는 경로에서 실행해야 함 )
+      
+        코드가 정상적으로 입력되었다면 다음과 같은 하위목록이 만들어져 있음
+
+        polls/
+            __init__.py
+            admin.py
+            apps.py
+            migrations/
+                __init__.py
+            models.py
+            tests.py
+            views.py
+      
+    
+ 
+
  
  #### 참고 : https://www.geeksforgeeks.org/django-tutorial/, https://www.geeksforgeeks.org/django-basics/ , https://docs.djangoproject.com/en/3.1/intro/tutorial01/ 
   
