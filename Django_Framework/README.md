@@ -73,14 +73,14 @@
           mysite은 프로젝트 이름 -> 사용자 임의로 만들기 가능 
           명령어가 입력된 후 파이참 같은 통합개발환경이나 파일 탐색기로 확인 시 다음과 같은 하위 목록이 만들어져 있음   
         
-          mysite/
-            manage.py
+          mysite/             
+            manage.py        ( 장고의 다양한 명령어를 실행하기 위한 파일 )
             mysite/
                 __init__.py
-                settings.py
-                urls.py
-                asgi.py
-                wsgi.py   
+                settings.py   ( 프로젝트에 관련된 다양한 설정 ) 
+                urls.py       ( 사용자가 URL로 Django에 접근을 하면 Django는 URL로 URL 규칙을 보고 내부에서 일치하는 VIEW를 찾아 연결 ) 
+                asgi.py       ( Asynchronous Server Gateway Interface 의 줄임말, django-channels가 사용하고 있는 Daphne와 django-channels가 작동하는 기반 ) 
+                wsgi.py       ( Web Server Gateway Interface 의 줄임말, Python 의 표준 Gateway Interface ) 
         
   + 폴더 이동하기 ( cmd 에서 ) 
     > #### cd mysite
@@ -139,9 +139,12 @@
             path('admin/', admin.site.urls),
         ]
         
-  + 모든 작업을 완료했으면 다음과 같은 화면이 나옴
+  + 웹 페이지 접속
+    + python manage.py runserver ( cmd 에서 입력 )
+    + http://localhost:8000/polls/ ( 링크 이동 ) 
+    + 모든 작업을 완료했으면 다음과 같은 화면이 나옴
   
-
+        <img src="https://user-images.githubusercontent.com/52907116/103541158-51fa5a80-4ede-11eb-9307-9cce567f5ad8.png" width="25%"></img>
  
- #### 참고 : https://www.geeksforgeeks.org/django-tutorial/, https://www.geeksforgeeks.org/django-basics/ , https://docs.djangoproject.com/en/3.1/intro/tutorial01/ 
+ #### 참고 : https://www.geeksforgeeks.org/django-tutorial/, https://www.geeksforgeeks.org/django-basics/ , https://docs.djangoproject.com/en/3.1/intro/tutorial01/ , https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC , https://velog.io/@vlvksbdof12/Python-Django-%EA%B8%B0%EC%B4%88-%EC%A0%9C-2%EA%B0%95 
   
