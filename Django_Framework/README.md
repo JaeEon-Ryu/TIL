@@ -109,9 +109,38 @@
             models.py
             tests.py
             views.py
+       
+  + 앱 ( polls ) 하위에 있는 views.py 파일 내용 작성
+    > polls/view.py
       
+        from django.http import HttpResponse
+
+        def index(request):
+            return HttpResponse("Hello, world. You're at the polls index.")
+  
+  + 앱 ( polls ) 하위에 urls.py 파일 생성 후 내용 작성
+    > polls/urls.py
     
- 
+        from django.urls import path
+
+        from . import views
+
+        urlpatterns = [
+            path('', views.index, name='index'),
+        ]
+        
+  + 프로젝트 폴더(mysite)에 있는 urls.py 내용 작성
+    > mysite/urls.py
+        
+        from django.urls import include, path
+
+        urlpatterns = [
+            path('polls/', include('polls.urls')),
+            path('admin/', admin.site.urls),
+        ]
+        
+  + 모든 작업을 완료했으면 다음과 같은 화면이 나옴
+  
 
  
  #### 참고 : https://www.geeksforgeeks.org/django-tutorial/, https://www.geeksforgeeks.org/django-basics/ , https://docs.djangoproject.com/en/3.1/intro/tutorial01/ 
