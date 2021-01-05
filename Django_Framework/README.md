@@ -97,7 +97,7 @@
     + http://localhost:8000/ 클릭    
       ( 우주선 모양이 나오면 성공 ) 
 
-+ polls 앱 만들기
++ ### polls 앱 만들기
   + 장고 프로젝트는 하나 이상의 애플리케이션으로 구성   
     ( 앱은 웹서비스 중 하나의 기능 의미 ) 
     
@@ -161,8 +161,16 @@
 
 ## Django 앱 작성, 2부
 
-+ 데이터베이스 설정
++ ### 데이터베이스 설정
   + 기본적으로 SQLite 사용 ( Python에 내장되어 있음 ) 
+  > 다른 엔진 사용 가능 
+  
+      'django.db.backends.sqlite3'
+      'django.db.backends.postgresql'
+      'django.db.backends.mysql'
+      'django.db.backends.oracle'
+    
++ ### 모델 만들기 
 
 
 #### 참고 : https://docs.djangoproject.com/en/3.1/intro/tutorial02/, https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-part2 
