@@ -170,7 +170,235 @@
       'django.db.backends.mysql'
       'django.db.backends.oracle'
     
-+ ### 모델 만들기 
++ ### 모델 생성
+  + Django에서의 Model : 데이터 서비스를 제공하는 계층
+  + models.py 모듈 안에 하나 이상의 모델 클래스를 정의 가능   
+    ( 하나의 모델 클래스는 데이터베이스에서 하나의 테이블에 해당 ) 
+  + 모델이란?
+    + 데이터베이스에 저장될 데이터를 클래스 형태로 구성한 것   
+      ( 상속기능을 이용해 필요한 부분만 구현하도록 ) 
+    + 데이터와 동작을 함께 정의 ( CRUD : 저장, 읽기, 수정, 삭제 ) 
+  + polls 폴더 하위에 있는 models.py 파일에 내용 작성
+    > polls/models.py
+      
+        from django.db import models
+
+        class Question(models.Model): 
+            question_text = models.CharField(max_length=200)  # 질문
+            pub_date = models.DateTimeField('date published') # publish 시간
 
 
+        class Choice(models.Model):
+            question = models.ForeignKey(Question, on_delete=models.CASCADE)  # 질문 - 외래키, 삭제될 경우 연쇄삭제
+            choice_text = models.CharField(max_length=200)  # 답변
+            votes = models.IntegerField(default=0)  # 답변 횟수
+            
+    + Question, Choice 각각 class로 정의하며, django.db.models.Model를 상속받음 
+  
+  + 모델 생성시
+    + 이 앱을 위한 Database schema 생성
+    + Question, Choice 객체를 위한 파이썬 데이터베이스 액세스 API 생성
+   
++ ### 모델 활성화    
+  + polls 앱이 설치 되었음을 알리기
+    > mysite / settings.py
+    
+        INSTALLED_APPS = [
+            'polls.apps.PollsConfig',
+            'django.contrib.admin',
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sessions',
+            'django.contrib.messages',
+            'django.contrib.staticfiles',
+        ]
+  
+  + > 모델 변경사항 저장하기 ( cmd 입력 )  
+    
+        python manage.py makemigrations polls
+  
+    + models.py에 만들어놓은 모델들은 바로 사용할 수 없음, makemigration 과정을 거쳐야 사용 가능
+    + 모델 클래스를 생성하고 난 후, 해당 모델에 상응하는 테이블을 DB에서 생성 가능함
+      + Migration : 파이썬 모델 클래스의 수정 및 생성을 DB에 적용하는 과정   
+        ( 이는 장고가 기본적으로 제공하는 ORM - Object Relational Mapping 을 통해 진행 )
+    
+  + > SQL문 미리보기 ( cmd 입력 )
+        
+        python manage.py sqlmigrate polls 0001
+  
+    + sqlmigrate 명령은 DB에서 migration을 실제로 실행하지 않음
+    + Django가 수행 할 작업을 확인하거나 변경을위해 SQL 스크립트를 필요로 할 때 사용
+    
+  + > 모델 테이블 만들기 ( cmd 입력 ) 
+  
+        python manage.py migrate
+        
+    + 실제적인 DB가 생성되는 시점    
+      ( makemigrations를 통해 생성된 임시파일을 setting.py에 작성된 데이터베이스에 반영 )
+    + Migration을 통해 DB나 테이블을 직접 삭제 or 생성 할 필요없이 모델에 변화를 줄 수 있음
+
++ ### Django가 제공하는 API 사용하기 ( 예제 ) 
+  
+  + Shell에서 나올때는 exit() 를 입력
+
+  + > Python Shell 호출 ( cmd 입력 )
+    
+        python manage.py shell 
+        
+  + > API 사용하기1) - Shell 내부에서 코드 입력 
+  
+        ( shell에 들어간 후 아래 코드중 ' >>> ' 표시가 되어있는 것들만 입력 ) 
+        
+        >>> from polls.models import Choice, Question  # Import the model classes we just wrote.
+
+        # No questions are in the system yet.
+        >>> Question.objects.all()
+        <QuerySet []>
+
+        # Create a new Question.
+        # Support for time zones is enabled in the default settings file, so
+        # Django expects a datetime with tzinfo for pub_date. Use timezone.now()
+        # instead of datetime.datetime.now() and it will do the right thing.
+        >>> from django.utils import timezone
+        >>> q = Question(question_text="What's new?", pub_date=timezone.now())
+
+        # Save the object into the database. You have to call save() explicitly.
+        >>> q.save()
+
+        # Now it has an ID.
+        >>> q.id
+        1
+
+        # Access model field values via Python attributes.
+        >>> q.question_text
+        "What's new?"
+        >>> q.pub_date
+        datetime.datetime(2021, 1, 5, 13, 55, 43, 205830, tzinfo=<UTC>)
+
+        # Change values by changing the attributes, then calling save().
+        >>> q.question_text = "What's up?"
+        >>> q.save()
+
+        # objects.all() displays all the questions in the database.
+        >>> Question.objects.all()
+        <QuerySet [<Question: Question object (1)>]>
+  
+  + API 사용하기2) - python 코드 추가 
+    
+    > polls/models.py ( 코드 추가 1 )
+    
+        from django.db import models
+
+        class Question(models.Model):
+            # ...
+            def __str__(self):
+                return self.question_text
+
+        class Choice(models.Model):
+            # ...
+            def __str__(self):
+                return self.choice_text
+  
+    __str__() : 객체의 표현을 사용하기 위해 메서드 추가
+  
+    > polls/models.py ( 코드 추가 2 ) 
+    
+        import datetime
+
+        from django.db import models
+        from django.utils import timezone
+
+
+        class Question(models.Model):
+            # ...
+            def was_published_recently(self):
+                return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+            
+    변경사항 저장
+    
+  + > Python Shell 호출 ( cmd 입력 )
+    
+        python manage.py shell 
+        
+  + > API 사용하기3) - Shell 내부에서 코드 입력 
+    
+        >>> from polls.models import Choice, Question
+
+        # Make sure our __str__() addition worked.
+        >>> Question.objects.all()
+        <QuerySet [<Question: What's up?>]>
+
+        # Django provides a rich database lookup API that's entirely driven by
+        # keyword arguments.
+        >>> Question.objects.filter(id=1)
+        <QuerySet [<Question: What's up?>]>
+        >>> Question.objects.filter(question_text__startswith='What')
+        <QuerySet [<Question: What's up?>]>
+
+        # Get the question that was published this year.
+        >>> from django.utils import timezone
+        >>> current_year = timezone.now().year
+        >>> Question.objects.get(pub_date__year=current_year)
+        <Question: What's up?>
+
+        # Request an ID that doesn't exist, this will raise an exception.
+        >>> Question.objects.get(id=2)
+        Traceback (most recent call last):
+            ...
+        DoesNotExist: Question matching query does not exist.
+
+        # Lookup by a primary key is the most common case, so Django provides a
+        # shortcut for primary-key exact lookups.
+        # The following is identical to Question.objects.get(id=1).
+        >>> Question.objects.get(pk=1)
+        <Question: What's up?>
+
+        # Make sure our custom method worked.
+        >>> q = Question.objects.get(pk=1)
+        >>> q.was_published_recently()
+        True
+
+        # Give the Question a couple of Choices. The create call constructs a new
+        # Choice object, does the INSERT statement, adds the choice to the set
+        # of available choices and returns the new Choice object. Django creates
+        # a set to hold the "other side" of a ForeignKey relation
+        # (e.g. a question's choice) which can be accessed via the API.
+        >>> q = Question.objects.get(pk=1)
+
+        # Display any choices from the related object set -- none so far.
+        >>> q.choice_set.all()
+        <QuerySet []>
+
+        # Create three choices.
+        >>> q.choice_set.create(choice_text='Not much', votes=0)
+        <Choice: Not much>
+        >>> q.choice_set.create(choice_text='The sky', votes=0)
+        <Choice: The sky>
+        >>> c = q.choice_set.create(choice_text='Just hacking again', votes=0)
+
+        # Choice objects have API access to their related Question objects.
+        >>> c.question
+        <Question: What's up?>
+
+        # And vice versa: Question objects get access to Choice objects.
+        >>> q.choice_set.all()
+        <QuerySet [<Choice: Not much>, <Choice: The sky>, <Choice: Just hacking again>]>
+        >>> q.choice_set.count()
+        3
+
+        # The API automatically follows relationships as far as you need.
+        # Use double underscores to separate relationships.
+        # This works as many levels deep as you want; there's no limit.
+        # Find all Choices for any question whose pub_date is in this year
+        # (reusing the 'current_year' variable we created above).
+        >>> Choice.objects.filter(question__pub_date__year=current_year)
+        <QuerySet [<Choice: Not much>, <Choice: The sky>, <Choice: Just hacking again>]>
+
+        # Let's delete one of the choices. Use delete() for that.
+        >>> c = q.choice_set.filter(choice_text__startswith='Just hacking')
+        >>> c.delete()
+        
+        
+     
+    
 #### 참고 : https://docs.djangoproject.com/en/3.1/intro/tutorial02/, https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-part2 
