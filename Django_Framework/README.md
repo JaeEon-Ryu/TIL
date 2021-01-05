@@ -282,6 +282,10 @@
         # objects.all() displays all the questions in the database.
         >>> Question.objects.all()
         <QuerySet [<Question: Question object (1)>]>
+        
+        
+      <img src="https://user-images.githubusercontent.com/52907116/103659823-33649400-4fb0-11eb-9c04-e79d27575dbc.png" width="90%"></img>
+        
   
   + API 사용하기2) - python 코드 추가 
     
@@ -299,7 +303,7 @@
             def __str__(self):
                 return self.choice_text
   
-    __str__() : 객체의 표현을 사용하기 위해 메서드 추가
+    \__str__() : 객체의 표현을 사용하기 위해 메서드 추가
   
     > polls/models.py ( 코드 추가 2 ) 
     
