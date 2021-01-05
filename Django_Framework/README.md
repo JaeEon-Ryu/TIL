@@ -436,13 +436,13 @@
 
         http://127.0.0.1:8000/admin/
       
-    <img src="https://user-images.githubusercontent.com/52907116/103661759-6d369a00-4fb2-11eb-8b6d-781a24707f80.png" width="50%"></img>
+    <img src="https://user-images.githubusercontent.com/52907116/103661759-6d369a00-4fb2-11eb-8b6d-781a24707f80.png" width="30%"></img>
 
 + ### 관리자 사이트 들어가기
   + 사이트에 로그인을 하게 되면 인증과 권한을 부여할 수 있는 기능이 있음    
     ( django.contrib.auth - 장고에 의해 제공되는 인증 프레임 워크 )
   
-     <img src="https://user-images.githubusercontent.com/52907116/103661762-6e67c700-4fb2-11eb-9e44-5efcb85d7065.png" width="90%"></img>
+     <img src="https://user-images.githubusercontent.com/52907116/103661762-6e67c700-4fb2-11eb-9e44-5efcb85d7065.png" width="70%"></img>
      
 + ### 관리자의 입장에서 polls앱을 수정 가능하도록 만들기
   +  Question 객체에 관리자 인터페이스가 있음을 알려야 함 ( Python 코드 추가 )
@@ -457,16 +457,16 @@
 
 + ### 기능 살펴보기
   + 바로 위에서 Question 이라는 것을 관리 사이트에 등록했으므로 아래와 같은 화면이 나옴
-    <img src="https://user-images.githubusercontent.com/52907116/103661763-6e67c700-4fb2-11eb-97fd-6070c3ec71db.png" width="90%"></img>
+    <img src="https://user-images.githubusercontent.com/52907116/103661763-6e67c700-4fb2-11eb-97fd-6070c3ec71db.png" width="70%"></img>
   + Questions을 클릭하면 앞서 만든 What's up? 이라는 문항이 나옴 
-    <img src="https://user-images.githubusercontent.com/52907116/103661764-6f005d80-4fb2-11eb-8953-ba690058e42b.png" width="90%"></img>
+    <img src="https://user-images.githubusercontent.com/52907116/103661764-6f005d80-4fb2-11eb-8953-ba690058e42b.png" width="65%"></img>
   + What's up? 문항 클릭 후 편집 화면
     + 게시된 날짜 값이 질문을 생성한 시간과 맞지 않다면 TIME_ZOME 설정값 변경하기
     + Today, Now 버튼을 누르면 현재 날짜, 시각으로 변경
-    
+    <img src="https://user-images.githubusercontent.com/52907116/103665113-6447c780-4fb6-11eb-952f-6f03ce77621c.png" width="70%"></img>
   + History 클릭 
     + 시간대별로 누가 변경을 했고 어떤것을 변경했는지 모든 변경사항이 나옴
-    
+    <img src="https://user-images.githubusercontent.com/52907116/103665117-64e05e00-4fb6-11eb-9c17-c1f2e31e7c98.png" width="50%"></img>
     
   
     
