@@ -402,7 +402,33 @@
         >>> c = q.choice_set.filter(choice_text__startswith='Just hacking')
         >>> c.delete()
         
++ ### Django 관리
+  + Django Admin : 모델에 대한 관리 인터페이스 생성 자동화
+  + 관리자 사이트는 방문자가 사용 불가 ( 관리자를 위한 것 ) 
+
+  + 관리자 생성하기
+    > 관리 사이트에 로그인 할 수 있는 사용자 만들기 ( cmd 입력 )
         
+        python manage.py createsuperuser
+    
+    > 사용자 이름 입력
+    
+        Username : admin
+    
+    > 이메일 주소 입력
+    
+        Email address : admin@example.com
+    
+    > 비밀번호 입력
+    
+        Password: **********
+        Password (again): *********
+        Superuser created successfully.
+
++ ### 개발 서버 시작
+  > 서버 실행
+    
+      python manage.py runserver
      
     
 #### 참고 : https://docs.djangoproject.com/en/3.1/intro/tutorial02/, https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-part2 
