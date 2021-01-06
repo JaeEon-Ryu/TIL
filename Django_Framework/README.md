@@ -160,35 +160,43 @@
   + 앱 ( polls ) 하위에 있는 views.py 파일 내용 작성
     > polls/view.py
       
-        from django.http import HttpResponse
+      ```Python
+      
+      from django.http import HttpResponse
 
-        def index(request):
-            return HttpResponse("Hello, world. You're at the polls index.")
+      def index(request):
+          return HttpResponse("Hello, world. You're at the polls index.")
+      ```
   
   <br>
   
   + 앱 ( polls ) 하위에 urls.py 파일 생성 후 내용 작성
     > polls/urls.py
     
-        from django.urls import path
+      ```Python
+      
+      from django.urls import path
 
-        from . import views
+      from . import views
 
-        urlpatterns = [
-            path('', views.index, name='index'),
-        ]
+      urlpatterns = [
+          path('', views.index, name='index'),
+      ]
+      ```
   
   <br>
         
   + 프로젝트 폴더(mysite)에 있는 urls.py 내용 작성
     > mysite/urls.py
-        
-        from django.urls import include, path
+       
+      ```Python 
+      from django.urls import include, path
 
-        urlpatterns = [
-            path('polls/', include('polls.urls')),
-            path('admin/', admin.site.urls),
-        ]
+      urlpatterns = [
+          path('polls/', include('polls.urls')),
+          path('admin/', admin.site.urls),
+      ]
+      ```
   
   <br>
         
@@ -199,10 +207,18 @@
   
         <img src="https://user-images.githubusercontent.com/52907116/103541158-51fa5a80-4ede-11eb-9307-9cce567f5ad8.png" width="25%"></img>
  
-
+  <br>
+  
+  
   <br>
    
-#### 참고 : https://www.geeksforgeeks.org/django-tutorial/, https://www.geeksforgeeks.org/django-basics/, https://docs.djangoproject.com/en/3.1/intro/tutorial01/ , https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC , https://velog.io/@vlvksbdof12/Python-Django-%EA%B8%B0%EC%B4%88-%EC%A0%9C-2%EA%B0%95 
+### 참고 
+
+###### [GeeksforGeeks - Django Tutorial](https://www.geeksforgeeks.org/django-tutorial/)
+###### [GeeksforGeeks - Django Basics](https://www.geeksforgeeks.org/django-basics/)
+###### [Django - Writing your first Django app, part 1](https://docs.djangoproject.com/en/3.1/intro/tutorial01/)
+###### [jcinsh - Django - 튜토리얼 part1](https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC)
+###### [vlvksbdof12 - Python Django 기초 제 2강](https://velog.io/@vlvksbdof12/Python-Django-%EA%B8%B0%EC%B4%88-%EC%A0%9C-2%EA%B0%95)
   
 
   <br>
@@ -217,10 +233,13 @@
   + 기본적으로 SQLite 사용 ( Python에 내장되어 있음 ) 
   > 다른 엔진 사용 가능 
   
-      'django.db.backends.sqlite3'
-      'django.db.backends.postgresql'
-      'django.db.backends.mysql'
-      'django.db.backends.oracle'
+    ```Python
+    
+    'django.db.backends.sqlite3'
+    'django.db.backends.postgresql'
+    'django.db.backends.mysql'
+    'django.db.backends.oracle'
+    ```
 
   <br>
       
@@ -241,17 +260,20 @@
   + polls 폴더 하위에 있는 models.py 파일에 내용 작성
     > polls/models.py
       
-        from django.db import models
+      ```Python
+      
+      from django.db import models
 
-        class Question(models.Model): 
-            question_text = models.CharField(max_length=200)  # 질문
-            pub_date = models.DateTimeField('date published') # publish 시간
+      class Question(models.Model): 
+          question_text = models.CharField(max_length=200)  # 질문
+          pub_date = models.DateTimeField('date published') # publish 시간
 
 
-        class Choice(models.Model):
-            question = models.ForeignKey(Question, on_delete=models.CASCADE)  # 질문 - 외래키, 삭제될 경우 연쇄삭제
-            choice_text = models.CharField(max_length=200)  # 답변
-            votes = models.IntegerField(default=0)  # 답변 횟수
+      class Choice(models.Model):
+          question = models.ForeignKey(Question, on_delete=models.CASCADE)  # 질문 - 외래키, 삭제될 경우 연쇄삭제
+          choice_text = models.CharField(max_length=200)  # 답변
+          votes = models.IntegerField(default=0)  # 답변 횟수
+      ```
             
     + Question, Choice 각각 class로 정의하며, django.db.models.Model를 상속받음 
   
@@ -267,16 +289,19 @@
   + polls 앱이 설치 되었음을 알리기
     > mysite / settings.py
     
-        INSTALLED_APPS = [
-            'polls.apps.PollsConfig',
-            'django.contrib.admin',
-            'django.contrib.auth',
-            'django.contrib.contenttypes',
-            'django.contrib.sessions',
-            'django.contrib.messages',
-            'django.contrib.staticfiles',
-        ]
-  
+      ```Python
+      
+      INSTALLED_APPS = [
+          'polls.apps.PollsConfig',
+          'django.contrib.admin',
+          'django.contrib.auth',
+          'django.contrib.contenttypes',
+          'django.contrib.sessions',
+          'django.contrib.messages',
+          'django.contrib.staticfiles',
+      ]
+      ```
+      
   <br>
   
   + > 모델 변경사항 저장하기 ( cmd 입력 )  
@@ -369,32 +394,37 @@
     
     > polls/models.py ( 코드 추가 1 )
     
-        from django.db import models
+      ```Python
+      
+      from django.db import models
 
-        class Question(models.Model):
-            # ...
-            def __str__(self):
-                return self.question_text
+      class Question(models.Model):
+          # ...
+          def __str__(self):
+              return self.question_text
 
-        class Choice(models.Model):
-            # ...
-            def __str__(self):
-                return self.choice_text
+      class Choice(models.Model):
+          # ...
+          def __str__(self):
+              return self.choice_text
+      ```
   
     \__str__() : 객체의 표현을 사용하기 위해 메서드 추가
   
     > polls/models.py ( 코드 추가 2 ) 
     
-        import datetime
+      ```Python
+      import datetime
 
-        from django.db import models
-        from django.utils import timezone
+      from django.db import models
+      from django.utils import timezone
 
 
-        class Question(models.Model):
-            # ...
-            def was_published_recently(self):
-                return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+      class Question(models.Model):
+          # ...
+          def was_published_recently(self):
+              return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+      ```
             
     변경사항 저장
   
@@ -539,12 +569,14 @@
 
       > polls/admin.py
 
-          from django.contrib import admin
+        ```Python
+        
+        from django.contrib import admin
 
-          from .models import Question
+        from .models import Question
 
-          admin.site.register(Question)
-
+        admin.site.register(Question)
+        ```
     <br>
 
   + ### 기능 살펴보기
@@ -573,7 +605,10 @@
 
     <br>
       
-#### 참고 : https://docs.djangoproject.com/en/3.1/intro/tutorial02/, https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-part2 
+### 참고 
+
+###### [Django - riting your first Django app, part 2](https://docs.djangoproject.com/en/3.1/intro/tutorial02/)
+###### [jcinsh - Django - 튜토리얼 part2](https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-part2)
 
 
   <br>
