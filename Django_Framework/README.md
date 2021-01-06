@@ -2,7 +2,18 @@
 
 + INDEX
   + [Django 앱 작성 1부](#django-앱-작성-1부)
+    + [개요](#개요)
+    + [구성](#구성)
+    + [장고 설치 ( 윈도우 기준 )](#장고-설치--윈도우-기준-)
+    + [장고 프로젝트 시작하기](#장고-프로젝트-시작하기)
+    + [polls 앱 만들기](#polls-앱-만들기)
   + [Django 앱 작성 2부](#django-앱-작성-2부)
+    + [데이터베이스 설정](#데이터베이스-설정)
+    + [모델 생성](#모델-생성)
+    + [모델 활성화](#모델-활성화)
+    + [Django가 제공하는 API 사용하기 ( 예제 )](#django가-제공하는-api-사용하기--예제-)
+    + [Djnago 관리](#django-관리)
+
 
 ------------------------------- 
 
@@ -498,69 +509,69 @@
         Password (again): *********
         Superuser created successfully.
 
-  <br>
-  
-+ ### 개발 서버 시작
-  + 관리자를 설정 했다면 Django 관리 사이트가 기본적으로 활성화 되어있음
-  
-    > 서버 실행
+    <br>
 
-        python manage.py runserver
+  + ### 개발 서버 시작
+    + 관리자를 설정 했다면 Django 관리 사이트가 기본적으로 활성화 되어있음
 
-    > 웹페이지 이동
+      > 서버 실행
 
-        http://127.0.0.1:8000/admin/
-      
-    <img src="https://user-images.githubusercontent.com/52907116/103661759-6d369a00-4fb2-11eb-8b6d-781a24707f80.png" width="30%"></img>
+          python manage.py runserver
 
-  <br>
-  
-+ ### 관리자 사이트 들어가기
-  + 사이트에 로그인을 하게 되면 인증과 권한을 부여할 수 있는 기능이 있음    
-    ( django.contrib.auth - 장고에 의해 제공되는 인증 프레임 워크 )
-  
-     <img src="https://user-images.githubusercontent.com/52907116/103661762-6e67c700-4fb2-11eb-9e44-5efcb85d7065.png" width="70%"></img>
+      > 웹페이지 이동
 
-  <br>
-       
-+ ### 관리자의 입장에서 polls앱을 수정 가능하도록 만들기
-  +  Question 객체에 관리자 인터페이스가 있음을 알려야 함 ( Python 코드 추가 )
-    
-    > polls/admin.py
+          http://127.0.0.1:8000/admin/
 
-        from django.contrib import admin
+      <img src="https://user-images.githubusercontent.com/52907116/103661759-6d369a00-4fb2-11eb-8b6d-781a24707f80.png" width="30%"></img>
 
-        from .models import Question
+    <br>
 
-        admin.site.register(Question)
+  + ### 관리자 사이트 들어가기
+    + 사이트에 로그인을 하게 되면 인증과 권한을 부여할 수 있는 기능이 있음    
+      ( django.contrib.auth - 장고에 의해 제공되는 인증 프레임 워크 )
 
-  <br>
-  
-+ ### 기능 살펴보기
-  + 바로 위에서 Question 이라는 것을 관리 사이트에 등록했으므로 아래와 같은 화면이 나옴
-    <img src="https://user-images.githubusercontent.com/52907116/103661763-6e67c700-4fb2-11eb-97fd-6070c3ec71db.png" width="70%"></img>
-  
-  <br>
-  
-  + Questions을 클릭하면 앞서 만든 What's up? 이라는 문항이 나옴 
-    <img src="https://user-images.githubusercontent.com/52907116/103661764-6f005d80-4fb2-11eb-8953-ba690058e42b.png" width="65%"></img>
-  
-  <br>
-  
-  + What's up? 문항 클릭 후 편집 화면
-    + 게시된 날짜 값이 질문을 생성한 시간과 맞지 않다면 TIME_ZOME 설정값 변경하기
-    + Today, Now 버튼을 누르면 현재 날짜, 시각으로 변경
-    <img src="https://user-images.githubusercontent.com/52907116/103665113-6447c780-4fb6-11eb-952f-6f03ce77621c.png" width="70%"></img>
-  
-  <br>
-  
-  + History 클릭 
-    + 시간대별로 누가 변경을 했고 어떤것을 변경했는지 모든 변경사항이 나옴
-    <img src="https://user-images.githubusercontent.com/52907116/103665117-64e05e00-4fb6-11eb-9c17-c1f2e31e7c98.png" width="50%"></img>
-    
-  
+       <img src="https://user-images.githubusercontent.com/52907116/103661762-6e67c700-4fb2-11eb-9e44-5efcb85d7065.png" width="70%"></img>
 
-  <br>
+    <br>
+
+  + ### 관리자의 입장에서 polls앱을 수정 가능하도록 만들기
+    +  Question 객체에 관리자 인터페이스가 있음을 알려야 함 ( Python 코드 추가 )
+
+      > polls/admin.py
+
+          from django.contrib import admin
+
+          from .models import Question
+
+          admin.site.register(Question)
+
+    <br>
+
+  + ### 기능 살펴보기
+    + 바로 위에서 Question 이라는 것을 관리 사이트에 등록했으므로 아래와 같은 화면이 나옴
+      <img src="https://user-images.githubusercontent.com/52907116/103661763-6e67c700-4fb2-11eb-97fd-6070c3ec71db.png" width="70%"></img>
+
+    <br>
+
+    + Questions을 클릭하면 앞서 만든 What's up? 이라는 문항이 나옴 
+      <img src="https://user-images.githubusercontent.com/52907116/103661764-6f005d80-4fb2-11eb-8953-ba690058e42b.png" width="65%"></img>
+
+    <br>
+
+    + What's up? 문항 클릭 후 편집 화면
+      + 게시된 날짜 값이 질문을 생성한 시간과 맞지 않다면 TIME_ZOME 설정값 변경하기
+      + Today, Now 버튼을 누르면 현재 날짜, 시각으로 변경
+      <img src="https://user-images.githubusercontent.com/52907116/103665113-6447c780-4fb6-11eb-952f-6f03ce77621c.png" width="70%"></img>
+
+    <br>
+
+    + History 클릭 
+      + 시간대별로 누가 변경을 했고 어떤것을 변경했는지 모든 변경사항이 나옴
+      <img src="https://user-images.githubusercontent.com/52907116/103665117-64e05e00-4fb6-11eb-9c17-c1f2e31e7c98.png" width="50%"></img>
+
+
+
+    <br>
       
 #### 참고 : https://docs.djangoproject.com/en/3.1/intro/tutorial02/, https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-part2 
 
