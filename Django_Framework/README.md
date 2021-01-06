@@ -607,9 +607,96 @@
       
 ### 참고 
 
-###### [Django - riting your first Django app, part 2](https://docs.djangoproject.com/en/3.1/intro/tutorial02/)
+###### [Django - Writing your first Django app, part 2](https://docs.djangoproject.com/en/3.1/intro/tutorial02/)
 ###### [jcinsh - Django - 튜토리얼 part2](https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-part2)
 
 
+## Django 앱 작성 3부
+  + ### 개요
+    + 뷰 : Django에 있는 웹 페이지의 종류 ( 특정 기능과 템플릿을 제공 )    
+      ( 상호작용 : View <-> URL <-> Django )
+    + Django에서 웹 페이지 및 기타 콘텐츠는 뷰를 통해 제공됨
+    + Django는 요청된 URL을 검사하여 뷰를 선택함
+    + URL에서 뷰로 이동하기 위해 Django는 'URLconfs'를 사용   
+      ( URLconf는 URL 패턴을 뷰에 매핑함 )
+    
+    <br>
+  
+  + ### 뷰 더 만들기
+    + polls 앱에 뷰 추가 
+      > polls/view.py
+      ```Python
+      def detail(request, question_id):
+          return HttpResponse("You're looking at question %s." % question_id)
+
+      def results(request, question_id):
+          response = "You're looking at the results of question %s."
+          return HttpResponse(response % question_id)
+
+      def vote(request, question_id):
+          return HttpResponse("You're voting on question %s." % question_id) 
+      ```
+      + urlpatterns에서 매칭되는 URL pattern을 찾았다면, HttpRequest 객체를 가지고 넘겨준 view function을 call함   
+      -> views 함수들의 첫번째 input에 모두 request라는 input을 받게 만들어둠
+      
+     <br>
+     
+    + polls 앱에 경로 추가
+      > polls/urls.py
+      ```Python
+      from django.urls import path
+
+      from . import views
+
+      urlpatterns = [
+          # ex: /polls/
+          path('', views.index, name='index'),
+          # ex: /polls/5/
+          path('<int:question_id>/', views.detail, name='detail'),
+          # ex: /polls/5/results/
+          path('<int:question_id>/results/', views.results, name='results'),
+          # ex: /polls/5/vote/
+          path('<int:question_id>/vote/', views.vote, name='vote'),
+      ]
+      ```
+     
+    + 요청 예시 ( "/polls/34/" 를 요청했을 때 )
+      + 1) mysite.urls를 불러옴   
+          ( mysite/settings.py 에서 ROOT_URLCONF = mysite.urls )
+      + 2) mysite.urls에서 urlpatterns라는 리스트를 찾고, 그 중  'polls/'라는 경로를 찾음
+      + 3) 일치하는 텍스트("polls/")를 빼고, 남은 텍스트인 "34/"를 'polls.urls' URLconf로 전달하여 남은 처리를 진행한다.   
+          ( urlpatterns 중 '<int:question_id>/'와 일치하여, 결과적으로 detail() 뷰 함수가 호출 )
+      + > 위와 같은 방식으로 detail 함수가 호출됨
+        
+            detail(request=<HttpRequest object>, question_id=34)
+      
+      + 호출된 웹페이지
+      
+  
+    <br>
+      
+  + ### 작동되는 뷰 만들기
+  
+    <br>
+      
+  + ### 404 에러 띄우기
+  
+    <br>
+      
+  + ### 템플릿 시스템 사용하기
+  
+    <br>
+      
+  + ### 템플릿에서 하드 코딩된 URL 제거하기
+  
+    <br>
+      
+  + ### 네임 스페이스 URL 이름 
+
   <br>
   
+### 참고 
+
+###### [Django - Writing your first Django app, part 3](https://docs.djangoproject.com/en/3.1/intro/tutorial03/)
+###### [wldus9503 - [Django tutorial] 3.첫 번째 장고 앱 작성하기, part 3](https://velog.io/@wldus9503/Django-tutorial-2.%EC%B2%AB-%EB%B2%88%EC%A7%B8-%EC%9E%A5%EA%B3%A0-%EC%95%B1-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0-part-3)
+###### [eungding - [Django] 튜토리얼 part 3 (1) - view 만들기, Template 이용하기, r](https://eunjin3786.tistory.com/128)
