@@ -672,11 +672,16 @@
       
       + 호출된 웹페이지
       
-  
+        <img src="https://user-images.githubusercontent.com/52907116/103776770-48eec200-5073-11eb-9ebb-ea2d1930537f.png" width="35%"></img>
+        
     <br>
       
   + ### 작동되는 뷰 만들기
-  
+    + 뷰의 역할 
+      + 1. 요청된 페이지의 내용이 담긴 HttpResponse 객체를 반환
+      + 2. Http404같은 예외를 반환
+    + 
+    
     <br>
       
   + ### 404 에러 띄우기
