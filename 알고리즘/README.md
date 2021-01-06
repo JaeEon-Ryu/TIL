@@ -59,7 +59,7 @@
     + 비효율적임
     
   + ### 구현
-    <pre><code>
+    ```Python
     # Python3 code to linearly search x in arr[]. 
     # If x is present then return its location, 
     # otherwise return -1 
@@ -86,7 +86,7 @@
         print("Element is present at index", result) 
         
     # 출처 : https://www.geeksforgeeks.org/linear-search/ 
-    </code></pre>
+    ```
     
 + ## 이진 탐색법 ( Binary Search ) 
   + ### 개요
@@ -94,7 +94,7 @@
     + 사전에 정렬이 되어 있어야 함
     
   + ### 이진트리의 재귀적 구현
-    <pre><code>
+    ```Python
     # Python3 Program for recursive binary search. 
 
     # Returns index of x in arr if present, else -1 
@@ -136,10 +136,10 @@
         print ("Element is not present in array") 
 
     # 출처 : https://www.geeksforgeeks.org/binary-search/ 
-    </code></pre>
+    ```
   
   + ### 이진트리의 반복적 구현
-    <pre><code>
+    ```Python
     # Python3 code to implement iterative Binary  
     # Search. 
 
@@ -180,10 +180,13 @@
         print ("Element is not present in array") 
 
     # 참고 : https://www.geeksforgeeks.org/binary-search/ 
-    </code></pre>
+    ```
   
   
-> ###### 참고 : https://blog.hexabrain.net/245 , https://www.geeksforgeeks.org/searching-algorithms/ , https://yeolco.tistory.com/74 
+### 참고
+###### [LAYER6AI - 알고리즘 2-1강. 탐색 알고리즘 - 순차탐색](https://blog.hexabrain.net/245)
+###### [GeeksforGeeks - Searching Algorithms](https://www.geeksforgeeks.org/searching-algorithms/)
+###### [열코 - 검색 알고리즘 종류](https://yeolco.tistory.com/74)
 
 <br>
 
@@ -228,7 +231,7 @@
         -> 거품이 올라오는 것처럼 보여 버블 정렬이라 불림
         
     + 구현
-      <pre><code>
+      ```Python
       def bubblesort(list):
 
       # Swap the elements to arrange in order
@@ -244,7 +247,7 @@
       print(list)
       
       # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm
-      </code></pre>
+      ```
       
   + ### 병합 정렬 ( Merge Sort )
     + 개요
@@ -253,7 +256,7 @@
         ( 분할-정복 알고리즘 기반 ) 
         
     + 구현
-      <pre><code>
+      ```Python
       def merge_sort(unsorted_list):
           if len(unsorted_list) <= 1:
               return unsorted_list
@@ -289,7 +292,7 @@
       print(merge_sort(unsorted_list))
       
       # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm
-      </code></pre> 
+      ``` 
   
   + ### 삽입 정렬 ( Insertion Sort )
     + 개요
@@ -297,7 +300,7 @@
       + 평균적으로 삽입정렬이 선택정렬과 버블정렬에 비해 빠름 
       
     + 구현
-      <pre><code>
+      ```Python
       def insertion_sort(InputList):
           for i in range(1, len(InputList)):
               j = i-1
@@ -314,7 +317,7 @@
       print(list)
       
       # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm 
-      </code></pre>
+      ```
   
   + ### 셸 정렬 ( Shell Sort )
     + 개요
@@ -328,7 +331,7 @@
       + 시간 복잡도가 명확하지 않음
       
     + 구현
-      <pre><code>
+      ```Python
       def shellSort(input_list):
     
           gap = len(input_list) // 2
@@ -354,7 +357,7 @@
       print(list)
       
       # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm 
-      </code></pre>
+      ```
     
   
   + ### 선택 정렬 ( Selection Sort )
@@ -363,7 +366,7 @@
       + 대체로 버블정렬보다 빠름
       
     + 구현
-      <pre><code>
+      ```Python
       def selection_sort(input_list):
 
         for idx in range(len(input_list)):
@@ -382,10 +385,14 @@
       print(l)
       
       # 출처 : https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm 
-      </code></pre>
+      ```
     
 
-> ###### 참고 : https://namu.wiki/w/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm , http://ejklike.github.io/2017/03/04/sorting-algorithms-with-python.html , https://gmlwjd9405.github.io/2018/05/08/algorithm-shell-sort.html 
+### 참고
+###### [나무위키 - 정렬 알고리즘](https://namu.wiki/w/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
+###### [tutorialspoint - Python - Sorting Algorithms](https://www.tutorialspoint.com/python_data_structure/python_sorting_algorithms.htm)
+###### [Eunji Kim - 파이썬으로 정렬 알고리즘 구현하기](http://ejklike.github.io/2017/03/04/sorting-algorithms-with-python.html)
+###### [heejeong Kwon - [알고리즘] 셸 정렬(shell sort)이란](https://gmlwjd9405.github.io/2018/05/08/algorithm-shell-sort.html)
 
 <br>
 
@@ -414,7 +421,7 @@
       > ( WIKIPEDIA, DFS )
       
     + 구현
-      <pre><code>
+      ```Python
         class graph:
             def __init__(self,gdict=None):
                 if gdict is None:
@@ -445,7 +452,7 @@
         dfs(gdict, 'a')
         
         # 출처 : https://www.tutorialspoint.com/python_data_structure/python_graph_algorithms.htm 
-      </code></pre>
+      ```
     
   + ### 너비 우선 탐색 ( Breadth First Search )
     + 개요
@@ -459,7 +466,7 @@
       
     
     + 구현
-      <pre><code>
+      ```Python
         import collections
         class graph:
             def __init__(self,gdict=None):
@@ -494,11 +501,7 @@
         
         # 출처  : https://www.tutorialspoint.com/python_data_structure/python_graph_algorithms.htm 
         
-      </code></pre>
-
-<pre><code>
-#코드 테스트
-</code></pre>
+      ```
 
 > ###### 참고 : https://www.tutorialspoint.com/python_data_structure/python_graph_algorithms.htm , https://namu.wiki/w/%EA%B7%B8%EB%9E%98%ED%94%84(%EC%9D%B4%EC%82%B0%EC%88%98%ED%95%99) , https://cyc1am3n.github.io/2019/04/26/bfs_dfs_with_python.html 
 
@@ -526,7 +529,7 @@
         -> ASCII와 같은 고정 길이 코드로 이루어진 데이터를 접두어 코드로 변환, 압축시키는 메커니즘
       
     + 구현
-     <pre><code>
+     ```Python
       import heapq
       import os
 
@@ -699,7 +702,7 @@
           return output_path
           
      # 출처 : https://bhrigu.me/post/huffman-coding-python-implementation/ 
-     </code></pre>
+     ```
      
   + ### 다익스트라 알고리즘 ( Dijkstra’s Algorithm )
     + 개요 
@@ -720,7 +723,7 @@
       
     
     + 구현
-      <pre><code>
+      ```Python
         # Python program for Dijkstra's single  
         # source shortest path algorithm. The program is  
         # for adjacency matrix representation of the graph 
@@ -805,7 +808,7 @@
 
         # This code is contributed by Divyanshu Mehta 
         # 출처 : https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/ 
-      </code></pre>
+      ```
       
   + ### 크루스칼 알고리즘 ( Kruskal’s algorithm )
     + 개요
@@ -824,7 +827,7 @@
         3. N-1개의 간선이 생성될때까지 2단계 반복      
       
     + 구현
-      <pre><code>
+      ```Python
         # Python program for Kruskal's algorithm to find
         # Minimum Spanning Tree of a given connected,
         # undirected and weighted graph
@@ -939,7 +942,7 @@
         # This code is contributed by Neelam Yadav
         
         # 출처 : https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/ 
-      </code></pre>
+      ```
       
   + ### 프림 알고리즘 ( Prim’s algorithm ) 
     + 개요
@@ -957,7 +960,7 @@
           3-3. u의 모든 인접 정점의 키 값을 업데이트
           
     + 구현
-      <pre><code>
+      ```Python
         # A Python program for Prim's Minimum Spanning Tree (MST) algorithm. 
         # The program is for adjacency matrix representation of the graph 
 
@@ -1042,7 +1045,7 @@
         # Contributed by Divyanshu Mehta
         
         # 출처 : https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/ 
-      </code></pre>
+      ```
   
 
 > ###### 참고 : https://www.fun-coding.org/Chapter19-greedy-live.html , https://skerritt.blog/greedy-algorithms/ ,https://janghw.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Greedy-Algorithm-%ED%83%90%EC%9A%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.geeksforgeeks.org/greedy-algorithms/#standardGreedyAlgorithms , https://namu.wiki/w/%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.fun-coding.org/Chapter20-shortest-live.html , https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html ,https://gmlwjd9405.github.io/2018/08/30/algorithm-prim-mst.html 
@@ -1064,16 +1067,16 @@
    
 + 피보나치를 통해 구현방식 알아보기 
   + Top-down - 큰 문제를 작은 문제로 쪼개면 해결 - 재귀로 구현
-    <pre><code>
+    ```Python
       def fibo(n):
         if n < 3:
             return 1
         else:
             return fibo(n - 1) + fibo(n - 2)
-    </code></pre>
+    ```
     
   + Bottom-up : 작은 문제부터 차례대로 해결 - 반복문으로 구현
-    <pre><code>
+    ```Python
       def fibo(n):
         li = []
         for i in range(0,n):
@@ -1083,7 +1086,7 @@
                 li.append(li[i-1] + li[i-2])
                 
         return li[n-1]
-    </code></pre>
+    ```
 
 > ###### 참고 : https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95 ,https://wooder2050.medium.com/%EB%8F%99%EC%A0%81%EA%B3%84%ED%9A%8D%EB%B2%95-dynamic-programming-%EC%A0%95%EB%A6%AC-58e1dbcb80a0 ,https://velog.io/@polynomeer/%EB%8F%99%EC%A0%81-%EA%B3%84%ED%9A%8D%EB%B2%95Dynamic-Programming
 
