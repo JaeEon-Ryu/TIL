@@ -680,8 +680,50 @@
     + 뷰의 역할 
       + 1. 요청된 페이지의 내용이 담긴 HttpResponse 객체를 반환
       + 2. Http404같은 예외를 반환
-    + 
-    
+    + 최근 5개 설문 인덱스 화면에 띄우기
+      > polls/view.py
+        ```Python
+        from django.http import HttpResponse
+
+        from .models import Question
+
+
+        def index(request):
+            latest_question_list = Question.objects.order_by('-pub_date')[:5]
+            output = ', '.join([q.question_text for q in latest_question_list])
+            return HttpResponse(output)
+        ```
+        
+        ( 사진 ) 
+        ( 저장되어 있는 리스트가 1개뿐이라 What's up? 만 나옴 ) 
+        
+    + 템플릿 생성
+      + 방금 위에서 작업한 코드를 보면 뷰에서 페이지 디자인이 하드 코딩되어 있음      
+        -> 페이지 모양을 변경하려면 이 Python 코드를 편집해야 함   
+        -> 따라서 템플릿을 생성하여 Python에서 설계를 분리함
+          
+    <br>
+      
+      + DjangoTemplates은 각 INSTALLED_APPS 에 있는 "templates" 하위 폴더를 탐색함   
+        -> DjangoTemplates이 찾을 수 있도록 polls 폴더 아래에 templates라는 디렉토리를 만들어줌   
+        -> 그리고 그 아래에 polls라는 폴더를 하나 더 만들고 그 아래에 index.html 파일을 만들어줌    
+          ( Django가 polls/templates 를 찾은 후, polls/index.html 이라는 이름으로 참조 )  
+            
+    <br>
+      
+      + > polls/templates/polls/index.html
+        ```Html
+        {% if latest_question_list %}
+            <ul>
+            {% for question in latest_question_list %}
+                <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No polls are available.</p>
+        {% endif %}
+        ```
+     
     <br>
       
   + ### 404 에러 띄우기
