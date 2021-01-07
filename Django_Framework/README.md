@@ -2,7 +2,7 @@
 
 + INDEX
   + [Django 앱 작성 1부](#django-앱-작성-1부)
-    + [개요](#개요)
+    + [1부 개요](#1부-개요)
     + [구성](#구성)
     + [장고 설치 ( 윈도우 기준 )](#장고-설치--윈도우-기준-)
     + [장고 프로젝트 시작하기](#장고-프로젝트-시작하기)
@@ -13,12 +13,20 @@
     + [모델 활성화](#모델-활성화)
     + [Django가 제공하는 API 사용하기 ( 예제 )](#django가-제공하는-api-사용하기--예제-)
     + [Djnago 관리](#django-관리)
+  + [Django 앱 작성 3부](#django-앱-작성-3부)
+    + [3부 개요](#3부-개요)
+    + [뷰 더 만들기](#뷰-더-만들기)
+    + [작동되는 뷰 만들기](#작동되는-뷰-만들기)
+    + [404 에러 띄우기](#404-에러-띄우기)
+    + [템플릿 시스템 사용하기](#템플릿-시스템-사용하기)
+    + [템플릿에서 하드 코딩된 URL 제거하기](#템플릿에서-하드-코딩된-url-제거하기)
+    + [URL 이름들 namespace 하기](#url-이름들-namespace-하기) 
 
 
 ------------------------------- 
 
 ## Django 앱 작성, 1부
-+ ### 개요
++ ### 1부 개요
   + Python 기반 웹 프레임 워크
   + 웹 애플리케이션을 효율적이고 신속하게 만들 수 있음
   + 문서화, 확장성이 뛰어남
@@ -612,7 +620,7 @@
 
 
 ## Django 앱 작성 3부
-  + ### 개요
+  + ### 3부 개요
     + 뷰 : Django에 있는 웹 페이지의 종류 ( 특정 기능과 템플릿을 제공 )    
       ( 상호작용 : View <-> URL <-> Django )
     + Django에서 웹 페이지 및 기타 콘텐츠는 뷰를 통해 제공됨
@@ -694,8 +702,11 @@
             return HttpResponse(output)
         ```
         
-        ( 사진 - 5개목록 ) 
+        <img src="https://user-images.githubusercontent.com/52907116/103887198-0508c500-5126-11eb-994f-35298abd7a4e.png" width="25%"></img>    
+        
         ( 저장되어 있는 리스트가 1개뿐이라 What's up? 만 나옴 ) 
+            
+    <br>
         
     + 템플릿 생성
       + 방금 위에서 작업한 코드를 보면 뷰에서 페이지 디자인이 하드 코딩되어 있음      
@@ -708,7 +719,9 @@
         -> DjangoTemplates이 찾을 수 있도록 polls 폴더 아래에 templates라는 디렉토리를 만들어줌   
         -> 그리고 그 아래에 polls라는 폴더를 하나 더 만들고 그 아래에 index.html 파일을 만들어줌    
           ( Django가 polls/templates 를 찾은 후, polls/index.html 이라는 이름으로 참조 )
-    
+        
+    <br>
+      
       + html 내용 작성 
         > polls/templates/polls/index.html
         ```Html
@@ -723,6 +736,8 @@
         {% endif %}
         ```
         
+    <br>
+      
       + 템플릿을 사용하기 위해 인덱스 수정하기
         > polls/views.py
         ```Python
@@ -742,10 +757,13 @@
             # context는 템플릿에서 쓰이는 변수명과 Python 객체를 연결하는 사전형 값
         ```
         
-        ( 사진 - 리스트 1 ) 
-        ( 사진 - 리스트 2 ) ( 클릭시 - 질문의 세부 정보 페이지 ) 
+        <img src="https://user-images.githubusercontent.com/52907116/103887201-05a15b80-5126-11eb-80c2-903a464adf0b.png" width="25%"></img>   
+        <img src="https://user-images.githubusercontent.com/52907116/103887202-0639f200-5126-11eb-9567-fed04c0ccfc4.png" width="25%"></img>    
+        ( 클릭시 - 질문의 세부 정보 페이지 ) 
+          
+    <br>
       
-      + 지름길 :  render() 
+      + 지름길 : render() 
         + request와 template_name을 필수로 받고 넘겨준 것들을 조합해서 HTTPResponse를 리턴해주는 함수
         > polls/views.py
         ```Python
@@ -770,7 +788,6 @@
       {{ question }}
       ```
      
-       
     <br>
       
     + 지름길 : get_object_or_404()
@@ -803,7 +820,7 @@
       {% endfor %}
       </ul>
       ```
-      ( 이미지 5 넣기 )
+      <img src="https://user-images.githubusercontent.com/52907116/103887197-03d79800-5126-11eb-8b15-8fbd7ada5b4f.png" width="20%"></img> 
     + dot-검색 구문을 사용하여 변수 attriubute에 접근 ( {{ question.question_text }} )
     + Django는 question 객체에 사전형 검색 수행
     + attriubute 검색 실패시, list-index 검색 수행
