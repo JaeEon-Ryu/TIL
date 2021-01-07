@@ -694,7 +694,7 @@
             return HttpResponse(output)
         ```
         
-        ( 사진 ) 
+        ( 사진 - 5개목록 ) 
         ( 저장되어 있는 리스트가 1개뿐이라 What's up? 만 나옴 ) 
         
     + 템플릿 생성
@@ -707,11 +707,10 @@
       + DjangoTemplates은 각 INSTALLED_APPS 에 있는 "templates" 하위 폴더를 탐색함   
         -> DjangoTemplates이 찾을 수 있도록 polls 폴더 아래에 templates라는 디렉토리를 만들어줌   
         -> 그리고 그 아래에 polls라는 폴더를 하나 더 만들고 그 아래에 index.html 파일을 만들어줌    
-          ( Django가 polls/templates 를 찾은 후, polls/index.html 이라는 이름으로 참조 )  
-            
-    <br>
-      
-      + > polls/templates/polls/index.html
+          ( Django가 polls/templates 를 찾은 후, polls/index.html 이라는 이름으로 참조 )
+    
+      + html 내용 작성 
+        > polls/templates/polls/index.html
         ```Html
         {% if latest_question_list %}
             <ul>
@@ -723,23 +722,140 @@
             <p>No polls are available.</p>
         {% endif %}
         ```
+        
+      + 템플릿을 사용하기 위해 인덱스 수정하기
+        > polls/views.py
+        ```Python
+        from django.http import HttpResponse
+        from django.template import loader
+
+        from .models import Question
+
+
+        def index(request):
+            latest_question_list = Question.objects.order_by('-pub_date')[:5]
+            template = loader.get_template('polls/index.html')                  # 템플릿 로드
+            context = {
+                'latest_question_list': latest_question_list,
+            }
+            return HttpResponse(template.render(context, request))              # context 전달
+            # context는 템플릿에서 쓰이는 변수명과 Python 객체를 연결하는 사전형 값
+        ```
+        
+        ( 사진 - 리스트 1 ) 
+        ( 사진 - 리스트 2 ) ( 클릭시 - 질문의 세부 정보 페이지 ) 
+      
+      + 지름길 :  render() 
+        + request와 template_name을 필수로 받고 넘겨준 것들을 조합해서 HTTPResponse를 리턴해주는 함수
+        > polls/views.py
+        ```Python
+        from django.shortcuts import render
+
+        from .models import Question
+
+
+        def index(request):
+            latest_question_list = Question.objects.order_by('-pub_date')[:5]
+            context = {'latest_question_list': latest_question_list}
+            return render(request, 'polls/index.html', context)
+        ```
      
     <br>
       
   + ### 404 에러 띄우기
+    + 요청받은 ID의 question이 없는 경우 Http404 예외 발생
+    + 예제를 빠르게 사용하려면
+      > polls/templates/polls/detail.html
+      ```HTML
+      {{ question }}
+      ```
+     
+       
+    <br>
+      
+    + 지름길 : get_object_or_404()
+      + Django 모델을 첫 번째 인수와 임의의 수의 키워드 인수를 사용하여 모델 관리자의 get() 함수에 전달,    
+        개체가 없는 경우 Http404를 올림
+        > polls/views.py
+        ```Python
+        from django.shortcuts import get_object_or_404, render
+
+        from .models import Question
+        # ...
+        def detail(request, question_id):
+            question = get_object_or_404(Question, pk=question_id)
+            return render(request, 'polls/detail.html', {'question': question})
+            
+        ```
+      + ObjectDoesNotExist 예외를 쓰지 않고 Http404 를 내보내는 모델 API 그리고 get_object_or_404() 를 쓰는 이유?    
+        -> 모델 계층과 뷰 계층을 결합하기 때문. Django는 느슨한 결합을 지향함
   
     <br>
       
   + ### 템플릿 시스템 사용하기
-  
+    + polls 앱의 세부 정보 보기 편집
+      > polls/templates/polls/detail.html
+      ```Html
+      <h1>{{ question.question_text }}</h1>
+      <ul>
+      {% for choice in question.choice_set.all %}
+          <li>{{ choice.choice_text }}</li>
+      {% endfor %}
+      </ul>
+      ```
+      ( 이미지 5 넣기 )
+    + dot-검색 구문을 사용하여 변수 attriubute에 접근 ( {{ question.question_text }} )
+    + Django는 question 객체에 사전형 검색 수행
+    + attriubute 검색 실패시, list-index 검색 수행
+    
     <br>
       
   + ### 템플릿에서 하드 코딩된 URL 제거하기
-  
+    + 기존 index.html 코드 중 question 부분
+      > polls/index.html
+        ``` Html
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+        ```
+         
     <br>
       
-  + ### 네임 스페이스 URL 이름 
+    + 위 코드처럼 긴밀하게 결합된 접근 방식의 문제 : 템플릿이 많은 프로젝트에서 URL을 변경하는 것이 어려워짐   
+      -> 따라서 polls.urls 모듈의 함수에서 이미 이름 인수를 정의했음
+      -> {% url %} 템플릿 태그를 사용하여 URL 구성에 정의된 특정 URL 경로에 대한 종속성을 제거 가능
+            
+    <br>
+      
+    + 수정 후 
+      > polls/index.html
+        ``` Html
+        <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+        ```
+      
+    <br>
+      
+  + ### URL 이름들 namespace 하기
+    + Django에서는 URL 이름들을 구별해야함     
+      ( 현재 polls 앱에서는 detail 뷰 등 ) 
+    + URLconf에 namespaces 추가 
+      > polls/urls.py
+        ```Python
+        from django.urls import path
 
+        from . import views
+
+        app_name = 'polls' 
+        urlpatterns = [
+            path('', views.index, name='index'),
+            path('<int:question_id>/', views.detail, name='detail'),
+            path('<int:question_id>/results/', views.results, name='results'),
+            path('<int:question_id>/vote/', views.vote, name='vote'),
+        ]
+        ```
+    + index.html 부분 수정
+      > polls/templates/polls/index.html
+        ```Html
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        ```
   <br>
   
 ### 참고 
