@@ -20,7 +20,8 @@
     + [404 에러 띄우기](#404-에러-띄우기)
     + [템플릿 시스템 사용하기](#템플릿-시스템-사용하기)
     + [템플릿에서 하드 코딩된 URL 제거하기](#템플릿에서-하드-코딩된-url-제거하기)
-    + [URL 이름들 namespace 하기](#url-이름들-namespace-하기) 
+    + [URL 이름공간 정해주기](#url-이름공간-정해주기)
+  + [Django 앱 작성 4부](#django-앱-작성-4부)
 
 
 ------------------------------- 
@@ -618,6 +619,11 @@
 ###### [Django - Writing your first Django app, part 2](https://docs.djangoproject.com/en/3.1/intro/tutorial02/)
 ###### [jcinsh - Django - 튜토리얼 part2](https://velog.io/@jcinsh/Django-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-part2)
 
+ <br>
+ 
+-----------------
+
+ <br>
 
 ## Django 앱 작성 3부
   + ### 3부 개요
@@ -850,7 +856,7 @@
       
     <br>
       
-  + ### URL 이름들 namespace 하기
+  + ### URL 이름공간 정해주기
     + Django에서는 URL 이름들을 구별해야함     
       ( 현재 polls 앱에서는 detail 뷰 등 ) 
     + URLconf에 namespaces 추가 
@@ -874,9 +880,149 @@
         <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
         ```
   <br>
-  
+
 ### 참고 
 
 ###### [Django - Writing your first Django app, part 3](https://docs.djangoproject.com/en/3.1/intro/tutorial03/)
 ###### [wldus9503 - [Django tutorial] 3.첫 번째 장고 앱 작성하기, part 3](https://velog.io/@wldus9503/Django-tutorial-2.%EC%B2%AB-%EB%B2%88%EC%A7%B8-%EC%9E%A5%EA%B3%A0-%EC%95%B1-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0-part-3)
 ###### [eungding - [Django] 튜토리얼 part 3 (1) - view 만들기, Template 이용하기, r](https://eunjin3786.tistory.com/128)
+
+
+<br> 
+
+------------------------
+
+<br>
+
+## Django 앱 작성 4부
+
++ ### 4부 개요
+  + polls 앱 양식 처리, 코드 리팩토링에 중점을 둘 것임
+  
++ ### 최소 양식 작성하기 
+  + poll앱 템플릿의 detail 업데이트하기
+    >polls/templates/polls/detail.html
+    ```Html
+    <h1>{{ question.question_text }}</h1>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    {% endfor %}
+    <input type="submit" value="Vote">
+    </form>
+    ```
+  > polls/urls.py
+  ```Python
+  path('<int:question_id>/vote/', views.vote, name='vote'),
+  ```
+  
+  > polls/urls.py
+  ```Python
+  from django.http import HttpResponse, HttpResponseRedirect
+  from django.shortcuts import get_object_or_404, render
+  from django.urls import reverse
+
+  from .models import Choice, Question
+  # ...
+  def vote(request, question_id):
+      question = get_object_or_404(Question, pk=question_id)
+      try:
+          selected_choice = question.choice_set.get(pk=request.POST['choice'])
+      except (KeyError, Choice.DoesNotExist):
+          # Redisplay the question voting form.
+          return render(request, 'polls/detail.html', {
+              'question': question,
+              'error_message': "You didn't select a choice.",
+          })
+      else:
+          selected_choice.votes += 1
+          selected_choice.save()
+          # Always return an HttpResponseRedirect after successfully dealing
+          # with POST data. This prevents data from being posted twice if a
+          # user hits the Back button.
+          return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+  ```
+  
+  > polls/views.py
+  ```Python
+  from django.shortcuts import get_object_or_404, render
+
+
+  def results(request, question_id):
+      question = get_object_or_404(Question, pk=question_id)
+      return render(request, 'polls/results.html', {'question': question})
+  ```
+  
+  > polls/templates/polls/results.html
+  ```Html
+  <h1>{{ question.question_text }}</h1>
+
+  <ul>
+  {% for choice in question.choice_set.all %}
+      <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+  {% endfor %}
+  </ul>
+
+  <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+  ```
++ ### 일반적인 뷰 사용하기 : 코드가 적을수록 좋음 
+
+  > polls/urls.py
+  ```Python
+  from django.urls import path
+
+  from . import views
+
+  app_name = 'polls'
+  urlpatterns = [
+      path('', views.IndexView.as_view(), name='index'),
+      path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+      path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
+      path('<int:question_id>/vote/', views.vote, name='vote'),
+  ]
+  ```
++ ### 뷰 수정
+
+  > polls/views.py
+  ```Python
+  from django.http import HttpResponseRedirect
+  from django.shortcuts import get_object_or_404, render
+  from django.urls import reverse
+  from django.views import generic
+
+  from .models import Choice, Question
+
+
+  class IndexView(generic.ListView):
+      template_name = 'polls/index.html'
+      context_object_name = 'latest_question_list'
+
+      def get_queryset(self):
+          """Return the last five published questions."""
+          return Question.objects.order_by('-pub_date')[:5]
+
+
+  class DetailView(generic.DetailView):
+      model = Question
+      template_name = 'polls/detail.html'
+
+
+  class ResultsView(generic.DetailView):
+      model = Question
+      template_name = 'polls/results.html'
+
+
+  def vote(request, question_id):
+      ... # same as above, no changes needed.
+  ```
+  
+  
+### 참고
+###### [Django - Writing your first Django app, part 3](https://docs.djangoproject.com/en/3.1/intro/tutorial04/)
+###### [eungding - [Django] 튜토리얼 part 4 (1) - QueryDict](https://eunjin3786.tistory.com/131?category=843118)
+
