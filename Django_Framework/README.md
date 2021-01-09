@@ -901,126 +901,157 @@
   
 + ### 최소 양식 작성하기 
   + poll앱 템플릿의 detail 업데이트하기
-    >polls/templates/polls/detail.html
+    > polls/templates/polls/detail.html
     ```Html
     <h1>{{ question.question_text }}</h1>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-    <form action="{% url 'polls:vote' question.id %}" method="post">
+    <form action="{% url 'polls:vote' question.id %}" method="post"> 
+    <!-- 데이터 서버 측 변경면에서 method="post"는 유용한 메서드임 -->
     {% csrf_token %}
+    <!-- 내부 URL을 대상으로 하는 모든 POST 폼들은 csrf_token 템플릿 태그를 사용 ( 사이트간 요청 위조 방지 ) -->
     {% for choice in question.choice_set.all %}
         <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <!-- 각 질문에 대한 radio 버튼 설정 -->
         <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+        <!-- forloop.counter = 말 그대로 반복문 개수 세기 -->
     {% endfor %}
     <input type="submit" value="Vote">
     </form>
     ```
-  > polls/urls.py
-  ```Python
-  path('<int:question_id>/vote/', views.vote, name='vote'),
-  ```
   
-  > polls/urls.py
-  ```Python
-  from django.http import HttpResponse, HttpResponseRedirect
-  from django.shortcuts import get_object_or_404, render
-  from django.urls import reverse
+  <br> 
 
-  from .models import Choice, Question
-  # ...
-  def vote(request, question_id):
-      question = get_object_or_404(Question, pk=question_id)
-      try:
-          selected_choice = question.choice_set.get(pk=request.POST['choice'])
-      except (KeyError, Choice.DoesNotExist):
-          # Redisplay the question voting form.
-          return render(request, 'polls/detail.html', {
-              'question': question,
-              'error_message': "You didn't select a choice.",
-          })
-      else:
-          selected_choice.votes += 1
-          selected_choice.save()
-          # Always return an HttpResponseRedirect after successfully dealing
-          # with POST data. This prevents data from being posted twice if a
-          # user hits the Back button.
-          return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
-  ```
+  + 제출된 데이터를 처리하는 Django 뷰 만들기 
+    + vote 부분 구현하기
+      > polls/urls.py
+        ```Python
+        from django.http import HttpResponse, HttpResponseRedirect
+        from django.shortcuts import get_object_or_404, render
+        from django.urls import reverse
+
+        from .models import Choice, Question
+        # ...
+        def vote(request, question_id):
+            question = get_object_or_404(Question, pk=question_id)
+            try:
+                selected_choice = question.choice_set.get(pk=request.POST['choice'])
+                # request.Post : 사전 자료형으로 선택된 choice의 ID값 반환 
+            except (KeyError, Choice.DoesNotExist):
+                # choice가 없으면 KetError
+                # Redisplay the question voting form.
+                return render(request, 'polls/detail.html', {
+                    'question': question,
+                    'error_message': "You didn't select a choice.",
+                })
+            else:
+                selected_choice.votes += 1
+                selected_choice.save()
+                # Always return an HttpResponseRedirect after successfully dealing
+                # with POST data. This prevents data from being posted twice if a
+                # user hits the Back button.
+                return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+                # 선택을 끝낸 사용자에게 보여줄 결과화면의 URL 
+                # args = URL로부터 파싱되는 뷰 함수로 이동될 인수 
+                # reverse 함수 : 뷰 함수에서 URL을 하드코딩 하지 않도록 하기 위함    
+                # ( 제어를 전달하기 원하는 뷰의 이름과 URL패턴의 변수 부분을 조합하여 해당 뷰를 가리킴 ) 
+        ```
+      
+      reverse('polls:results', args=(question.id,)) 을 호출하게 되면  
+      urlpatterns에서 name이 results인 것을 찾게 됨   
+      
+      ( 이미지 1 출력 )
+      
+      그리고 문자열 '/polls/3/results/' 를 반환함 ( 여기서 3은 question.id 의 값 )    
+      그 후 이 리디렉션된 URL이 result 뷰를 호출하여 최종 페이지를 표시함   
+      
+    + 최종 페이지 수정
+      > polls/views.py ( 전에 했던 detail 뷰와 내용 같음 ) 
+        ```Python
+        from django.shortcuts import get_object_or_404, render
+
+        def results(request, question_id):
+            question = get_object_or_404(Question, pk=question_id) # question_id에 해당하는 Question 
+            return render(request, 'polls/results.html', {'question': question}) # results.html 렌더링
+        ```
+    + results.html 템플릿 작성
+      > polls/templates/polls/results.html
+        ```Html
+        <h1>{{ question.question_text }}</h1>
+
+        <ul>
+        {% for choice in question.choice_set.all %}
+            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+        {% endfor %}
+        </ul>
+
+        <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+        ```
+  결과화면 
+  (이미지 띄우기 2 ) 
+
++ ### 제네릭 뷰 사용하기 : 코드가 적을수록 좋음 
+  + 뷰 : URL에서 전달된 매개 변수에 따라 DB 데이터 가져오기, 템플릿을 로드하고 렌더링 된 템플릿을 반환하기 등  기본 웹 개발의 일반적인 경우 나타냄    
+    -> Django는 이런 매우 일반적인 경우를 위해 Generic View 라는 지름길을 제공함
+  + 순서
+    + URLconf 변환
+    + 불필요한 예전 뷰 삭제
+    + Django의 제네릭뷰에 기반한 새로운 뷰 도입
+ 
+  + ### URLconf 수정 ( 
+    > polls/urls.py
+      ```Python
+      from django.urls import path
+
+      from . import views
+
+      app_name = 'polls'
+      urlpatterns = [
+          path('', views.IndexView.as_view(), name='index'),
+          path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+          path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
+          path('<int:question_id>/vote/', views.vote, name='vote'),
+      ]
+      ```
+      
+  + ### 뷰 수정
+    + index, detail, results 뷰 수정
+      > polls/views.py
+      ```Python
+      from django.http import HttpResponseRedirect
+      from django.shortcuts import get_object_or_404, render
+      from django.urls import reverse
+      from django.views import generic
+
+      from .models import Choice, Question
+
+
+      class IndexView(generic.ListView):  # ListView로 수정 
+          template_name = 'polls/index.html' # 오버라이딩
+          context_object_name = 'latest_question_list' # 오버라이딩
+
+          def get_queryset(self): # 템플릿으로 넘겨줄 모델을 반환해주는 함수 
+              """Return the last five published questions."""
+              return Question.objects.order_by('-pub_date')[:5]
+
+
+      class DetailView(generic.DetailView):
+          model = Question # 오버라이딩
+          template_name = 'polls/detail.html' # 오버라이딩
+
+
+      class ResultsView(generic.DetailView):
+          model = Question # 오버라이딩 
+          template_name = 'polls/results.html' # 오버라이딩 
+
+
+      def vote(request, question_id):
+          ... # same as above, no changes needed.
+      ```
   
-  > polls/views.py
-  ```Python
-  from django.shortcuts import get_object_or_404, render
-
-
-  def results(request, question_id):
-      question = get_object_or_404(Question, pk=question_id)
-      return render(request, 'polls/results.html', {'question': question})
-  ```
-  
-  > polls/templates/polls/results.html
-  ```Html
-  <h1>{{ question.question_text }}</h1>
-
-  <ul>
-  {% for choice in question.choice_set.all %}
-      <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-  {% endfor %}
-  </ul>
-
-  <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
-  ```
-+ ### 일반적인 뷰 사용하기 : 코드가 적을수록 좋음 
-
-  > polls/urls.py
-  ```Python
-  from django.urls import path
-
-  from . import views
-
-  app_name = 'polls'
-  urlpatterns = [
-      path('', views.IndexView.as_view(), name='index'),
-      path('<int:pk>/', views.DetailView.as_view(), name='detail'),
-      path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
-      path('<int:question_id>/vote/', views.vote, name='vote'),
-  ]
-  ```
-+ ### 뷰 수정
-
-  > polls/views.py
-  ```Python
-  from django.http import HttpResponseRedirect
-  from django.shortcuts import get_object_or_404, render
-  from django.urls import reverse
-  from django.views import generic
-
-  from .models import Choice, Question
-
-
-  class IndexView(generic.ListView):
-      template_name = 'polls/index.html'
-      context_object_name = 'latest_question_list'
-
-      def get_queryset(self):
-          """Return the last five published questions."""
-          return Question.objects.order_by('-pub_date')[:5]
-
-
-  class DetailView(generic.DetailView):
-      model = Question
-      template_name = 'polls/detail.html'
-
-
-  class ResultsView(generic.DetailView):
-      model = Question
-      template_name = 'polls/results.html'
-
-
-  def vote(request, question_id):
-      ... # same as above, no changes needed.
-  ```
-  
+  결과화면 
+      ( 이미디 3 띄우기 )
   
 ### 참고
 ###### [Django - Writing your first Django app, part 3](https://docs.djangoproject.com/en/3.1/intro/tutorial04/)
