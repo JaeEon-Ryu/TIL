@@ -899,6 +899,8 @@
 + ### 4부 개요
   + polls 앱 양식 처리, 코드 리팩토링에 중점을 둘 것임
   
+  <br> 
+
 + ### 최소 양식 작성하기 
   + poll앱 템플릿의 detail 업데이트하기
     > polls/templates/polls/detail.html
@@ -959,13 +961,15 @@
         ```
       
       reverse('polls:results', args=(question.id,)) 을 호출하게 되면  
-      urlpatterns에서 name이 results인 것을 찾게 됨   
-      
-      ( 이미지 1 출력 )
-      
+      urlpatterns에서 name이 results인 것을 찾게 됨    
+         
+      <img src="https://user-images.githubusercontent.com/52907116/104094375-ec3e1200-52d3-11eb-8a55-b77dc4359236.png" width="60%"></img>
+         
       그리고 문자열 '/polls/3/results/' 를 반환함 ( 여기서 3은 question.id 의 값 )    
       그 후 이 리디렉션된 URL이 result 뷰를 호출하여 최종 페이지를 표시함   
-      
+            
+  <br> 
+
     + 최종 페이지 수정
       > polls/views.py ( 전에 했던 detail 뷰와 내용 같음 ) 
         ```Python
@@ -975,6 +979,9 @@
             question = get_object_or_404(Question, pk=question_id) # question_id에 해당하는 Question 
             return render(request, 'polls/results.html', {'question': question}) # results.html 렌더링
         ```
+        
+  <br> 
+
     + results.html 템플릿 작성
       > polls/templates/polls/results.html
         ```Html
@@ -988,17 +995,24 @@
 
         <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
         ```
-  결과화면 
-  (이미지 띄우기 2 ) 
+    결과화면    
+    <img src="https://user-images.githubusercontent.com/52907116/104094378-ed6f3f00-52d3-11eb-81e9-efa382647d12.png" width="25%"></img>
+
+  <br> 
 
 + ### 제네릭 뷰 사용하기 : 코드가 적을수록 좋음 
   + 뷰 : URL에서 전달된 매개 변수에 따라 DB 데이터 가져오기, 템플릿을 로드하고 렌더링 된 템플릿을 반환하기 등  기본 웹 개발의 일반적인 경우 나타냄    
     -> Django는 이런 매우 일반적인 경우를 위해 Generic View 라는 지름길을 제공함
+    
+  <br> 
+
   + 순서
     + URLconf 변환
     + 불필요한 예전 뷰 삭제
     + Django의 제네릭뷰에 기반한 새로운 뷰 도입
  
+  <br> 
+
   + ### URLconf 수정 ( 
     > polls/urls.py
       ```Python
@@ -1015,6 +1029,8 @@
       ]
       ```
       
+  <br> 
+
   + ### 뷰 수정
     + index, detail, results 뷰 수정
       > polls/views.py
@@ -1050,8 +1066,8 @@
           ... # same as above, no changes needed.
       ```
   
-  결과화면 
-      ( 이미디 3 띄우기 )
+    결과화면    
+    <img src="https://user-images.githubusercontent.com/52907116/104094379-ee07d580-52d3-11eb-965d-22cd6d9fccb7.png" width="25%"></img>
   
 ### 참고
 ###### [Django - Writing your first Django app, part 3](https://docs.djangoproject.com/en/3.1/intro/tutorial04/)
