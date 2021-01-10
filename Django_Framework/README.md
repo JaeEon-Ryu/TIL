@@ -1074,6 +1074,172 @@
     <img src="https://user-images.githubusercontent.com/52907116/104094379-ee07d580-52d3-11eb-965d-22cd6d9fccb7.png" width="25%"></img>
   
 ### 참고
-###### [Django - Writing your first Django app, part 3](https://docs.djangoproject.com/en/3.1/intro/tutorial04/)
+###### [Django - Writing your first Django app, part 4](https://docs.djangoproject.com/en/3.1/intro/tutorial04/)
 ###### [eungding - [Django] 튜토리얼 part 4 (1) - QueryDict](https://eunjin3786.tistory.com/131?category=843118)
+###### [eungding - [Django] 튜토리얼 part 4 (2) - QueryDict](https://eunjin3786.tistory.com/132?category=843118)
+
+<br>
+
+---------------------------
+
+<br>
+
+## Django 앱 작성 5부
+  + ### 자동 테스트 도입
+    + 자동 테스트란?
+      + 코드 작동을 확인하는 루틴
+      + 셸을 이용하여 메서드 동작을 검사하거나 응용 프로그램을 실행하고 데이터를 입력하여 작동 방식 확인    
+        ( 앱 작성 2부에서 다뤄본 것 )
+      + 앱 작성 2부에서는 테스트가 사용자에 의하여 수행, 자동 테스트는 시스템에 의하여 수행
+      
+    <br>
+    
+    + 테스트를 생성하는 이유
+      + 시간 절약이 가능함   
+        + 작동하는 것처럼 보이는지 점검 
+        + 문제의 원인이 무엇인지 확인하는 것에 빠름
+      + 문제를 사전에 방지할 수 있음   
+        + app의 목적이나 의도된 동작이 불투명할 수 있기 때문
+      + 코드를 더욱 보기좋게 만듦
+        + acob Kaplan-Moss 曰 "테스트가 없는 코드는 디자인에 의해 깨진다" 
+      + 팀 간의 협업 지원 가능 
+        + 동료가 실수로 코드를 깨지 않게끔 하기 위함
+      
+    <br>
+    
+  + ### 기본 테스트 전략
+    + 테스트 기반 개발   
+      -> 코드를 작성하기전에 테스트 작성 
+    + 이미 작성된 코드에서 테스팅을 한다면   
+      -> 새 기능을 추가하거나 버그를 수정할 때 테스트 작성
+    
+    <br>
+  
+  + ### 테스트 작성
+    + #### 버그 식별하기
+      + 현재 app에서 고쳐야 할 버그 : Question.was_published_recently() 메서드   
+        ( pub_date가 미래일 경우에도 True를 반환함 )    
+          -> shell을 통하여 확인하도록 함 
+      > python manage.py shell 
+      ```Python
+      import datetime
+      from django.utils import timezone
+      from polls.models import Question
+      # create a Question instance with pub_date 30 days in the future
+      future_question = Question(pub_date=timezone.now() + datetime.timedelta(days=30))
+      # was it published recently?
+      future_question.was_published_recently()
+      ```
+      
+      ( 이미지 1 )
+      시간이 최근이 아님에도 불구하고, True를 반환하는 것을 확인 가능 
+    
+    <br>
+   
+    + #### 버그 검출을 위한 테스트
+      + 방금 위에서 식별한 버그를 자동 테스트로 전환
+      > polls/tests.py  ( 앱을 테스트 하기 위한 일반적인 장소 ) 
+      ```Python
+      import datetime
+
+      from django.test import TestCase
+      from django.utils import timezone
+
+      from .models import Question
+
+
+      # django.test.TestCase 의 하위 클래스로 작성
+      class QuestionModelTests(TestCase):
+      
+          def test_was_published_recently_with_future_question(self):
+              """
+              was_published_recently() returns False for questions whose pub_date
+              is in the future.
+              """
+              time = timezone.now() + datetime.timedelta(days=30)
+              future_question = Question(pub_date=time)
+              self.assertIs(future_question.was_published_recently(), False)
+      ```
+    
+    <br>
+    
+    + #### 테스트 실행
+      + 테스트를 위해 cmd 입력
+      > python manage.py test polls
+      (  이미지 2 )
+      
+      asserIs() 메서드를 사용하여, False가 반환되기를 원함에도 불구하고   
+      was_published_recently()가 True를 반환다는 메세지 확인   
+      ( 어디서 버그를 확인했는지 line까지 알려줌 ) 
+    
+    <br>
+    
+    + #### 버그 fix
+      + was_published_recently()함수 수정
+      > polls/models.py
+      ```Python
+      def was_published_recently(self):
+      now = timezone.now()
+      return now - datetime.timedelta(days=1) <= self.pub_date <= now
+      ```   
+      
+      + 다시 테스트 해보기
+      > python mange.py test polls
+      ( 이미지 3 )
+      
+      버그를 확인한 후 , 버그를 노출시키는 테스트를 작성했고,    
+      코드로 들어가 버그를 수정하여 테스트를 통과함   
+
+    < br >
+    
+    + #### 더욱 포괄적인 테스트 
+      + 메서드의 동작을 보다 포괄적으로 테스트하기 위해 같은 클래스에 함수 2개 추가
+      > polls/tests.py
+      ```Python
+      def test_was_published_recently_with_old_question(self):
+          """
+          was_published_recently() returns False for questions whose pub_date
+          is older than 1 day.
+          """
+          time = timezone.now() - datetime.timedelta(days=1, seconds=1)
+          old_question = Question(pub_date=time)
+          self.assertIs(old_question.was_published_recently(), False)
+
+      def test_was_published_recently_with_recent_question(self):
+          """
+          was_published_recently() returns True for questions whose pub_date
+          is within the last day.
+          """
+          time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
+          recent_question = Question(pub_date=time)
+          self.assertIs(recent_question.was_published_recently(), True)
+      ```
+         
+     과거, 현재, 미래 총 3가지로 구분하여 테스트를 포괄적으로 할 수 있음  
+  
+  <br>
+  
+  + ### 뷰 테스트하기
+    + 만약 Question의 pub_date가 미래로 설정되어있다고 가정했을 때     
+      시간이 지나 그 미래가 된다면 해당 질문이 보여야 하지만  
+      미래가 아니라면 그 전 까지 질문이 보이지 않아야 함 
+    + 현재 polls 앱은 pub_date 필드가 미래인 질문까지도 포함하여 게시함 
+  
+    <br>
+
+    + #### Django 테스트 클라이언트
+    + #### 뷰 개선 
+    + #### 새로운 뷰 테스트
+    + #### Detail뷰 테스트
+    + #### 다른 테스트에 대한 아이디어
+    
+  + ### 테스트를 많이 할수록 좋음
+  + ### 추가 테스트
+  + ### 다음에 배울 것 
+
+
+### 참고
+###### [Django - Writing your first Django app, part 5](https://docs.djangoproject.com/en/3.1/intro/tutorial05/)
+###### [eungding - [Django] 튜토리얼 part 5 (1) - 테스트 작성하기](https://eunjin3786.tistory.com/131?category=843118)
+###### [eungding - [Django] 튜토리얼 part 5 (2) - 뷰 테스트 작성하기](https://eunjin3786.tistory.com/139?category=843118)
 
