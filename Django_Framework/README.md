@@ -25,6 +25,7 @@
     + [4부 개요](#4부-개요)
     + [최소 양식 작성하기](#최소-양식-작성하기)
     + [제네릭 뷰 사용하기 : 코드가 적을수록 좋음](#제네릭-뷰-사용하기--코드가-적을수록-좋음)
+  + [Django 앱 작성 5부](#django-앱-작성-5부)
     
 
 
@@ -1228,15 +1229,217 @@
     <br>
 
     + #### Django 테스트 클라이언트
-    + #### 뷰 개선 
-    + #### 새로운 뷰 테스트
-    + #### Detail뷰 테스트
-    + #### 다른 테스트에 대한 아이디어
+      + 뷰 레벨에서 코드와 상호작용하는 유저를 simulate 하기 위해 테스트 클라이언트 제공
+        ( test.py 혹은 shell에서 사용 가능함 ) 
+      + shell 부터 확인
+      > python manage.py shell 
+      ```Python
+      
+      from django.test.utils import setup_test_environment
+      setup_test_environment()
+      '''
+       setup_test_environment()를 사용하여 템플릿 렌더러를 설치
+       이 메서드는 테스트 데이터베이스를 셋업하지 않음 ( setup_databases 메서드를 따로 불러줘야함 )
+      '''
+      
+      from django.test import Client
+      # create an instance of the client for our use
+      client = Client()
+      '''
+      테스트 클라이언트 import
+      ( 나중에 tests.py에서는 django.test.TestCase 클래스에 같이 딸려오는 클라이언트를 사용할 것임 ) 
+      환경 설정 끝 
+      '''
+      
+      # get a response from '/'
+      response = client.get('/')
+      # Out -> Not Found: /
+      # we should expect a 404 from that address; if you instead see an
+      # "Invalid HTTP_HOST header" error and a 400 response, you probably
+      # omitted the setup_test_environment() call described earlier.
+      response.status_code
+      # Out -> 404
+      # on the other hand we should expect to find something at '/polls/'
+      # we'll use 'reverse()' rather than a hardcoded URL
+      from django.urls import reverse
+      response = client.get(reverse('polls:index'))
+      response.status_code
+      # Out -> 200
+      response.content
+      # Out -> b'\n    <ul>\n    \n        <li><a href="/polls/1/">What&#x27;s up?</a></li>\n    \n    </ul>\n\n'
+      response.context['latest_question_list']
+      # Out -> <QuerySet [<Question: What's up?>]>
+      ```
+    <br>
     
-  + ### 테스트를 많이 할수록 좋음
-  + ### 추가 테스트
-  + ### 다음에 배울 것 
+    + #### 뷰 개선 
+      + 현재 polls 목록은 아직 게시되지 않은 polls들(미래에 게시되어야 할)을 보여줌 ( 개선 )
+      > polls.views.py
+      ```Python
+      from django.utils import timezone
+      
+      def get_queryset(self):
+          """
+          Return the last five published questions (not including those set to be
+          published in the future).
+          """
+          return Question.objects.filter(
+              pub_date__lte=timezone.now() # 현재 이하인 것으로 필터링
+          ).order_by('-pub_date')[:5]
+      ```
+      
+    + #### 새로운 뷰 테스트
+      + runserver 실행, site 로드, 과거와 미래에 대한 질문들 등    
+        이에 대한 영향을 미치는 변경 작업을 매번 수행할 필요 X   
+        -> shell 기반으로 테스트 생성 
+      + 질문을 생성하는 함수 및 테스트 케이스들 추가 
+      > polls/tests.py
+      ```Python
+      from django.urls import reverse
+      
+      def create_question(question_text, days):
+          """
+          Create a question with the given `question_text` and published the
+          given number of `days` offset to now (negative for questions published
+          in the past, positive for questions that have yet to be published).
+          """
+          time = timezone.now() + datetime.timedelta(days=days)
+          return Question.objects.create(question_text=question_text, pub_date=time)
 
+
+      class QuestionIndexViewTests(TestCase):
+          # 최근 질문 리스트가 비어있는지 확인 
+          def test_no_questions(self):
+              """
+              If no questions exist, an appropriate message is displayed.
+              """
+              response = self.client.get(reverse('polls:index'))
+              self.assertEqual(response.status_code, 200)
+              self.assertContains(response, "No polls are available.")
+              self.assertQuerysetEqual(response.context['latest_question_list'], [])
+
+          # 질문이 생성되어 목록에 나타나는지 확인
+          def test_past_question(self):
+              """
+              Questions with a pub_date in the past are displayed on the
+              index page.
+              """
+              create_question(question_text="Past question.", days=-30)
+              response = self.client.get(reverse('polls:index'))
+              self.assertQuerysetEqual(
+                  response.context['latest_question_list'],
+                  ['<Question: Past question.>']
+              )
+
+          # 미래 pub_date로 질문 작성
+          def test_future_question(self):
+              """
+              Questions with a pub_date in the future aren't displayed on
+              the index page.
+              """
+              create_question(question_text="Future question.", days=30)
+              response = self.client.get(reverse('polls:index'))
+              self.assertContains(response, "No polls are available.")
+              self.assertQuerysetEqual(response.context['latest_question_list'], [])
+
+          def test_future_question_and_past_question(self):
+              """
+              Even if both past and future questions exist, only past questions
+              are displayed.
+              """
+              create_question(question_text="Past question.", days=-30)
+              create_question(question_text="Future question.", days=30)
+              response = self.client.get(reverse('polls:index'))
+              self.assertQuerysetEqual(
+                  response.context['latest_question_list'],
+                  ['<Question: Past question.>']
+              )
+
+          def test_two_past_questions(self):
+              """
+              The questions index page may display multiple questions.
+              """
+              create_question(question_text="Past question 1.", days=-30)
+              create_question(question_text="Past question 2.", days=-5)
+              response = self.client.get(reverse('polls:index'))
+              self.assertQuerysetEqual(
+                  response.context['latest_question_list'],
+                  ['<Question: Past question 2.>', '<Question: Past question 1.>']
+              )
+      ```
+      (이미지4)
+      python manage.py test polls 실행시 8개의 테스트가 성공된 것을 볼 수 있음
+    
+    <br> 
+    
+    + #### Detail뷰 테스트
+      + 미래의 설문들은 리스트에 나타나지 않음   
+        but, 사용자가 URL을 알고 있거나 추측하면 접근할 수 있음  
+      + Detail뷰에 제약 조건 추가
+        > polls/views.py
+        ```python
+        class DetailView(generic.DetailView):
+            ...
+            def get_queryset(self): # get_queryset 오버라이딩 
+                """
+                Excludes any questions that aren't published yet.
+                """
+                return Question.objects.filter(pub_date__lte=timezone.now())
+        ```
+      + 테스트 추가 ( pub_date가 과거인 질문이 표시될 수 있는지, 미래인 질문은 표시될 수 없는지 )  
+        > polls/tests.py
+      ```Python
+      class QuestionDetailViewTests(TestCase):
+          def test_future_question(self):
+              """
+              The detail view of a question with a pub_date in the future
+              returns a 404 not found.
+              """
+              future_question = create_question(question_text='Future question.', days=5) # 기준 : + 5일
+              url = reverse('polls:detail', args=(future_question.id,))
+              response = self.client.get(url)
+              self.assertEqual(response.status_code, 404)
+
+          def test_past_question(self):
+              """
+              The detail view of a question with a pub_date in the past
+              displays the question's text.
+              """
+              past_question = create_question(question_text='Past Question.', days=-5) # 기준 : - 5일
+              url = reverse('polls:detail', args=(past_question.id,))
+              response = self.client.get(url)
+              self.assertContains(response, past_question.question_text)
+      ```
+      (이미지5)
+      python manage.py test polls 실행시 10개의 테스트가 성공된 것을 볼 수 있음
+    
+    + #### 다른 테스트에 대한 아이디어
+      + get_queryset 메서드를 Results뷰에 추가, 뷰에 대한 새로운 테스트 만들기   
+        ( 지금까지 한 것과 유사 )
+      + 테스트를 추가하며 다양한 방법으로 app 개선 가능   
+        ( 선택 항목이 없는 사이트에 질문 게시 같은 버그 )
+      + 로그인된 관리자는 게시되지 않은 질문을 볼 수 있지만 일반 방문자는 볼 수 없어야 함
+   
+  <br>
+  
+  + ### 테스트를 많이 할수록 좋음
+    + app보다 테스트 코드가 더 많이 나올지라도 계속하여 작성하기
+    + 코드 수정시 -> 기존의 많은 테스트 실패 -> 어떤 테스트를 수정해야 하는지 정확하게 알려줌
+    + 테스트가 중복되는 것 : 상관없음 ( 오히려 좋음 ) 
+    + 경험에서 나온 바로는 다음을 포괄함
+      + 각 모델 혹은 뷰에 대한 독립된 테스트 클래스
+      + 테스트 할 각 조건 집합에 대해 독립된 테스트 방법
+      + 그 기능을 설명하는 테스트 메서드 이름 
+  
+  <br>
+  
+  + ### 추가 테스트
+    + 이번 테스트에서는 모델의 내부 논리와 뷰로 정보를 게시하는 방법에 대하여 배움
+    + 해당 페이지에서 다루지 않지만 Selenium과 같은 브라우저 내 프레임워크를 사용하여 HTML이 실제로 브라우저에서 렌더링되는 방식도 테스트 가능   
+      ( Django 코드의 동작뿐만 아니라, JavaScript의 동작 또한 확인 가능함 ) 
+    + 자동으로 테스트를 실행하여 품질 관리가 부분적으로 자동화될수록 할 수 있음
+  
+  <br> 
 
 ### 참고
 ###### [Django - Writing your first Django app, part 5](https://docs.djangoproject.com/en/3.1/intro/tutorial05/)
