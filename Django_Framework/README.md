@@ -26,6 +26,12 @@
     + [최소 양식 작성하기](#최소-양식-작성하기)
     + [제네릭 뷰 사용하기 : 코드가 적을수록 좋음](#제네릭-뷰-사용하기--코드가-적을수록-좋음)
   + [Django 앱 작성 5부](#django-앱-작성-5부)
+    + [자동 테스트 도입](#자동-테스트-도입)
+    + [기본 테스트 전략](#기본-테스트-전략)
+    + [테스트 작성](#테스트-작성)
+    + [뷰 테스트](#뷰-테스트)
+    + [테스트를 많이 할수록 좋음](#테스트를-많이-할수록-좋음)
+    + [추가-테스트](#추가-테스트)
     
 
 
@@ -1130,9 +1136,9 @@
       future_question = Question(pub_date=timezone.now() + datetime.timedelta(days=30))
       # was it published recently?
       future_question.was_published_recently()
-      ```
+    ```
       
-      ( 이미지 1 )
+      <img src="https://user-images.githubusercontent.com/52907116/104127548-08aa7f00-53a6-11eb-95c0-594d9d8991aa.png" width="50%"></img>   
       시간이 최근이 아님에도 불구하고, True를 반환하는 것을 확인 가능 
     
     <br>
@@ -1151,7 +1157,7 @@
 
       # django.test.TestCase 의 하위 클래스로 작성
       class QuestionModelTests(TestCase):
-      
+
           def test_was_published_recently_with_future_question(self):
               """
               was_published_recently() returns False for questions whose pub_date
@@ -1166,9 +1172,8 @@
     
     + #### 테스트 실행
       + 테스트를 위해 cmd 입력
-      > python manage.py test polls
-      (  이미지 2 )
-      
+      > python manage.py test polls   
+      <img src="https://user-images.githubusercontent.com/52907116/104127549-09431580-53a6-11eb-8356-2e465b722dfd.png" width="80%"></img>             
       asserIs() 메서드를 사용하여, False가 반환되기를 원함에도 불구하고   
       was_published_recently()가 True를 반환다는 메세지 확인   
       ( 어디서 버그를 확인했는지 line까지 알려줌 ) 
@@ -1186,12 +1191,12 @@
       
       + 다시 테스트 해보기
       > python mange.py test polls
-      ( 이미지 3 )
-      
+      <img src="https://user-images.githubusercontent.com/52907116/104127550-09dbac00-53a6-11eb-8b0a-58f5a1ed47a3.png" width="40%"></img>   
+
       버그를 확인한 후 , 버그를 노출시키는 테스트를 작성했고,    
       코드로 들어가 버그를 수정하여 테스트를 통과함   
 
-    < br >
+    <br>
     
     + #### 더욱 포괄적인 테스트 
       + 메서드의 동작을 보다 포괄적으로 테스트하기 위해 같은 클래스에 함수 2개 추가
@@ -1215,12 +1220,12 @@
           recent_question = Question(pub_date=time)
           self.assertIs(recent_question.was_published_recently(), True)
       ```
-         
-     과거, 현재, 미래 총 3가지로 구분하여 테스트를 포괄적으로 할 수 있음  
-  
+
+      과거, 현재, 미래 총 3가지로 구분하여 테스트를 포괄적으로 할 수 있음  
+
   <br>
   
-  + ### 뷰 테스트하기
+  + ### 뷰 테스트
     + 만약 Question의 pub_date가 미래로 설정되어있다고 가정했을 때     
       시간이 지나 그 미래가 된다면 해당 질문이 보여야 하지만  
       미래가 아니라면 그 전 까지 질문이 보이지 않아야 함 
@@ -1234,14 +1239,14 @@
       + shell 부터 확인
       > python manage.py shell 
       ```Python
-      
+
       from django.test.utils import setup_test_environment
       setup_test_environment()
       '''
        setup_test_environment()를 사용하여 템플릿 렌더러를 설치
        이 메서드는 테스트 데이터베이스를 셋업하지 않음 ( setup_databases 메서드를 따로 불러줘야함 )
       '''
-      
+
       from django.test import Client
       # create an instance of the client for our use
       client = Client()
@@ -1250,7 +1255,7 @@
       ( 나중에 tests.py에서는 django.test.TestCase 클래스에 같이 딸려오는 클라이언트를 사용할 것임 ) 
       환경 설정 끝 
       '''
-      
+
       # get a response from '/'
       response = client.get('/')
       # Out -> Not Found: /
@@ -1277,7 +1282,7 @@
       > polls.views.py
       ```Python
       from django.utils import timezone
-      
+
       def get_queryset(self):
           """
           Return the last five published questions (not including those set to be
@@ -1296,7 +1301,7 @@
       > polls/tests.py
       ```Python
       from django.urls import reverse
-      
+
       def create_question(question_text, days):
           """
           Create a question with the given `question_text` and published the
@@ -1367,7 +1372,7 @@
                   ['<Question: Past question 2.>', '<Question: Past question 1.>']
               )
       ```
-      (이미지4)
+      <img src="https://user-images.githubusercontent.com/52907116/104127551-09dbac00-53a6-11eb-8f37-b18f0d19afed.png" width="40%"></img>    
       python manage.py test polls 실행시 8개의 테스트가 성공된 것을 볼 수 있음
     
     <br> 
@@ -1376,18 +1381,18 @@
       + 미래의 설문들은 리스트에 나타나지 않음   
         but, 사용자가 URL을 알고 있거나 추측하면 접근할 수 있음  
       + Detail뷰에 제약 조건 추가
-        > polls/views.py
-        ```python
-        class DetailView(generic.DetailView):
-            ...
-            def get_queryset(self): # get_queryset 오버라이딩 
-                """
-                Excludes any questions that aren't published yet.
-                """
-                return Question.objects.filter(pub_date__lte=timezone.now())
-        ```
+      > polls/views.py
+      ```python
+      class DetailView(generic.DetailView):
+          ...
+          def get_queryset(self): # get_queryset 오버라이딩 
+              """
+              Excludes any questions that aren't published yet.
+              """
+              return Question.objects.filter(pub_date__lte=timezone.now())
+      ```
       + 테스트 추가 ( pub_date가 과거인 질문이 표시될 수 있는지, 미래인 질문은 표시될 수 없는지 )  
-        > polls/tests.py
+      > polls/tests.py
       ```Python
       class QuestionDetailViewTests(TestCase):
           def test_future_question(self):
@@ -1410,8 +1415,8 @@
               response = self.client.get(url)
               self.assertContains(response, past_question.question_text)
       ```
-      (이미지5)
-      python manage.py test polls 실행시 10개의 테스트가 성공된 것을 볼 수 있음
+    <img src="https://user-images.githubusercontent.com/52907116/104127547-0811e880-53a6-11eb-8055-e83439cdd8a6.png" width="40%"></img>     
+    python manage.py test polls 실행시 10개의 테스트가 성공된 것을 볼 수 있음
     
     + #### 다른 테스트에 대한 아이디어
       + get_queryset 메서드를 Results뷰에 추가, 뷰에 대한 새로운 테스트 만들기   
