@@ -1472,9 +1472,47 @@
 <br>  
 
 + ### 앱의 모양과 느낌을 커스터마이징
-  + 
+  + polls 폴더에 static 폴더 생성
+  + Django의 STATICFILES_FINDERS 설정 
+    + 다양한 자원으로부터 정적 파일들을 어떻게 발견하는지에 대한 검색기 목록이 있음
+    + 기본값 중 하나는 AppDirectoriesFinder로 INSTALLED_APPS 각각에서 "static" 하위 폴더를 찾음
+    + 관리 사이트는 구조적으로 정적 파일에 대해 같은 폴더 구조를 이용함
+  + 방금 만든 static 폴더에 polls라는 폴더를 생성하고 그 안에 style.css 파일을 작성함   
+    ( polls/static/polls/style.css )   
+    ( AppDirectoriesFinder라는 정적파일 탐색기의 작동방식 때문 - 전에 템플릿 경로를 만든것과 유사함 )
+  + Static file namespacing
+    + 템플릿과 마찬가지로 정적 파일을 다른 polls 하위 폴더안에 넣지 않고 직접 polls/static 위치에 놓는 것은 좋지 않음   
+     ( 다른 응용 프로그램에 동일한 이름의 정적 파일이 있는 경우 그 파일을 구별할 수 없기 때문 ) 
+  + 스타일 시트 작성하기
+    > polls/static/polls/style.css
+    ```Html
+    li a {
+        color: green;
+    }
+    ```
+  + 인덱스 페이지에 스타일 적용하기
+    > polls/templates/polls/index.html
+    ```Html
+    {% load static %}
+    <!-- {% static %} : 이 템플릿 태그는 정적 파일의 URL에 대한 절대 경로를 생성함 --> 
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+    
+    ```
+  + 적용되었는지 확인
+    > python manage.py runserver   
+    ( 이미지 1 )
+ 
+<br> 
 
 + ### 배경 이미지 추가
+  + 이미지를 위한 하위 폴더만들고 그 안에 background라는 이름을 가진 gif파일 넣기 
+   ( polls/static/polls/images/background.gif ) 
+  + 적용되었는지 확인
+    > python manage.py runserver   
+    ( 이미지 2 )
+  + 스타일시트처럼 Django에서 만들지 않은 정적 파일에는 {% static %} 템플릿 태그를 이용할 수 없음   
+    ( 정적 파일 간의 연결에는 항상 상대 경로를 사용해야 함 )
 
 ### 참고
 ###### [Django - Writing your first Django app, part 6](https://docs.djangoproject.com/en/3.1/intro/tutorial06/)
