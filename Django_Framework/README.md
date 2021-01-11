@@ -32,10 +32,14 @@
     + [뷰 테스트](#뷰-테스트)
     + [테스트를 많이 할수록 좋음](#테스트를-많이-할수록-좋음)
     + [추가-테스트](#추가-테스트)
+  + [Django 앱 작성 6부](#django-앱-작성-6부)
     
 
+<br>
 
 ------------------------------- 
+
+<br>
 
 ## Django 앱 작성, 1부
 + ### 1부 개요
@@ -1448,6 +1452,30 @@
 
 ### 참고
 ###### [Django - Writing your first Django app, part 5](https://docs.djangoproject.com/en/3.1/intro/tutorial05/)
-###### [eungding - [Django] 튜토리얼 part 5 (1) - 테스트 작성하기](https://eunjin3786.tistory.com/131?category=843118)
+###### [eungding - [Django] 튜토리얼 part 5 (1) - 테스트 작성하기](https://eunjin3786.tistory.com/135?category=843118)
 ###### [eungding - [Django] 튜토리얼 part 5 (2) - 뷰 테스트 작성하기](https://eunjin3786.tistory.com/139?category=843118)
+
+<br>
+
+----------------------
+
+<br>
+
+## Django 앱 작성, 6부
++ 6부 개요 
+  + 스타일 시트와 이미지를 추가할 예정
+  + 서버에 의해 생성된 HTML 외에도, 웹 애플리케이션은 일반적으로 완전한 웹 페이지를 렌더링 하는데 필요한   
+    이미지, javaScript, CSS 들과 같은 추가 파일을 제공해야 함. Django에서는 이러한 파일을 "static files" 라고 함
+  + 대규모 프로젝트의 경우 각 app에서 제공하는 정적 파일 세트를 처리하는 작업이 까다로움
+  + django.contrib.staticfiles : 위의 문제를 해결하기 위해 만든 것으로, 각 app에서 정적 파일을 단일 위치(프로덕션에서 쉽게 제공할 수 있는)로 수집함
+  
+<br>  
+
++ ### 앱의 모양과 느낌을 커스터마이징
+  + 
+
++ ### 배경 이미지 추가
+
+### 참고
+###### [Django - Writing your first Django app, part 6](https://docs.djangoproject.com/en/3.1/intro/tutorial06/)
 
