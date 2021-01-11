@@ -34,7 +34,7 @@
     + [추가-테스트](#추가-테스트)
   + [Django 앱 작성 6부](#django-앱-작성-6부)
     + [앱의 모양과 느낌을 커스터마이징](#앱의-모양과-느낌을-커스터마이징)
-    + [배경 이미지 추가](#배경 이미지 추가)
+    + [배경 이미지 추가](#배경-이미지-추가)
     
 
 <br>
@@ -1521,19 +1521,19 @@
 
   + 적용되었는지 확인
     > python manage.py runserver    
-    <img src="https://user-images.githubusercontent.com/52907116/104193897-f2fb8f00-5463-11eb-9248-eefc34454eb6.png" width="50%"></img>
+    <img src="https://user-images.githubusercontent.com/52907116/104193897-f2fb8f00-5463-11eb-9248-eefc34454eb6.png" width="30%"></img>
  
 <br> 
 
 + ### 배경 이미지 추가
   + 이미지를 위한 하위 폴더만들고 그 안에 background라는 이름을 가진 gif파일 넣기 
-   ( polls/static/polls/images/background.gif ) 
-  + 적용되었는지 확인
-    
-<br>  
+   ( polls/static/polls/images/background.gif )
+  
+<br> 
 
+  + 적용되었는지 확인
     > python manage.py runserver    
-    <img src="https://user-images.githubusercontent.com/52907116/104193900-f42cbc00-5463-11eb-96f5-4989339a275e.png" width="50%"></img>
+    <img src="https://user-images.githubusercontent.com/52907116/104193900-f42cbc00-5463-11eb-96f5-4989339a275e.png" width="30%"></img>
     
 <br>  
 
