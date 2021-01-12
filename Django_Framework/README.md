@@ -35,6 +35,8 @@
   + [Django 앱 작성 6부](#django-앱-작성-6부)
     + [앱의 모양과 느낌을 커스터마이징](#앱의-모양과-느낌을-커스터마이징)
     + [배경 이미지 추가](#배경-이미지-추가)
+  + [Django 앱 작성 7부](#django-앱-작성-7부)
+  
     
 
 <br>
@@ -1546,3 +1548,112 @@
   
 <br>  
 
+---------------------
+
+<br>
+
+## Django 앱 작성, 7부
++ ### 7부개요
+  + Django에서 자동으로 생성되는 관리 사이트(2부에서 살펴봄)를 커스터마이징 하는 것에 초점을 맞춤
+
+<br>
+
++ ### 관리자 폼 커스터마이징
+  + 2부에서 보면 admin.site.register(Question)으로 질문 모델을 등록함으로써 기본 양식을 표현했음    
+    여기서, 커스터마이징을 원한다면 객체를 등록할 때 Django에게 원하는 옵션을 말하도록 함
+  + 편집 폼의 필드 재정렬
+  > polls/admin.py
+  ```Python
+  from django.contrib import admin
+
+  from .models import Question
+
+
+  # QuestionAdmin 이라는 클래스를 만든 후 이것을 admin.site.register의 두번째 인자에 집어넣음
+  class QuestionAdmin(admin.ModelAdmin): 
+      fields = ['pub_date', 'question_text'] # '출판 날짜'가 '질문' 필드보다 우선시 하도록 함
+
+  admin.site.register(Question, QuestionAdmin)
+  ```
+  ( 이미지 1 )   
+  '출판 날짜'가 '질문' 필드보다 앞서 있는 모습 
+  
+  <br>
+  
+  + 수십 개의 필드가 있는 양식을 다음과 같이 필드 세트로 나눌 수 있음
+  > polls/admin.py
+  ```Python
+  from django.contrib import admin
+
+  from .models import Question
+
+
+  class QuestionAdmin(admin.ModelAdmin):
+      fieldsets = [
+          (None,               {'fields': ['question_text']}),
+          ('Date information', {'fields': ['pub_date']}),
+      ]
+
+  admin.site.register(Question, QuestionAdmin)
+  ```
+  ( 이미지 2 )  
+  '질문' 필드가 '출판 날짜' 필드보다 앞서 있고 '출판 날짜' 필드에 제목이 추가된 모습  
+  
+  <br>
+  
++ ### 관련 객체 추가
+  + 현재 질문에는 여러가지 선택 항목이 존재하지만, 질문 관리자 페이지에는 선택 항목이 표시되지 않음
+  + 첫 번째 solution : 선택 항목을 관리자에 등록
+  > polls/admin.py
+  ```Python
+  from django.contrib import admin
+
+  from .models import Choice, Question
+  # ...
+  admin.site.register(Choice)
+  ```
+  ( 이미지 3 )   
+  왼쪽 POLLS 인덱스에 Choices가 추가되고 해당 부분에 들어가면 선택 항목을 볼 수 있음   
+  우측 상단에는 'ADD CHOICE +' 라는 메뉴도 볼 수 있음   
+  
+  ( 이미지 4 )   
+  선택항목 추가 화면   
+  
+  <br>
+  
+  + 첫 번째 solution에 대한 고찰 
+    + 위에 있는 Add choice 화면에서 "Question" 필드는 DB의 모든 질문이 들어가 있는 선택 상자임   
+      ( Django는 이 외래키가 선택 상자로써 관리자에 표시되어야 한다는 것을 알고 있음 )
+    
+  <br> 
+  
+    + ( 이미지 5 )   
+      "Question" 옆에 있는 "Add another"(플러스 모양)을 누르면 팝업 창이 나옴   
+      ( 이미지 6 )   
+      해당 창에서 질문을 추가하고 "Save" 버튼을 누르면 Django가 질문을 DB에 저장하고 현재 보고 있는   
+      "Add choice"폼에서 선택한 항목을 동적으로 추가함  
+    
+  <br> 
+  
+    + 그러나 실제로 시스템에 Choice 객체를 추가하는것은 효율적이지 않음   
+      -> 두 번째 방법에서는 질문 객체를 만들 때 수 많은 선택 항목을 직접 추가해보도록 함 
+  
+  <br> 
+  
+  + 두 번째 solution 
+  
+<br>
+
++ ### 관리자 변경 목록 커스터마이징
++ ### 관리자 모양 및 느낌 커스터마이징
+  + #### 프로젝트 템플릿 커스터마이징
+  + #### 응용 프로그램 템플릿 커스터마이징
++ ### 관리자 인덱스 페이지 커스터마이징
+
+### 참고
+###### [Django - Writing your first Django app, part 7](https://docs.djangoproject.com/en/3.1/intro/tutorial07/)
+
+  
+
+
+  
