@@ -1641,10 +1641,49 @@
   <br> 
   
   + 두 번째 solution 
-  
+    > Choice 모델에 대한 register() 호출 제거 후, 코드 편집
+    ```Python
+    from django.contrib import admin
+
+    from .models import Choice, Question
+
+
+    class ChoiceInline(admin.StackedInline):
+        model = Choice
+        extra = 3 # default 선택 개수를 3개로 정의함
+
+
+    class QuestionAdmin(admin.ModelAdmin):
+        fieldsets = [
+            (None,               {'fields': ['question_text']}),
+            ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
+        ]
+        inlines = [ChoiceInline] # Choice 객체는 질문 관리 페이지에서 편집되도록 함 
+
+    admin.site.register(Question, QuestionAdmin)
+    ```
+    ( 이미지 7 )   
+    위 화면에는 선택지와 관련하여 3개의 항목이 존재하며, 이미 생성된 객체의"Change" 버튼으로 들어갈 때마다 세 개의 슬롯이 추가됨   
+    "Add another Choice"를 클릭하면 새 슬롯이 추가되며 삭제도 오른쪽 상단의 X 로 가능함
+   
+   <br>
+   
+    + 두 번째 solution에 대한 고찰
+      + 위 이미지에서도 보다시피 모든 필드를 표시하는데 많은 화면이 필요함   
+        따라서 Django는 이에 대해 표 형식의 방법을 제공함
+      >polls/admin.py
+      ```Python
+      class ChoiceInline(admin.TabularInline):
+          #...
+      ```   
+      ( 이미지 8 )   
+      조금 더 compact하게 정리된 테이블 기반 형식을 볼 수 있음   
+      ( "DELETE?" 라는 문구로 삭제 열도 따로 추가되어 있음 )
+        
 <br>
 
 + ### 관리자 변경 목록 커스터마이징
+
 + ### 관리자 모양 및 느낌 커스터마이징
   + #### 프로젝트 템플릿 커스터마이징
   + #### 응용 프로그램 템플릿 커스터마이징
