@@ -1804,9 +1804,18 @@
     
     <br>
   
-  + #### 응용 프로그램 템플릿 커스터마이징
+  + #### 응용 프로그램의 템플릿 커스터마이징
+    + DIRS가 기본적으로 비어있다면, Django는 어떻게 기본 관리 템플릿을 찾는가?
+      -> APP_DIRS가 True로 설정되어 있기 때문에 Django는 자동으로   
+        각 애플리케이션 패키지 내에서 fallback으로 사용 할 templates/하위 폴더를 찾게 됨
+    + 애플리케이션이 좀 더 복잡해지고 정교한 수정이 필요한 경우   
+      프로젝트의 템플릿보다 애플리케이션의 템플릿을 수정하는 것이 더 현명함
   
 + ### 관리자 인덱스 페이지 커스터마이징
+  + 기본적으로 INSTALLED_APPS에서 모든 app들이 보이게 됨
+  + index는 관리자 페이지에서 가장 중요한 페이지임
+  + 파일을 편집하면, app_list라는 템플릿 변수를 볼 것이고   
+    이 변수에는 설치된 모든 Django 앱이 들어가 있음
 
 ### 참고
 ###### [Django - Writing your first Django app, part 7](https://docs.djangoproject.com/en/3.1/intro/tutorial07/)
