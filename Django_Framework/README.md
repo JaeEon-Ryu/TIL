@@ -36,6 +36,12 @@
     + [앱의 모양과 느낌을 커스터마이징](#앱의-모양과-느낌을-커스터마이징)
     + [배경 이미지 추가](#배경-이미지-추가)
   + [Django 앱 작성 7부](#django-앱-작성-7부)
+    + [7부 개요](#7부개요)
+    + [관리자 폼 커스터마이징](#관리자-폼-커스터마이징)
+    + [관련 객체 추가](#관련-객체-추가)
+    + [관리자 변경 목록 커스터마이징](#관리자-변경-목록-커스터마이징)
+    + [관리자 모양 및 느낌 커스터마이징](#관리자-모양-및-느낌-커스터마이징)
+    + [관리자 인덱스 페이지 커스터마이징](#관리자-인덱스-페이지-커스터마이징)
   
     
 
@@ -1575,7 +1581,7 @@
 
   admin.site.register(Question, QuestionAdmin)
   ```
-  ( 이미지 1 )   
+  <img src="https://user-images.githubusercontent.com/52907116/104461995-6089f580-55f3-11eb-8858-a1e15e79dd36.png" width="70%"></img>    
   '출판 날짜'가 '질문' 필드보다 앞서 있는 모습 
   
   <br>
@@ -1596,7 +1602,7 @@
 
   admin.site.register(Question, QuestionAdmin)
   ```
-  ( 이미지 2 )  
+  <img src="https://user-images.githubusercontent.com/52907116/104462003-61bb2280-55f3-11eb-86f8-3e1951819c03.png" width="70%"></img>    
   '질문' 필드가 '출판 날짜' 필드보다 앞서 있고 '출판 날짜' 필드에 제목이 추가된 모습  
   
   <br>
@@ -1612,11 +1618,13 @@
   # ...
   admin.site.register(Choice)
   ```
-  ( 이미지 3 )   
+  <img src="https://user-images.githubusercontent.com/52907116/104462007-6253b900-55f3-11eb-83a5-f581e63eb47b.png" width="70%"></img>      
   왼쪽 POLLS 인덱스에 Choices가 추가되고 해당 부분에 들어가면 선택 항목을 볼 수 있음   
   우측 상단에는 'ADD CHOICE +' 라는 메뉴도 볼 수 있음   
   
-  ( 이미지 4 )   
+  <br>
+  
+  <img src="https://user-images.githubusercontent.com/52907116/104462011-62ec4f80-55f3-11eb-94f7-e61d6343b0d8.png" width="50%"></img>   
   선택항목 추가 화면   
   
   <br>
@@ -1627,9 +1635,12 @@
     
   <br> 
   
-    + ( 이미지 5 )   
+    + <img src="https://user-images.githubusercontent.com/52907116/104462014-6384e600-55f3-11eb-93a9-0d9f89f88ddb.jpg" width="50%"></img>   
       "Question" 옆에 있는 "Add another"(플러스 모양)을 누르면 팝업 창이 나옴   
-      ( 이미지 6 )   
+      
+      <br>
+      
+      <img src="https://user-images.githubusercontent.com/52907116/104462020-641d7c80-55f3-11eb-8fed-3f8673342024.png" width="50%"></img>      
       해당 창에서 질문을 추가하고 "Save" 버튼을 누르면 Django가 질문을 DB에 저장하고 현재 보고 있는   
       "Add choice"폼에서 선택한 항목을 동적으로 추가함  
     
@@ -1662,7 +1673,7 @@
 
     admin.site.register(Question, QuestionAdmin)
     ```
-    ( 이미지 7 )   
+    <img src="https://user-images.githubusercontent.com/52907116/104462021-64b61300-55f3-11eb-85fd-7490cf4e7cc8.png" width="70%"></img>     
     위 화면에는 선택지와 관련하여 3개의 항목이 존재하며, 이미 생성된 객체의"Change" 버튼으로 들어갈 때마다 세 개의 슬롯이 추가됨   
     "Add another Choice"를 클릭하면 새 슬롯이 추가되며 삭제도 오른쪽 상단의 X 로 가능함
    
@@ -1676,7 +1687,7 @@
       class ChoiceInline(admin.TabularInline):
           #...
       ```   
-      ( 이미지 8 )   
+      <img src="https://user-images.githubusercontent.com/52907116/104462022-64b61300-55f3-11eb-9825-459e6bea9c1c.png" width="70%"></img>    
       조금 더 compact하게 정리된 테이블 기반 형식을 볼 수 있음   
       ( "DELETE?" 라는 문구로 삭제 열도 따로 추가되어 있음 )
         
@@ -1684,7 +1695,7 @@
 
 + ### 관리자 변경 목록 커스터마이징
   + 시스템의 모든 질문을 표시하는 "Change list"를 수정할 예정   
-    ( 이미지 9-1 )   
+  <img src="https://user-images.githubusercontent.com/52907116/104462024-654ea980-55f3-11eb-81b4-f3bdcf57f00a.png" width="70%"></img>  
   
   <br>
   
@@ -1696,7 +1707,7 @@
         # ...
         list_display = ('question_text', 'pub_date','was_published_recently')
     ```
-    ( 이미지 9-2 )   
+    <img src="https://user-images.githubusercontent.com/52907116/104462027-65e74000-55f3-11eb-8fb1-2f5891ec7812.png" width="70%"></img>  
     열의 헤더를 클릭함으로써 정렬을 할 수 있음   
     하지만 맨 오른쪽 was_published_recently는 임의의 메서드에 의한 출력으로 정렬이 지원되지 않음   
       -> 이를 해결하기 위한 방법은 아래와 같음 
@@ -1704,7 +1715,7 @@
   <br>
   
   + 몇가지 속성을 메서드에 추가하여 기능 개선하기
-    (이미지 11)   
+  <img src="https://user-images.githubusercontent.com/52907116/104462029-667fd680-55f3-11eb-8e6a-e478565c4ac6.png" width="90%"></img>     
     
     <br>
     
@@ -1745,6 +1756,8 @@
 + ### 관리자 모양 및 느낌 커스터마이징
   + 각 관리 페이지 상단에 "Django administration" 문구 지우기   
   
+  <br>
+  
   + #### 프로젝트 템플릿 커스터마이징
     + manage.py가 포함되어 있는 프로젝트 폴더에 "templates"라는 폴더를 생성
     + DIRS 옵션 추가
@@ -1766,7 +1779,10 @@
         },
     ]
      ```
-     ( 이미지 12 )   
+     <img src="https://user-images.githubusercontent.com/52907116/104462030-667fd680-55f3-11eb-819c-facfc7d0c0e1.png" width="70%"></img> 
+     
+    <br>
+    
     + 템플릿 구성      
       static 파일들처럼, 모든 템플릿을 하나의 대형 템플릿 폴더에 모을 수 있음  
       하지만 특정 응용 프로그램에 속하는 템플릿은 polls/templates 같은 폴더가 아닌   
@@ -1793,7 +1809,7 @@
       {% endblock %}
       <!--#''' -->
       ```
-      (이미지 13)
+      <img src="https://user-images.githubusercontent.com/52907116/104462034-67186d00-55f3-11eb-9d98-403ee2512639.png" width="30%"></img>  
       
       <br>
     
@@ -1810,6 +1826,8 @@
         각 애플리케이션 패키지 내에서 fallback으로 사용 할 templates/하위 폴더를 찾게 됨
     + 애플리케이션이 좀 더 복잡해지고 정교한 수정이 필요한 경우   
       프로젝트의 템플릿보다 애플리케이션의 템플릿을 수정하는 것이 더 현명함
+  
+  <br>
   
 + ### 관리자 인덱스 페이지 커스터마이징
   + 기본적으로 INSTALLED_APPS에서 모든 app들이 보이게 됨
