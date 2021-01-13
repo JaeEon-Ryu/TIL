@@ -1683,10 +1683,129 @@
 <br>
 
 + ### 관리자 변경 목록 커스터마이징
+  + 시스템의 모든 질문을 표시하는 "Change list"를 수정할 예정   
+    ( 이미지 9-1 )   
+  
+  <br>
+  
+  + 기본적으로 Django는 각 객체의 str()을 보여줌 -> 개별 필드를 보여줄 수 있다면 더 도움이 될 것     
+    -> list_display admin 옵션 사용  
+    > polls/admin.py
+    ```Python
+    class QuestionAdmin(admin.ModelAdmin):
+        # ...
+        list_display = ('question_text', 'pub_date','was_published_recently')
+    ```
+    ( 이미지 9-2 )   
+    열의 헤더를 클릭함으로써 정렬을 할 수 있음   
+    하지만 맨 오른쪽 was_published_recently는 임의의 메서드에 의한 출력으로 정렬이 지원되지 않음   
+      -> 이를 해결하기 위한 방법은 아래와 같음 
+  
+  <br>
+  
+  + 몇가지 속성을 메서드에 추가하여 기능 개선하기
+    (이미지 11)   
+    
+    <br>
+    
+    > polls/models.py ( 정렬 및 목록 커스터마이징 (1) )
+    ```Python
+    class Question(models.Model):
+        # ...
+        def was_published_recently(self):
+            now = timezone.now()
+            return now - datetime.timedelta(days=1) <= self.pub_date <= now
+        was_published_recently.admin_order_field = 'pub_date' # 정렬 문제
+        was_published_recently.boolean = True # True, False 문자열을 띄우지 않고 아이콘을 띄우게 해줌 
+        was_published_recently.short_description = 'Published recently?' # 헤더 이름 바꾸기
+    ```
+    
+    <br>
+  
+    > polls/admin.py ( 필터 추가 (2) )
+    ```Python
+    class QuestionAdmin(admin.ModelAdmin):
+        # ...
+        list_filter = ['pub_date']
+    ```
+    
+    <br>
+    
+    > polls/admin.py ( 검색창 추가 (3) )
+    ```Python
+    class QuestionAdmin(admin.ModelAdmin):
+        # ...
+        search_fields = ['question_text']
+    ```
+    검색의 경우, background에서 쿼리문으로 like를 사용함   
+    따라서 검색하는 글자 수를 줄이면 더 빠른 탐색이 가능함   
+     
+    <br>
 
 + ### 관리자 모양 및 느낌 커스터마이징
+  + 각 관리 페이지 상단에 "Django administration" 문구 지우기   
+  
   + #### 프로젝트 템플릿 커스터마이징
+    + manage.py가 포함되어 있는 프로젝트 폴더에 "templates"라는 폴더를 생성
+    + DIRS 옵션 추가
+     > mysite/settings.py
+     ```Python
+     TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [BASE_DIR / 'templates'],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
+        },
+    ]
+     ```
+     ( 이미지 12 )   
+    + 템플릿 구성      
+      static 파일들처럼, 모든 템플릿을 하나의 대형 템플릿 폴더에 모을 수 있음  
+      하지만 특정 응용 프로그램에 속하는 템플릿은 polls/templates 같은 폴더가 아닌   
+      프로젝트의 템플릿 폴더에 배치해야 함 (위처럼)
+      이에 대한 이유는 재사용가능한 앱 튜토리얼에서 다루어보도록 함 ( 향후 업로드 예정 ) 
+    
+    <br>
+    
+    + DIRS : Django 템플릿을 로드할 때 확인할 파일 시스템 디렉토리의 리스트 ( 검색 경로 )
+    + templates 폴더 안에 admin 폴더를 생성  
+      django/contrib/admin/templates/admin/base_site.html 파일을 admin 폴더에 복사
+      > Django 경로를 모른다면 cmd에 다음과 같이 입력  
+        
+          $ python -c "import django; print(django.__path__)"
+    
+    <br>
+    
+    + 템플릿 수정
+      > 복사된 base_site.html 수정
+      ``` Html
+      <!--#''' -->
+      {% block branding %}
+      <h1 id="site-name"><a href="{% url 'admin:index' %}">Polls Administration</a></h1>
+      {% endblock %}
+      <!--#''' -->
+      ```
+      (이미지 13)
+      
+      <br>
+    
+    + 지금까지 템플릿을 어떻게 오버라이드 하는지 배웠고 나중에 실제 프로젝트를 수행한다면  
+      "django.contrib.admin.AdminSite.site_header" 를 커스터마이징 할 때 사용하게 될 것임
+    + 템플릿 파일에 있는 {% block branding %} and {{ title }} 중 {% 기호나 {{는 Django 템플릿 언어임
+    + Django의 기본 관리 템플릿은 모두 오버라이드 될 수 있음 ( base_site.html을 복사한 것 처럼 하면 됨 )
+    
+    <br>
+  
   + #### 응용 프로그램 템플릿 커스터마이징
+  
 + ### 관리자 인덱스 페이지 커스터마이징
 
 ### 참고
