@@ -1862,16 +1862,235 @@
       이미 part 1에서 배웠음 ( include를 사용하여 프로젝트 레벨 URLconf로부터 polls 분리시키기 ) 
     + 이번 장에서는 새 프로젝트에서 앱을 쉽게 사용할 수 있도록 하고 
       다른 사용자가 설치 및 사용할 수 있도록 추가 단계를 수행할 것임
-  
-  + ### 프로젝트 및 재사용 가능한 앱
-  + ### 일부 필수 구성 요소 설치
-  + ### 앱 패키지화하기
-  + ### 나만의 패키지 사용하기
-  + ### 앱 게시하기
-  + ### 가상 환경에 Python 패키지 설치하기
 
+  <br>
+
+  + ### 프로젝트 및 재사용 가능한 앱
+    + 이번 장에 대하여 공부하기 앞서, 프로젝트 폴더 상황은 다음과 같음
+    > 디렉토리 구조
+    
+        mysite/
+            manage.py
+            mysite/
+                __init__.py
+                settings.py
+                urls.py
+                asgi.py
+                wsgi.py
+            polls/
+                __init__.py
+                admin.py
+                apps.py
+                migrations/
+                    __init__.py
+                    0001_initial.py
+                models.py
+                static/
+                    polls/
+                        images/
+                            background.gif
+                        style.css
+                templates/
+                    polls/
+                        detail.html
+                        index.html
+                        results.html
+                tests.py
+                urls.py
+                views.py
+            templates/
+                admin/
+                    base_site.html
+    
+    + 템플릿을 따로 두 개 만든 이유 ( mysite/templates 그리고 polls/templates )    
+      -> polls 폴더 안에 있는 애플리케이션 - 자체적으로 포함되고 새로운 프로젝트에 쉽게 참여 가능함  
+      -> polls 폴더를 새 Django 프로젝트로 복사하여 즉시 재사용 가능함  
+      ( 하지만 아직 다른 사람이 쉽게 설치할 수 없음 -> 앱을 패키징 해야함 )  
+  
+  <br>
+  
+  + ### 일부 필수 구성 요소 설치
+    + 패키지를 만들기 위해 setuptools를 이용할 예정
+    + 설치와 삭제를 위해 pip을 이용할 예정
+  
+  <br>
+  
+  + ### 앱 패키지화하기
+    + 파이썬 패키징 : 쉽게 설치되고 사용될 수 있게끔 특정한 형식으로 app을 준비하는 것 
+    
+    <br>
+    
+    + (1) polls의 상위 폴더인 곳에 "django-polls" 폴더 생성
+      + 앱(패키지) 이름 고르기 
+        + 기존 패키와 이름이 충돌하지 않도록 PyPI와 리소스 확인  
+        + 배포할 패키지를 만들 때, 모듈 이름에 django- 를 쓰는것이 좋음  
+      + 유의
+        + 애플리케이션 레이블(경로의 마지막 부분)은 INSTALLED_APPs에서 고유해야 함   
+          ( 'Django 패키지와 동일한 레이블은 피할 것 - auth', 'admin', 'messages' 등 ) 
+    
+    <br>
+    
+    + (2) polls 폴더를 "django-polls" 폴더로 옮기기
+    
+    <br>
+    
+    + (3) README.rst 파일 만들기
+      > django-polls/README.rst
+      ```Rst
+      =====
+      Polls
+      =====
+
+      Polls is a Django app to conduct Web-based polls. For each question,
+      visitors can choose between a fixed number of answers.
+
+      Detailed documentation is in the "docs" directory.
+
+      Quick start
+      -----------
+
+      1. Add "polls" to your INSTALLED_APPS setting like this::
+
+          INSTALLED_APPS = [
+              ...
+              'polls',
+          ]
+
+      2. Include the polls URLconf in your project urls.py like this::
+
+          path('polls/', include('polls.urls')),
+
+      3. Run ``python manage.py migrate`` to create the polls models.
+
+      4. Start the development server and visit http://127.0.0.1:8000/admin/
+         to create a poll (you'll need the Admin app enabled).
+
+      5. Visit http://127.0.0.1:8000/polls/ to participate in the poll.
+      ```
+      
+    <br>
+    
+    + (4) django-polls 폴더에 LICENSE 폴더 만들기 
+      + 라이센스 없이 릴리즈된 코드는 유용하지 않음
+      + Django 및 많은 Django 호환 앱은 BSD 라이센스에 따라 배포되지만,   
+        임의로 라이센스를 자유롭게 선택할 수 있음 
+      + 라이센스 선택은 그 해당 코드 사용하는 사용자에게 영향이 있음
+    
+    <br>
+  
+    + (5) setup.cfg, setup.py - 앱 빌드 및 설치 방법 제작
+      > django-polls/setup.cfg¶
+      ```Cfg
+      [metadata]
+      name = django-polls
+      version = 0.1
+      description = A Django app to conduct Web-based polls.
+      long_description = file: README.rst
+      url = https://www.example.com/
+      author = Your Name
+      author_email = yourname@example.com
+      license = BSD-3-Clause  # Example license
+      classifiers =
+          Environment :: Web Environment
+          Framework :: Django
+          Framework :: Django :: X.Y  # Replace "X.Y" as appropriate
+          Intended Audience :: Developers
+          License :: OSI Approved :: BSD License
+          Operating System :: OS Independent
+          Programming Language :: Python
+          Programming Language :: Python :: 3
+          Programming Language :: Python :: 3 :: Only
+          Programming Language :: Python :: 3.6
+          Programming Language :: Python :: 3.7
+          Programming Language :: Python :: 3.8
+          Topic :: Internet :: WWW/HTTP
+          Topic :: Internet :: WWW/HTTP :: Dynamic Content
+
+      [options]
+      include_package_data = true
+      packages = find:
+      ```
+      
+      <br>
+      
+      > django-polls/setup.py
+      ```
+      from setuptools import setup
+
+      setup()
+      ```
+    
+    <br>
+    
+    + (6) MANIFEST.in 파일 작성 
+      ( 기본적으로 패키지에는 파이썬 모듈 및 패키지가 기본적으로 포함됨 )   
+      ( 그 이외에 파일들을 추가적으로 포함하기 위해서는 MANIFEST 파일을 작성해야 함 )    
+      > django-polls/MANIFEST.in
+      ```In
+      include LICENSE
+      include README.rst
+      recursive-include polls/static *
+      recursive-include polls/templates *
+      ```
+    
+    <br>
+    
+    + (7) 선택사항 - 자세한 설명서를 app에 포함시키기   
+      7-1 ) django-polls 폴더에 docs 문서 작성 후 내용 쓰기  
+      7-2) > django-polls/MANIFEST.in ( 한줄 추가 )  
+      ```In
+      recursive-include docs *
+      ```   
+    
+    <br>
+    
+    + (8) 패키지 완성 
+      > django-polls 폴더 하에서 명령어 입력
+      
+          python setup.py sdist
+          
+      명령어를 입력했다면 dist라는 폴더가 만들어 짐   
+      해당 폴더 안에는 패키지인 django-polls-0.1.tar.gz 가 생성되어 있음  
+      
+    <br>
+  
+  + ### 나만의 패키지 사용하기
+    + 현재 polls 폴더를 프로젝트에서 옮겼기 때문에 더이상 작동되지 않음   
+      -> 앞서 만들었던 새로운 Django polls 패키지를 설치할 예정 
+    
+    <br>
+    
+    + 패키지 설치
+    > 사용자 폴더에서 pip을 사용
+      
+        python -m pip install --user django-polls/dist/django-polls-0.1.tar.gz  
+    
+    (이미지1)   
+    성공화면
+    
+    <br>
+    
+    + 위 이미지처럼 성공했다면 서버 구동시 이전처럼 정상적으로 홈페이지가 동작하게 됨
+    
+    <br>
+    
+    + 패키지 삭제의 경우
+    > 패키지 삭제를 위해서 마찬가지로 pip 사용
+      
+        python -m pip uninstall django-polls
+    
+  <br>
+  
+  + ### 앱 게시하기
+    + PyPI(Python Package Index)와 같은 공용 저장소에 패키지를 업로드하는 등 공유 가능
+  
+  <br>
+  
+  
 ### 참고
 ###### [Advanced tutorial: How to write reusable apps](https://docs.djangoproject.com/en/3.1/intro/reusable-apps/)
+
+
 
   
 
