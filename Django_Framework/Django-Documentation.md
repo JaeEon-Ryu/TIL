@@ -2093,7 +2093,7 @@
   
   
 ### 참고
-###### [Advanced tutorial: How to write reusable apps](https://docs.djangoproject.com/en/3.1/intro/reusable-apps/)
+###### [Django - Advanced tutorial: How to write reusable apps](https://docs.djangoproject.com/en/3.1/intro/reusable-apps/)
 
 
 
