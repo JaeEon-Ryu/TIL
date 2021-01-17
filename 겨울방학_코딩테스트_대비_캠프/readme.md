@@ -2,5 +2,10 @@
 
 --------------
 
-
 <br>
+
++ 주관 : 한국외국어대학교 AI 교육원
++ 실습환경 : [LeeBros Code](https://leebroscode.com/missions/2/concepts) 서비스 이용  
++ 사용 언어 : Python  
++ 기간 : 2021년 1월 17일(일) ~ 1월 23일(토) (7일, 일 3시간)    
+
