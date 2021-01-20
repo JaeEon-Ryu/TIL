@@ -1,8 +1,3 @@
-'''
-진행중
-
-'''
-
 def in_range(x, y):
     return 0 <= x and x < n and 0 <= y and y < n
 
@@ -44,6 +39,7 @@ def combine_marble(x,y,marble_info):
 
     return marble_info
 
+# 입력 받기 및 기본 변수 선언
 n, m, t = map(int, input().split()) # 격자크기, 구슬 개수, 시간
 
 grid = [
@@ -55,37 +51,39 @@ marble_info = []
 
 for _ in range(m):
     r, c, d, w = list(input().split())
-    order = n + 1
-    marble_info.append([int(r),int(c),d,int(w),order])
+    order = _ + 1
+    marble_info.append([int(r)-1,int(c)-1,d,int(w),order])
     grid[int(r)-1][int(c)-1] = 1
 
 dir = ['U','D','L','R']
 dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
 
-temp = []
+# 시간만큼 반복
 for _ in range(t):
 
     # 구슬의 좌표가 있다면 실행
     if not marble_info:
         break
 
+    temp = []
     for marble in marble_info:
-        row = marble[0] - 1
-        col = marble[1] - 1
+
+        row = marble[0]
+        col = marble[1]
         dir_char = marble[2]
 
         # 이동하기 전에 원래 있었던 좌표의 기록 지우기
-
         grid[row][col] -= 1
 
         # 정해진 방향으로 이동
         new_x = row + dx[dir.index(dir_char)]
         new_y = col + dy[dir.index(dir_char)]
 
+        # 정해진 방향으로 범위 확인
         if in_range(new_x, new_y) :
             row = new_x
             col = new_y
-        else:
+        else: # 범위 바깥이면 방향 반대로 전환
             dir_char = opposite_dir(dir_char)
 
         # 이동 후 해당 좌표에 구슬 개수 기록
@@ -100,20 +98,15 @@ for _ in range(t):
     for i in range(n):
         for j in range(n):
             if grid[i][j] >= 2:
-                combine_marble(i,j,marble_info)
+                marble_info = combine_marble(i,j,marble_info)
                 grid[i][j] = 1
-    for i in range(n):
-        for j in range(n):
-            print(grid[i][j],end=' ')
-        print()
-    print()
 
+
+# 출력
 max_w = 0
 for info in marble_info:
-    #print(info)
     if max_w < info[3]:
         max_w = info[3]
-
 
 print(len(marble_info),max_w)
 
