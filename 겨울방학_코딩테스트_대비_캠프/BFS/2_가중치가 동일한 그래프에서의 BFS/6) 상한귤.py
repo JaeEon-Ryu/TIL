@@ -1,7 +1,4 @@
-'''
-테스트케이스3 수정중
 
-'''
 from collections import deque
 
 n, k = map(int,input().split())
@@ -33,7 +30,7 @@ def visited_initialization():
 def in_range(x,y):
     return 0 <= x < n  and 0 <= y < n
 
-def can_go(x,y):
+def can_go(x,y,s):
     global second
 
     if not in_range(x,y):
@@ -44,7 +41,7 @@ def can_go(x,y):
     # 초기화된 상태가 아닌 경우 ( 방문을 해서 값이 바뀐 경우 )
     if result[x][y] != -2:
         # 이미 기록된 시간보다 현재 시간이 더 클 경우 가면 안됨
-        if second > result[x][y]:
+        if s > result[x][y]:
             return False
 
     return True
@@ -53,21 +50,18 @@ def bfs():
     global second
 
     while q:
-        x,y = q.popleft()
-
+        x,y,s = q.popleft() # 행, 열, 시간
+        s += 1 # 시간 1초 추가
         for i in range(4):
             new_x,new_y = x + dx[i], y + dy[i]
 
-            if can_go(new_x, new_y):
-                q.append([new_x,new_y])
+            if can_go(new_x, new_y,s):
                 visited[new_x][new_y] = 1
-                result[new_x][new_y] = second # 시간 기록
-        second += 1
+                result[new_x][new_y] = s # 시간 기록
+                q.append([new_x, new_y, s])
 
 
 q = deque()
-global second
-
 
 for i in range(n):
     for j in range(n):
@@ -80,14 +74,9 @@ for i in range(n):
             result[i][j] = 0
             visited[i][j] = 1
             second = 1
-            q.append([i,j])
+            q.append([i,j,0])
             bfs()
 
-            for i in range(n):
-                for j in range(n):
-                    print(result[i][j], end=' ')
-                print()
-            print()
             # 또 다른 상한 귤을 만날 확률이 있으므로
             # visited 초기화
             visited_initialization()
