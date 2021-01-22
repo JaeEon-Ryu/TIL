@@ -44,9 +44,11 @@ def second_combination(curr_idx, cnt):
             ''':type
             print_combination()
             '''
-            print(possible_index2)
+            #print(possible_index2)
             idx_1 = possible_index[0]
             idx_2 = possible_index[1]
+            #print('test')
+            #print(points)
             dist = (points[idx_1][0] - points[idx_2][0]) ** 2 +\
                    (points[idx_1][1] - points[idx_2][1]) ** 2
             result.append(dist)
@@ -69,7 +71,6 @@ print(min(max_list))
 
 '''
 4 3
-
 1 1
 4 4
 3 5
