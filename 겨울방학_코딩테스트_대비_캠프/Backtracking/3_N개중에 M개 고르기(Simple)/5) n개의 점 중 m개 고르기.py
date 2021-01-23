@@ -1,97 +1,82 @@
-n, m = map(int,input().split())
+import sys
+global INT_MIN
+INT_MIN = sys.maxsize
+global INT_MAX
+INT_MAX = -sys.maxsize
+
+n, m = map(int, input().split())
+coordinates = []
+for _ in range(n):
+    coordinates.append(list(map(int,input().split())))
 points = []
-possible_index = []
-possible_index2 = []
-global result
-global max_val
-global max_list
-max_list =[]
-max_val = 0
-result = []
-for i in range(n):
-    points.append(list(map(int,input().split())))
+final_points = []
 
 
-def first_combination(curr_idx, cnt):
-    global max_list
-    global max_val
-    global result
-    if curr_idx == n:
+# 점 n개중 m개 선택하기 ( combination )
+def select_m_points(curr_num, cnt):
+    global INT_MAX
+    global INT_MIN
+
+    if curr_num == n:
         if cnt == m:
-            ''':type
-            print_combination()
-            '''
-            print(possible_index)
-            second_combination(0,0)
-            if result:
-                if max_val < max(result):
-                    max_val = max(result)
-                    max_list.append(max_val)
-            result = []
+            select_two_points(len(points),0,0,points)
+            INT_MIN = min(INT_MAX, INT_MIN)
+            INT_MAX = -sys.maxsize
 
         return
 
-    possible_index.append(curr_idx)
-    first_combination(curr_idx + 1, cnt + 1)
-    possible_index.pop()
+    points.append(curr_num)
+    select_m_points(curr_num + 1, cnt + 1)
+    points.pop()
 
-    first_combination(curr_idx + 1, cnt)
+    select_m_points(curr_num + 1, cnt)
 
-def second_combination(curr_idx, cnt):
-
-    if curr_idx == len(possible_index):
+# 선택된 m개 중 2개 선택하기 ( combination )
+def select_two_points(nop,curr_num, cnt,m_list):
+    if curr_num == nop:
         if cnt == 2:
-            ''':type
-            print_combination()
-            '''
-            #print(possible_index2)
-            idx_1 = possible_index[0]
-            idx_2 = possible_index[1]
-            #print('test')
-            #print(points)
-            dist = (points[idx_1][0] - points[idx_2][0]) ** 2 +\
-                   (points[idx_1][1] - points[idx_2][1]) ** 2
-            result.append(dist)
+            cal_distance(m_list)
 
         return
 
-    possible_index2.append(possible_index[curr_idx])
-    second_combination(curr_idx + 1, cnt + 1)
-    possible_index2.pop()
+    final_points.append(curr_num)
+    select_two_points(nop,curr_num + 1, cnt + 1,m_list)
+    final_points.pop()
 
-    second_combination(curr_idx + 1, cnt)
+    select_two_points(nop,curr_num + 1, cnt,m_list)
+
+# 거리 계산
+def cal_distance(m_list):
+    global INT_MAX
+
+    i_1 = m_list[final_points[0]]
+    i_2 = m_list[final_points[1]]
+
+    x = coordinates[i_2][0] - coordinates[i_1][0]
+    y = coordinates[i_2][1] - coordinates[i_1][1]
+
+    # 선택된 m개중 두 점 사이의 거리가 가장 먼 것
+    INT_MAX = max(INT_MAX,x**2 + y**2)
 
 
-first_combination(0, 0)
-print(min(max_list))
-
-
-
+select_m_points(0, 0)
+print(INT_MIN)
 
 
 '''
-4 3
+5 3
+1 1
+2 2
+3 3
+4 4
+5 5
+
+입력:
+3 2
 1 1
 4 4
 3 5
-2 2
 
-'''
-
-
-'''
-3 3
-1 1
-4 4
-5 3
-
-20
-
-4 3
-1 1
-4 4
-5 3
-0 0
-
-20
+출력: 
+2
 '''
