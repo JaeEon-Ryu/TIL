@@ -1,90 +1,61 @@
 '''
-완전탐색으로 푸는 방법 - (모든 경우의 수)
-O(N)으로 푸는 방법 - 기호에 따른 숫자 변화
-'''
-
-'''
-완전탐색 풀이
+리스트[::2]    # 처음부터 끝까지 2칸씩            = 홀수번째
+리스트[1::2]   # 첫 번째 인덱스부터 끝까지 2칸씩   = 짝수번째
 '''
 
 import sys
-INT_MIN = -sys.maxsize
-global max_val
-max_val = INT_MIN\
-#print(max_val)
-def calculation(a,op,b):
-    if op == '+':
-        return a+b
-    elif op == '-':
-        return a-b
-    else:
-        return a*b
+INT_MAX = -1 * sys.maxsize
 
-def find_max():
-    global max_val
-
-    result = 4 # 처음 숫자는 4로 시작해야 제일 큼
-    for op,num in zip(op_list,nums):
-        result = calculation(result,op,num)
-    #print(result)
-    if result > max_val:
-        max_val = result
-
-def find_permutaion(cnt):
-    if cnt == N:
-        find_max()
-        return
-
-    nums.append(1)
-    find_permutaion(cnt+1)
-    nums.pop()
-
-    nums.append(4)
-    find_permutaion(cnt+1)
-    nums.pop()
-
-
-
-# 값 입력받기
 s = input()
-N = (len(s)+1)//2
-s = s[1:]
-op_list = []
 
-# operator 따로 보관
-for i in range(len(s)):
-    if i%2==0:
-        op_list.append(s[i])
+unique_set = set(s[::2]) # 중복제거된 알파벳들
+unique_len = len(unique_set)
 
-# 숫자들 따로 보관
 nums = []
 
-# permutation 시작
-find_permutaion(0)
+def string_calculator(s_modified):
+    result = int(s_modified[0])
+    s_modified = s_modified[1:]
+
+    for i in range(len(s_modified)):
+        if i%2 == 1:
+            # s_modified[i-1] = 연산자
+            # s_modified[i] = 오른쪽 숫자
+            result = calculation(result,s_modified[i-1],int(s_modified[i]))
+
+    return result
+
+def calculation(left,op,right):
+    if op == '+':
+        return left + right
+    elif op == '-':
+        return left - right
+    else:
+        return left * right
+
+def cal_in_permutation():
+    global max_val
+
+    s_copied = s[:]
+    # permutation에서 얻은 숫자를 문자에 대입
+    for n,u in zip(nums, unique_set):
+        s_copied = s_copied.replace(u,str(n))
+
+    max_val = max(max_val,string_calculator(s_copied))
+
+
+def find_permutations(cnt):
+    if cnt == unique_len:
+        cal_in_permutation()
+        return
+
+    for i in range(1,5):
+        nums.append(i)
+        find_permutations(cnt+1)
+        nums.pop()
+
+global max_val
+max_val = INT_MAX
+find_permutations(0)
 
 print(max_val)
-
-
-'''
-
-def calculation(a,op,b):
-    if op == '+':
-        return a+b
-    elif op == '-':
-        return a-b
-    else:
-        return a*b
-
-s = input()
-s = s[1:]
-
-result = 4
-for i in range(len(s)):
-    if i%2 == 0:
-        if s[i] == '+' or s[i] == '*':
-            result = calculation(result,s[i],4)
-        else:
-            result = calculation(result, s[i], 1)
-
-print(result)
-'''
