@@ -1,10 +1,25 @@
-''' 테스트케이스 10번 틀림
-크기 구하기 방향
-1. 오른쪽으로 쭉 구하기
-2. 1번의 가로축을 그대로 내리기
-- 배열 끝까지 다다랐거나, 음수일경우 중지
-'''
-
+#
+# def find_rectangle(x,y):
+#     end_x = x+1
+#     for j in range(x,m):
+#         if grid[x][j] < 1:
+#             break
+#         end_x = j
+#     else:
+#         for i in range(x,n):
+#             if grid[i][end_x]:
+#
+#
+#
+# n,m = map(int,input().split())
+#
+# grid = [
+#     list(map(int,input().split()))
+#     for i in range(n)
+# ]
+#
+# for i in range(n):
+#     for j in range(m):
 
 n,m = map(int,input().split())
 
@@ -19,7 +34,7 @@ def get_max(row_s,col_s):
     right_size = 1
     new_c = col_s + 1
 
-    while new_c < m and grid[row_s][new_c] > 0:
+    while new_c < m and grid[row_s][new_c] >= 1:
         right_size += 1
         new_c += 1
     original_size = right_size
@@ -40,7 +55,7 @@ def get_max(row_s,col_s):
     left_size = 1
     new_r = row_s + 1
 
-    while new_r < n and grid[new_r][col_s] > 0:
+    while new_r < n and grid[new_r][col_s] >= 1:
         left_size += 1
         new_r += 1
     original_size = left_size
@@ -57,44 +72,24 @@ def get_max(row_s,col_s):
             left_size += original_size
         new_c += 1
 
+
     return max(left_size,right_size)
 
 
 max_val = -1
 for i in range(n):
     for j in range(m):
-        if grid[i][j] > 0:
+        if grid[i][j] >= 1:
             max_val = max(max_val,get_max(i,j))
 
 print(max_val)
 
-'''
-input
-3 3
-1 2 3
-3 4 5
-6 7 8
-
-output
-9
-'''
 
 '''
-input
-5 7
-0 0 0 0 0 0 0
-0 -1 0 0 0 0 0
-0 -1 0 0 1 1 0
-0 -1 0 0 0 1 0
-0 0 0 0 0 0 1
-
-5
-
-4 5
-6 -2 4 -3 1
-3 6 7 -4 1
-6 1 8 15 -5
-3 -5 1 16 3
-
-6
+5 6
+1 1 1 1 1 1
+0 1 1 1 0 0
+0 1 1 0 0 0
+0 1 0 0 0 0
+0 0 0 0 0 0
 '''
