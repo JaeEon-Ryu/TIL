@@ -1,9 +1,8 @@
 '''
-직사각형의 모양을 유형별로 나눈다
-( 3x3 격자에서의 직사각형, 4x4 격자에서의 직사각형 등등 )
-
-굳이 정해진 방향대로 순회하는 알고리즘을 짤 필요가 없다
-( 문제에서는 합만 구하도록 나옴 )
+a. 오른쪽 대각선 방향 (-1, +1) 한칸씩 while문 (in_range 일때까지)
+    b. 왼쪽 대각선 방향 (-1, -1) 한칸씩 while문 (in_range 일때까지)
+        c. a에서 갔던 거리만큼 왼쪽아래 대각선 이동 ( 이때도 in_range 검사 )
+        d. c에서 break이 일어나지 않았다면 b에서 갔던 거리만큼 오른쪽 아래 대각선 이동
 '''
 
 n = int(input())
@@ -12,25 +11,60 @@ grid = [
     for _ in range(n)
 ]
 
-def can_partial_grid(x,y,size):
-    return 0 <= x+size-1 < n and 0 <= y+size-1 < n
+def in_range(x,y):
+    return 0 <= x < n and 0 <= y < n
 
-def sum_of_nums(x,y,size):
-    start_from_bottom = 0
-    start_from_top = 0
+def get_max_from_current_point(x, y):
 
-    # 본 문제에서는 순회했던 순서대로 값을 출력하라는 말이 없고
-    # 합만 뽑아내라고 했으므로 2줄씩 계산하도록 한다
+    result = 0
+    path_sum_1 = 0
 
-    # 좌측하단에서 우측상단으로 커져가는 사각형 ( 2줄씩 계산 )
-    for i in range(size-1):
-        start_from_bottom += grid[x+size-2-i][y+i] + grid[x+size-1-i][y+1+i]
+    # 1번,2번 방향을 탐색한 후 in_range의 경우라면
+    # 반복 횟수를 대각선 길이로 만들어
+    # 경로에 속한 값들을 갖고오기 위함
+    right_diagonal_line = 1 # 오른쪽 대각선 길이
+    left_diagonal_line = 1 # 왼쪽 대각선 길이
 
-    # 좌측상단에서 우측하단으로 커져가는 사각형 ( 2줄씩 계산 )
-    for i in range(size-1):
-        start_from_top += grid[x+i][y+1+i] + grid[x+i+1][y+i]
+    tr_x, tr_y = x-1,y+1 # head to the top right
+    while in_range(tr_x,tr_y): # 1번 방향으로 진행
 
-    return max(start_from_bottom,start_from_top)
+        path_sum_1 += grid[tr_x][tr_y]
+        tl_x, tl_y = tr_x-1, tr_y-1 # head to the top left
+        path_sum_2 = path_sum_1
+        left_diagonal_line = 1
+
+        while in_range(tl_x,tl_y): # 2번 방향으로 진행
+
+            path_sum_2 += grid[tl_x][tl_y]
+            bl_x,bl_y = tl_x, tl_y # head to the bottom left
+            path_sum_3 = path_sum_2
+
+            for _ in range(right_diagonal_line): # 3번 방향으로 진행
+                bl_x,bl_y = bl_x+1, bl_y-1
+
+                if not in_range(bl_x,bl_y):
+                    break
+                else:
+                    path_sum_3 += grid[bl_x][bl_y]
+            else: # 3번 방향을 진행을 완료했을 때 break이 일어나지 않았다면 실행
+
+                br_x, br_y = bl_x, bl_y # head to the bottom right
+                path_sum_4 = path_sum_3
+
+                for _ in range(left_diagonal_line): # 4번 방향으로 진행
+                    br_x, br_y = br_x + 1, br_y + 1
+                    path_sum_4 += grid[br_x][br_y]
+
+                result = max(result, path_sum_4)
+
+            tl_x, tl_y = tl_x - 1, tl_y - 1
+            left_diagonal_line += 1
+
+        tr_x, tr_y = tr_x - 1, tr_y + 1
+        right_diagonal_line += 1
+
+    return result
+
 
 max_val = 4
 
@@ -38,34 +72,7 @@ max_val = 4
 for size in range(3,n+1):
     for i in range(n):
         for j in range(n):
-            if can_partial_grid(i,j,size): # 해당하는 사이즈라면
-                max_val = max(max_val, sum_of_nums(i,j,size)) # 값 뽑아내기
+            max_val = max(max_val, get_max_from_current_point(i, j))
 
 print(max_val)
 
-'''
-ts 5번틀림
-
-18
-97 60 20 37 23 89 81 75 81 33 53 77 83 23 8 86 36 96 
-14 96 81 30 43 30 23 99 49 98 6 53 33 14 35 45 62 73 
-26 99 56 37 80 62 78 94 27 81 68 8 3 30 56 40 22 29 
-30 37 40 71 10 100 81 36 60 15 74 30 40 40 20 89 14 25 
-15 70 61 72 31 98 96 96 58 79 17 28 51 31 48 60 48 34 
-94 95 52 52 59 40 20 94 58 72 44 70 94 25 85 84 70 86 
-83 1 98 49 98 16 12 36 39 26 68 40 38 32 93 32 87 43 
-2 78 43 20 9 56 50 57 68 67 6 13 21 61 45 96 28 30 
-62 87 57 5 21 40 65 11 12 52 84 74 56 92 65 69 55 86 
-28 86 78 14 14 64 59 6 31 89 82 33 52 20 33 60 13 85 
-53 84 99 41 96 39 43 51 55 70 21 90 89 19 59 94 13 39 
-93 14 48 32 23 48 58 91 44 22 45 47 8 50 70 5 15 81 
-47 3 31 98 61 78 89 21 95 45 91 77 62 54 80 67 73 67 
-41 79 94 94 5 6 99 100 40 96 65 34 79 89 54 30 69 94 
-18 15 97 96 71 59 16 91 32 7 73 22 16 93 54 96 40 64 
-11 18 61 12 45 99 29 44 45 37 23 51 39 71 71 96 23 6 
-72 80 45 93 45 97 59 30 45 59 6 7 98 1 70 38 13 47 
-66 63 13 18 61 17 36 22 26 42 73 89 11 6 92 65 93 10 
-
-
-2037 나와야 함 (1874나옴)
-'''
