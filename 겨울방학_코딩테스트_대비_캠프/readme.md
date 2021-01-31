@@ -14,6 +14,8 @@
    
 <br>
 
-<p>
-	<img src="https://user-images.githubusercontent.com/52907116/105710618-b13a1080-5f5a-11eb-97d1-77d8be98f727.jpg" width="60%"/>
-</p>
+
+<img src="https://user-images.githubusercontent.com/52907116/105710618-b13a1080-5f5a-11eb-97d1-77d8be98f727.jpg" width="50%"/><img src="https://user-images.githubusercontent.com/52907116/106383637-817f8280-640a-11eb-8d76-f1dfb6ce9f50.jpg" width="50%"/>
+
+
+
