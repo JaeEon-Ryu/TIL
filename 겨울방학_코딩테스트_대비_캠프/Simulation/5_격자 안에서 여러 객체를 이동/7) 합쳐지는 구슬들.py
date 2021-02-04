@@ -109,4 +109,3 @@ for info in marble_info:
         max_w = info[3]
 
 print(len(marble_info),max_w)
-
