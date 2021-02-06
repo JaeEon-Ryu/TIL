@@ -1,3 +1,7 @@
+'''
+문제 중 그림이 잘못 표시되어 있는 것 수정 요청함
+'''
+
 n,m = map(int,input().split())
 grid = [
     list(map(int,input().split()))
