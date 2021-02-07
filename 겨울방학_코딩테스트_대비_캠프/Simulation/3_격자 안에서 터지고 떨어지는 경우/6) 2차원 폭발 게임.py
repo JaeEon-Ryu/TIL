@@ -1,3 +1,128 @@
+'''
+tk1 : m = 1 일때 time limit exceed 가 나왔음
+뜯어보니 30번 행의 cnt = 1 그리고 39번 행의 cnt >= m 때문에 무한루프
+-> m = 1 일 경우, 무조건 정답은 0 이므로 0을 띄우고 종료하게끔 함
+
+tk14 : grid라는 2차원 리스트를 여러 함수에 매개변수로 받고 보내며 문제 발생
+-> grid를 전역변수로 만들고 매개변수를 제거함
+
+'''
+
+import sys
+
+n,m,k = map(int,input().split())
+
+global grid
+grid = [
+    list(map(int,input().split()))
+    for _ in range(n)
+]
+
+# 격자 터트리기
+def grid_burst():
+
+    while True:
+        bursted = False
+
+        for j in range(n):
+            prev_num = grid[0][j]
+            prev_index = 0
+            cnt = 1
+
+            for i in range(1,n):
+                curr_num = grid[i][j]
+
+                if prev_num == curr_num and prev_num != 0:
+                    cnt += 1
+                else:
+                    # cnt m개 이상일 시 연속적으로 터트리기
+                    if cnt >= m :
+                        bursted = True
+                        for _ in range(prev_index,i):
+                            grid[_][j] = 0
+
+                    # 개수 초기화
+                    prev_num = grid[i][j]
+                    prev_index = i
+                    cnt = 1
+
+            # 맨 마지막 숫자가 같은 숫자로 끝날 때
+            if cnt >= m :
+                bursted = True
+                for _ in range(prev_index,n):
+                    grid[_][j] = 0
+
+        grid_arrange()
+
+        if bursted == False:
+            break
+
+# 격자 정리하기
+def grid_arrange():
+
+    global grid
+
+    temp_grid = [
+        [0 for _ in range(n)]
+        for _ in range(n)
+    ]
+
+    for j in range(n):
+        temp_index = n-1
+
+        for i in range(n-1,-1,-1):
+            if grid[i][j] != 0:
+                temp_grid[temp_index][j] = grid[i][j]
+                temp_index -= 1
+
+    grid = temp_grid
+
+
+# 격자 회전하기
+def grid_rotate():
+
+    global grid
+
+    temp_grid = [
+        [0 for _ in range(n)]
+        for _ in range(n)
+    ]
+
+    temp_row = n-1
+    for i in range(n):
+
+        for j in range(n):
+            temp_grid[j][i] = grid[temp_row][j]
+
+        temp_row -= 1
+
+    grid = temp_grid
+    grid_arrange()
+
+if m == 1:
+    print(0)
+    sys.exit()
+
+# k번 반복
+grid_burst()
+for _ in range(k):
+    grid_rotate()
+    grid_burst()
+
+
+# 남아 있는 숫자 세기
+result = 0
+for i in range(n):
+    for j in range(n):
+        if grid[i][j] != 0:
+            result += 1
+
+# 결과
+print(result)
+
+
+'''
+TK 14번 틀린 코드
 
 n,m,k = map(int,input().split())
 
@@ -100,8 +225,7 @@ for i in range(n):
 print(result)
 
 
-'''
-TK 14번
+
 
 92 3 388
 3 3 3 1 3 1 1 3 3 1 2 3 1 2 2 1 1 2 2 2 2 2 3 2 1 1 3 1 1 3 2 2 2 1 3 2 2 1 2 2 2 1 2 2 2 3 2 3 1 1 2 2 1 1 3 1 1 3 1 2 2 3 1 2 2 2 3 1 1 2 2 1 2 3 3 2 3 2 1 2 2 3 2 3 2 1 3 2 1 2 1 2 
