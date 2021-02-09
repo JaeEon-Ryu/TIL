@@ -26,7 +26,7 @@ def drop_bombs(row, col, t):
 grid[r][c] = 1
 
 # 시간의 흐름에 따라 폭발이 연쇄적으로 일어날 수 있게끔 함
-for time in range(1,m+1):
+for result in range(1, m + 1):
     temp_grid = copy.deepcopy(grid)
 
     for i in range(n):
@@ -34,7 +34,7 @@ for time in range(1,m+1):
 
             # 폭탄이 있는 곳으로부터 연쇄적인 폭발하기
             if temp_grid[i][j] == 1:
-                drop_bombs(i,j,time)
+                drop_bombs(i, j, result)
 
 # 폭탄의 개수 세기
 result = 0
