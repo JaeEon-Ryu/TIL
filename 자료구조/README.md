@@ -63,7 +63,10 @@
   
 <br>
 
-> ###### 참고 : http://www.tcpschool.com/c/c_array_oneDimensional , https://codedragon.tistory.com/7468 , https://daimhada.tistory.com/106?category=820522
+### 참고  
+###### [TCPSCHOOL - 1차원 배열](http://www.tcpschool.com/c/c_array_oneDimensional)  
+###### [codedragon - 배열(array)의 장단점](https://codedragon.tistory.com/7468)  
+###### [Daim - Python으로 구현하는 자료구조:Array](https://daimhada.tistory.com/106?category=820522)  
 
 ------------
 ------------
@@ -218,7 +221,10 @@
 
 <br> 
 
-> ###### 참고 : https://daimhada.tistory.com/72, https://deep-learning-study.tistory.com/146, https://blex.me/@baealex/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%9C-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8, https://m.blog.naver.com/beaqon/221240103226 
+### 참고  
+###### [Daim - Python으로 구현하는 자료구조 : Linked List (1) Singly linked list](https://daimhada.tistory.com/72)
+###### [배진오 - 파이썬으로 구현한 자료구조 - 연결 리스트](https://blex.me/@baealex/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%9C-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8)  
+###### [BQRIUM - 자료구조 단일연결리스트 (Singly linked list)](https://m.blog.naver.com/beaqon/221240103226)  
 
 <br>
 
@@ -388,7 +394,10 @@
   
 <br>
 
-> ###### 참고 : https://daimhada.tistory.com/72, https://scarletbreeze.github.io/articles/2019-07/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0(10), https://m.blog.naver.com/PostView.nhn?blogId=beaqon&logNo=221240197476&proxyReferer=https:%2F%2Fwww.google.com%2F
+### 참고  
+###### [Daim - Python으로 구현하는 자료구조 : Linked List(2) Doubly linked list](https://daimhada.tistory.com/99?category=820522) 
+###### [scarletbreeze - 파이썬자료구조(10)이중연결리스트](https://scarletbreeze.github.io/articles/2019-07/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0(10)) 
+###### [BQRIUM - 자료구조 이중연결리스트 (Doubly linked list)](https://m.blog.naver.com/PostView.nhn?blogId=beaqon&logNo=221240197476&proxyReferer=https:%2F%2Fwww.google.com%2F)  
 
 <br>
 
@@ -483,7 +492,10 @@
   
 <br>
 
-> ###### 참고 : https://daimhada.tistory.com/72, https://ehrn35.tistory.com/8, https://jwlee010523.tistory.com/entry/%EC%9B%90%ED%98%95-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8Circular-Linked-List 
+### 참고  
+###### [Daim - Python으로 구현하는 자료구조 : Linked List(3) Circular linked list](https://daimhada.tistory.com/102?category=820522)
+###### [정보컴퓨터 임용고시 - 2.2.4 원형 연결 리스트 (Circular Linked List](https://ehrn35.tistory.com/8)
+###### [짱짱 개발자 - 원형 연결 리스트(Circular Linked List)](https://jwlee010523.tistory.com/entry/%EC%9B%90%ED%98%95-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8Circular-Linked-List) 
 
 <br>
 
@@ -587,7 +599,10 @@
 
 <br>
 
-> ###### 참고 : https://galid1.tistory.com/178, https://cloudstudying.kr/lectures/141, https://velog.io/@choiiis/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%8A%A4%ED%83%9DStack%EA%B3%BC-%ED%81%90Queue 
+### 참고
+###### [전준엽 - 자료구조 - 스택(Stack)이란](https://galid1.tistory.com/178)  
+###### [클라우드스터딩 - 스택(Stack)](https://cloudstudying.kr/lectures/141)   
+###### [choiiis - [자료구조] 스택(Stack), 큐(Queue), 덱(Deque)](https://velog.io/@choiiis/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%8A%A4%ED%83%9DStack%EA%B3%BC-%ED%81%90Queue)   
 
 ------------
 <br>
@@ -682,7 +697,9 @@
   # 출처 : https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/ 
   </code></pre> 
   
-> ###### 참고 : https://syundev.tistory.com/34, https://velog.io/@choiiis/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%8A%A4%ED%83%9DStack%EA%B3%BC-%ED%81%90Queue 
+### 참고  
+###### [. - 자료구조 - 선형 큐 (Queue)](https://syundev.tistory.com/34)  
+###### [choiiis - [자료구조] 스택(Stack), 큐(Queue), 덱(Deque)](https://velog.io/@choiiis/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EC%8A%A4%ED%83%9DStack%EA%B3%BC-%ED%81%90Queue)  
 
 ## 우선순위 큐 ( Priority Queue )
   
@@ -734,7 +751,8 @@
   #출처 : https://daimhada.tistory.com/169
   </code></pre> 
 
-> ###### 참고 : https://hannom.tistory.com/36 
+### 참고  
+###### [곤란 - [자료구조] 우선순위 큐(Priority Queue)-1](https://hannom.tistory.com/36) 
 
 <br>
 
@@ -771,7 +789,9 @@
     + 노드가 N인 트리는 항상 N-1의 간선을 가짐
     + 종류 : 이진 트리, 이진 탐색 트리, 균형 트리 , 이진 힙 등 
     
-  > ###### 참조 : https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html , https://m.blog.naver.com/justkukaro/220548164184
+  ### 참조  
+  ###### [heejeong Kwon - [자료구조] 트리(Tree)란](https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html)  
+  ###### [justkukaro - 08-자료구조: 트리(Tree) - 일반 트리와 트리의 정의,일반트리의 구현](https://m.blog.naver.com/justkukaro/220548164184)  
 
 ## 이진 트리 ( Binary Tree )
 
@@ -863,7 +883,10 @@
   # 출처 : https://www.tutorialspoint.com/python_data_structure/python_binary_tree.htm 
   </code></pre> 
 
-  > ###### 참고 : https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html , https://ratsgo.github.io/data%20structure&algorithm/2017/10/21/tree/ , https://coderkoo.tistory.com/9 
+  ### 참고  
+  ###### [heejeong Kwon - [자료구조] 트리(Tree)란](https://gmlwjd9405.github.io/2018/08/12/data-structure-tree.html)   
+  ###### [ratsgo - 트리(tree)와 이진트리(binary tree)](https://ratsgo.github.io/data%20structure&algorithm/2017/10/21/tree/)   
+  ###### [라몽의 배움일기 - 이진트리(Binary Tre) - 트리(Tree)의 기초](https://coderkoo.tistory.com/9)  
 <br>
 
 ------------
@@ -892,51 +915,8 @@
       + 인접 행렬보다 빠름
     + 3) 단점
       + 인접 행렬보다 구현하기 어려움
-      + 인접한 노드를 찾기 위해서는 모든 노드를 전부 순회해야 함
-    + 4) 구현
-      <pre><code>
-      class graph:
-        def __init__(self,gdict=None):
-            if gdict is None:
-                gdict = {}
-            self.gdict = gdict
+      + 인접한 노드를 찾기 위해서는 모든 노드를 전부 순회해야 함  
 
-        def edges(self):
-            return self.findedges()
-
-        # Add the new edge
-        def AddEdge(self, edge):
-            edge = set(edge)
-            (vrtx1, vrtx2) = tuple(edge)
-            if vrtx1 in self.gdict:
-                self.gdict[vrtx1].append(vrtx2)
-            else:
-                self.gdict[vrtx1] = [vrtx2]
-
-        # List the edge names
-        def findedges(self):
-            edgename = []
-            for vrtx in self.gdict:
-                for nxtvrtx in self.gdict[vrtx]:
-                    if {nxtvrtx, vrtx} not in edgename:
-                        edgename.append({vrtx, nxtvrtx})
-            return edgename
-
-      # Create the dictionary with graph elements
-      graph_elements = { "a" : ["b","c"],
-                      "b" : ["a", "d"],
-                      "c" : ["a", "d"],
-                      "d" : ["e"],
-                      "e" : ["d"]
-                      }
-
-      g = graph(graph_elements)
-      g.AddEdge({'a','e'})
-      g.AddEdge({'a','c'})
-      print(g.edges())
-      # 출처 : https://www.tutorialspoint.com/python_data_structure/python_graphs.htm 
-      </code></pre>
-      
   + ### 인접 행렬로 구현
     + 1) 개요 
       + 이차원 배열 방식 이용
@@ -946,20 +926,13 @@
       + 구현하기 쉬움
     + 3) 단점
       + 인접 리스트보다 느림
-    + 4) 구현
-      <pre><code>
-      keys=sorted(g.keys())
-      size=len(keys)
-      M = [ [0]*size for i in range(size) ]
-      for a,b in [(keys.index(a), keys.index(b)) for a, row in g.items() for b in row]:
-           M[a][b] = 2 if (a==b) else 1
-      # 수정예정
-      # 참고 : https://www.python2.net/questions-120420.htm 
-      </code></pre>
- 
- 
+   
 
-  > ###### 참고 : https://gmlwjd9405.github.io/2018/08/13/data-structure-graph.html , https://coding-factory.tistory.com/610 , https://butter-shower.tistory.com/82 , https://velog.io/@gimtommang11/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%EA%B7%B8%EB%9E%98%ED%94%84 
+  ### 참고
+  ###### [heejeong Kwon - [자료구조] 그래프(Graph)란](https://gmlwjd9405.github.io/2018/08/13/data-structure-graph.html)  
+  ###### [코딩팩토리 - [Algorithm] 자료구조 그래프(Graph)란 무엇인가?](https://coding-factory.tistory.com/610)  
+  ###### [사용자_rian - [algorithm] 그래프의 개념과 정의, 탐색 방법](https://butter-shower.tistory.com/82)  
+  ###### [gimtommang11 - [자료구조]그래프](https://velog.io/@gimtommang11/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%EA%B7%B8%EB%9E%98%ED%94%84)   
 
 <br>
 
