@@ -1099,9 +1099,9 @@
     ```
 
 ### 참고
-###### [위키백과 - 동적 계획법] (https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95)  
-###### [강재영 - 동적계획법(Dynamic Programminh) 정리] (https://wooder2050.medium.com/%EB%8F%99%EC%A0%81%EA%B3%84%ED%9A%8D%EB%B2%95-dynamic-programming-%EC%A0%95%EB%A6%AC-58e1dbcb80a0)   
-###### [polynomeer - 동적계획법(Dynamic Programminh)] (https://velog.io/@polynomeer/%EB%8F%99%EC%A0%81-%EA%B3%84%ED%9A%8D%EB%B2%95Dynamic-Programming)  
+###### [위키백과 - 동적 계획법](https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95)  
+###### [강재영 - 동적계획법(Dynamic Programminh) 정리](https://wooder2050.medium.com/%EB%8F%99%EC%A0%81%EA%B3%84%ED%9A%8D%EB%B2%95-dynamic-programming-%EC%A0%95%EB%A6%AC-58e1dbcb80a0)   
+###### [polynomeer - 동적계획법(Dynamic Programminh)](https://velog.io/@polynomeer/%EB%8F%99%EC%A0%81-%EA%B3%84%ED%9A%8D%EB%B2%95Dynamic-Programming)  
 
 <br>
 
