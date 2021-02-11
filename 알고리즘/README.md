@@ -503,7 +503,10 @@
         
       ```
 
-> ###### 참고 : https://www.tutorialspoint.com/python_data_structure/python_graph_algorithms.htm , https://namu.wiki/w/%EA%B7%B8%EB%9E%98%ED%94%84(%EC%9D%B4%EC%82%B0%EC%88%98%ED%95%99) , https://cyc1am3n.github.io/2019/04/26/bfs_dfs_with_python.html 
+### 참고
+###### [tutorialspoint - Python - Graph Algorithms](https://www.tutorialspoint.com/python_data_structure/python_graph_algorithms.htm)   
+###### [나무위키 - 그래프](https://namu.wiki/w/%EA%B7%B8%EB%9E%98%ED%94%84(%EC%9D%B4%EC%82%B0%EC%88%98%ED%95%99))
+###### [cyc1am3n - [Daily PS] 파이썬으로 구현하는 BFS와 DFS](https://cyc1am3n.github.io/2019/04/26/bfs_dfs_with_python.html)
 
 <br>
 
@@ -1047,8 +1050,15 @@
         # 출처 : https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/ 
       ```
   
-
-> ###### 참고 : https://www.fun-coding.org/Chapter19-greedy-live.html , https://skerritt.blog/greedy-algorithms/ ,https://janghw.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Greedy-Algorithm-%ED%83%90%EC%9A%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.geeksforgeeks.org/greedy-algorithms/#standardGreedyAlgorithms , https://namu.wiki/w/%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 , https://www.fun-coding.org/Chapter20-shortest-live.html , https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html ,https://gmlwjd9405.github.io/2018/08/30/algorithm-prim-mst.html 
+### 참고 
+###### [잔재미코딩 - 탐욕 알고리즘의 이해](https://www.fun-coding.org/Chapter19-greedy-live.html)  
+###### [Skerritt - Greedy Algorithms In Python](https://skerritt.blog/greedy-algorithms/)  
+###### [c0smicb0y - [알고리즘] Greedy Algorithm (탐욕알고리즘)](https://janghw.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Greedy-Algorithm-%ED%83%90%EC%9A%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)  
+###### [geeksforgeeks - Greedy Algorithms](https://www.geeksforgeeks.org/greedy-algorithms/#standardGreedyAlgorithms)  
+###### [나무위키 - 다익스트라 알고리즘](https://namu.wiki/w/%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)  
+###### [잔재미코딩 - 최단 경로 알고리즘의 이해](https://www.fun-coding.org/Chapter20-shortest-live.html)  
+###### [heejeong Kwon - [알고리즘] Kruskal 알고리즘 이란](https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html)  
+###### [heejeong Kwon - [알고리즘] Prim 알고리즘 이란](https://gmlwjd9405.github.io/2018/08/30/algorithm-prim-mst.html)
 
 <br>
 
@@ -1088,7 +1098,10 @@
         return li[n-1]
     ```
 
-> ###### 참고 : https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95 ,https://wooder2050.medium.com/%EB%8F%99%EC%A0%81%EA%B3%84%ED%9A%8D%EB%B2%95-dynamic-programming-%EC%A0%95%EB%A6%AC-58e1dbcb80a0 ,https://velog.io/@polynomeer/%EB%8F%99%EC%A0%81-%EA%B3%84%ED%9A%8D%EB%B2%95Dynamic-Programming
+### 참고
+###### [위키백과 - 동적 계획법] (https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95)  
+###### [강재영 - 동적계획법(Dynamic Programminh) 정리] (https://wooder2050.medium.com/%EB%8F%99%EC%A0%81%EA%B3%84%ED%9A%8D%EB%B2%95-dynamic-programming-%EC%A0%95%EB%A6%AC-58e1dbcb80a0)   
+###### [polynomeer - 동적계획법(Dynamic Programminh)] (https://velog.io/@polynomeer/%EB%8F%99%EC%A0%81-%EA%B3%84%ED%9A%8D%EB%B2%95Dynamic-Programming)  
 
 <br>
 
