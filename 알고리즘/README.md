@@ -27,8 +27,9 @@
     + [크루스칼 알고리즘 ( Kruskal’s algorithm )](#크루스칼-알고리즘--kruskal’s-algorithm-)
     + [프림 알고리즘 ( Prim’s algorithm )](#프림-알고리즘--prim’s-algorithm-)
 
-+ [동적 계획법 ( Dynamic Programming )](#동적-계획법--dynamic-programming-)
++ [동적 계획법 ( Dynamic Programming )](#동적-계획법--dynamic-programming-)  
 
++ [( permutation )](#permutation)
 <br>
 
 ------------------
@@ -1106,3 +1107,7 @@
 <br>
 
 ------------
+
+
+### 참고
+###### [Project Nayuki - Next lexicographical permutation algorithm](https://www.nayuki.io/page/next-lexicographical-permutation-algorithm)
