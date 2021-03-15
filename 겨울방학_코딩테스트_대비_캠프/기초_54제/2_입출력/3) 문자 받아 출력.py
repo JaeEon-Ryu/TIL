@@ -1,2 +1,0 @@
-char = input()
-print(char)

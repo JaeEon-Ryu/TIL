@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dd4fda45-4b5c-452b-81cb-5af4299ec3f8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/겨울방학_코딩테스트_대비_캠프.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BFS/1_BFS 탐색/1) 네 방향 탈출 가능 여부 판별하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BFS/1_BFS 탐색/6) 우리는 하나.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BFS/2_가중치가 동일한 그래프에서의 BFS/1) 최소 경로로 탈출하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BFS/2_가중치가 동일한 그래프에서의 BFS/6) 상한귤.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BFS/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backtracking/1_K개 중 하나를 N번 선택하기(Simple)/1) k개 중에 1개를 n번 뽑기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backtracking/1_K개 중 하나를 N번 선택하기(Simple)/7) 알파벳과 사칙연산.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backtracking/2_K개 중 하나를 N번 선택하기(Conditional)/1) 특정 조건에 맞게 k개 중에 1개를 n번 뽑기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backtracking/2_K개 중 하나를 N번 선택하기(Conditional)/5) 최소 점프 횟수.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backtracking/3_N개중에 M개 고르기(Simple)/1) n개 중에 m개 뽑기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backtracking/3_N개중에 M개 고르기(Simple)/5) n개의 점 중 m개 고르기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backtracking/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/1_단순_반복문/3)약수의 개수가 3개인 수.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/1_단순_반복문/5) 보고 말하는 수열.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/1_단순_반복문/6) 완전수.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/2_최대_최소/3) 중복되지 않는 숫자 중 최대.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/2_최대_최소/4) 가장 왼쪽에 있는 최댓값.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/2_최대_최소/5) 자동차 단일 거래 이익 최대화하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/3_문자열_다루기/3) 문자열 계속 지우기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/3_문자열_다루기/4) Run Length 인코딩.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/4_2차원_Array/3) 대각선으로 숫자 채우기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/4_2차원_Array/4) 빙빙 돌며 사각형 채우기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/4_2차원_Array/5) 가운데에서 시작하여 빙빙 돌기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/5_배열_정렬/1) Top K 숫자 구하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/5_배열_정렬/2) 2개씩 그룹짓기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/5_배열_정렬/3) 순서를 바꾸었을 때 같은 단어인지 판별하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/6_Object_정렬/1) 줄 세우기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/6_Object_정렬/2) 정렬된 숫자 위치 알아내기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/6_Object_정렬/3) 원점으로부터의 거리.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DFS/DFS 탐색/1) 그래프 탐색.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DFS/DFS 탐색/2) 두 방향 탈출 가능 여부 판별하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DFS/DFS 탐색/5) 뿌요뿌요.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/1_ subproblem을 그대로 합치면 되는 DP/1) 피보나치 수.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/1_ subproblem을 그대로 합치면 되는 DP/2) 서로 다른 BST 개수 세기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/2_격자 안에서 한 칸씩 전진하는 DP/1) 정수 사각형 최대 합.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/2_격자 안에서 한 칸씩 전진하는 DP/2) 정수 사각형 최솟값의 최대.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/5_조건에 맞게 선택적으로 전진하는 DP/1) 최대 증가 부분 수열.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/1_격자 안에서 완전탐색/1) 최고의 33위치.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/1_격자 안에서 완전탐색/2) 행복한 수열의 개수.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/1_격자 안에서 완전탐색/3) 트로미노.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/1_격자 안에서 완전탐색/4) 금 채굴하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/1_격자 안에서 완전탐색/5) 기울어진 사각형.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/1_격자 안에서 완전탐색/6) 겹쳐지지 않는 두 직사각형.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/1_격자 안에서 완전탐색/7) 양수 직사각형의 최대 크기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/2_격자 안에서 밀고 당기기/1) 컨베이어 벨트.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/2_격자 안에서 밀고 당기기/2) 삼각형 컨베이어 벨트.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/2_격자 안에서 밀고 당기기/3) 1차원 바람.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/2_격자 안에서 밀고 당기기/4) 2차원 바람.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/2_격자 안에서 밀고 당기기/5) 기울어진 직사각형의 회전.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/2_격자 안에서 밀고 당기기/6) 최단 Run Length 인코딩.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/3_격자 안에서 터지고 떨어지는 경우/1) 1차원 젠가.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/3_격자 안에서 터지고 떨어지는 경우/2) 십자 모양 폭발.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/3_격자 안에서 터지고 떨어지는 경우/3) 1차원 폭발 게임.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/3_격자 안에서 터지고 떨어지는 경우/4) 단 한 번의 2048 시도.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/3_격자 안에서 터지고 떨어지는 경우/5) 십자 모양의 지속적 폭발.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/3_격자 안에서 터지고 떨어지는 경우/6) 2차원 폭발 게임.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/3_격자 안에서 터지고 떨어지는 경우/7) 최적의 십자 모양 폭발.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동/1) 숫자가 더 큰 인접한 곳으로 이동.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동/2) 떨어지는 1자 블록.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동/3) 벽 짚고 미로 탈출하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동/4) 주사위 던지기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동/5) 대폭발.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동/6) 뱀은 사과를 좋아해.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동/7) 핀볼게임.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/5_격자 안에서 여러 객체를 이동/1) 숫자가 가장 큰 인접한 곳으로 이동.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/5_격자 안에서 여러 객체를 이동/2) 숫자의 순차적 이동.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/5_격자 안에서 여러 객체를 이동/3) 벽이 있는 충돌 실험.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/5_격자 안에서 여러 객체를 이동/4) 쌓인 숫자의 순차적 이동.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/5_격자 안에서 여러 객체를 이동/5) 구슬의 이동.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/5_격자 안에서 여러 객체를 이동/7) 합쳐지는 구슬들.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/10_문자열_다루기/1) 문자열에서 문자 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/10_문자열_다루기/2) 문장에서 단어 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/10_문자열_다루기/3) 부분문자열 위치 구하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/10_문자열_다루기/4) 문자열 놀이.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/10_문자열_다루기/5) 문자열 한 칸씩 밀어내며 뒤집기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/11_함수/1) 피보나치 수.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/11_함수/2) 숫자 뒤집기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/11_함수/3) 최대 공약수.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/11_함수/4) 삼각형 둘레의 최소 길이.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/1_출력/1) 단어 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/1_출력/2) 문장 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/1_출력/3) 따옴표 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/1_출력/4) 2줄 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/2_입출력/1) 정수 받아 그대로 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/2_입출력/2) 실수 받아 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/2_입출력/3) 문자 받아 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/2_입출력/4) 문자열 받아 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/2_입출력/5) 정수 2개 받아 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/2_입출력/6) 1시간 뒤 시간 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/2_입출력/7) 날짜 변경하여 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/3_자료형/1) 제곱값.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/3_자료형/2) 다음 알파벳과 대문자 알파벳.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/4_연산자/1) 간단한 사칙연산.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/4_연산자/2) 합과 평균.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/5_조건문/1) 비교 연산.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/5_조건문/2) 2개 중 최대.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/5_조건문/3) 숫자의 계절은.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/5_조건문/4) 굉장한 숫자.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/5_조건문/5) 윤년인가.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/6_단순_반복문/1) a부터 b까지의 합.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/6_단순_반복문/2) a부터 b까지 짝수의 합.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/6_단순_반복문/3) b부터 a까지 감소.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/6_단순_반복문/4) a의 b승.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/6_단순_반복문/5) 0 나올때까지 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/6_단순_반복문/6) 369 게임.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/6_단순_반복문/7) a나누기b 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/6_단순_반복문/8) 3n+1 수열.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/7_중첩_반복문/1) 정사각형 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/7_중첩_반복문/2) 좌우 지그재그 출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/7_중첩_반복문/3) 19단출력.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/7_중첩_반복문/4) 별 그리기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/7_중첩_반복문/5) 3n+1 수열 m번.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/7_중첩_반복문/6) 소수 구하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/8_1차원_Array/1) 원소 10개의 합.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/8_1차원_Array/2) 제곱하여 출력하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/8_1차원_Array/3) 짝수인 것만 출력하기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/8_1차원_Array/4) 1-9 개수 세기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/8_1차원_Array/5) 배열 놀이.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/8_1차원_Array/6) n개의 숫자 중 최소.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/8_1차원_Array/7) n개의 숫자 중 최대 2개.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/8_1차원_Array/8) 연속부분수열일까.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/9_2차원_Array/1) 격자에 점 그리기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/9_2차원_Array/2) 지그재그로 숫자 채우기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/기초_54제/9_2차원_Array/3) 박스 굴리기.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/코테1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/코테2.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1nCQjYq7wcOnMzsZw905ZJNDNYm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../프로그래머스/Coding_test/LeeBrosCode" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Yoo Jae Un\Desktop\열일\나혼자코딩\TIL\겨울방학_코딩테스트_대비_캠프\DFS\DFS 탐색" />
+      <recent name="C:\Users\Yoo Jae Un\Desktop\열일\나혼자코딩\TIL\겨울방학_코딩테스트_대비_캠프\BFS\1_BFS 탐색" />
+      <recent name="C:\Users\Yoo Jae Un\Desktop\열일\나혼자코딩\TIL\겨울방학_코딩테스트_대비_캠프\Backtracking\2_K개 중 하나를 N번 선택하기(Conditional)" />
+      <recent name="C:\Users\Yoo Jae Un\Desktop\열일\나혼자코딩\겨울방학_코딩테스트_대비_캠프\기초_54제\10_문자열_다루기" />
+      <recent name="C:\Users\Yoo Jae Un\Desktop\열일\나혼자코딩\겨울방학_코딩테스트_대비_캠프\기초_54제\6_단순_반복문" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.5) 구슬의 이동">
+    <configuration name="1) 단어 출력" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="겨울방학_코딩테스트_대비_캠프" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/기초_54제/1_출력" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/기초_54제/1_출력/1) 단어 출력.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="5) 대폭발" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="겨울방학_코딩테스트_대비_캠프" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동/5) 대폭발.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="5) 구슬의 이동" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="겨울방학_코딩테스트_대비_캠프" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Simulation/5_격자 안에서 여러 객체를 이동" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Simulation/5_격자 안에서 여러 객체를 이동/5) 구슬의 이동.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="6) 2차원 폭발 게임" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="겨울방학_코딩테스트_대비_캠프" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Simulation/3_격자 안에서 터지고 떨어지는 경우" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Simulation/3_격자 안에서 터지고 떨어지는 경우/6) 2차원 폭발 게임.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="6) 뱀은 사과를 좋아해" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="겨울방학_코딩테스트_대비_캠프" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Simulation/4_격자 안에서 단일 객체를 이동/6) 뱀은 사과를 좋아해.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.5) 구슬의 이동" />
+        <item itemvalue="Python.1) 단어 출력" />
+        <item itemvalue="Python.6) 뱀은 사과를 좋아해" />
+        <item itemvalue="Python.5) 대폭발" />
+        <item itemvalue="Python.6) 2차원 폭발 게임" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd4fda45-4b5c-452b-81cb-5af4299ec3f8" name="Default Changelist" comment="" />
+      <created>1610891728155</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610891728155</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1180" y="275" key="FileChooserDialogImpl" timestamp="1613052259673">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1180" y="275" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613052259673" />
+    <state width="446" height="644" key="GridCell.Tab.0.bottom" timestamp="1613052171021">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="446" height="644" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613052171021" />
+    <state width="1000" height="665" key="GridCell.Tab.0.bottom/0.0.1536.824/0.-1080.1920.1040@0.-1080.1920.1040" timestamp="1612932914152" />
+    <state width="1059" height="418" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.-231.1080.1880@1920.-231.1080.1880" timestamp="1611592908150" />
+    <state width="497" height="616" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612847603906" />
+    <state width="446" height="644" key="GridCell.Tab.0.center" timestamp="1613052171021">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="446" height="644" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613052171021" />
+    <state width="1000" height="665" key="GridCell.Tab.0.center/0.0.1536.824/0.-1080.1920.1040@0.-1080.1920.1040" timestamp="1612932914152" />
+    <state width="1059" height="418" key="GridCell.Tab.0.center/0.0.1536.824/1920.-231.1080.1880@1920.-231.1080.1880" timestamp="1611592908150" />
+    <state width="497" height="616" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612847603905" />
+    <state width="446" height="644" key="GridCell.Tab.0.left" timestamp="1613052171020">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="446" height="644" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613052171020" />
+    <state width="1000" height="665" key="GridCell.Tab.0.left/0.0.1536.824/0.-1080.1920.1040@0.-1080.1920.1040" timestamp="1612932914152" />
+    <state width="1059" height="418" key="GridCell.Tab.0.left/0.0.1536.824/1920.-231.1080.1880@1920.-231.1080.1880" timestamp="1611592908150" />
+    <state width="497" height="616" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612847603905" />
+    <state width="446" height="644" key="GridCell.Tab.0.right" timestamp="1613052171021">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="446" height="644" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613052171021" />
+    <state width="1000" height="665" key="GridCell.Tab.0.right/0.0.1536.824/0.-1080.1920.1040@0.-1080.1920.1040" timestamp="1612932914152" />
+    <state width="1059" height="418" key="GridCell.Tab.0.right/0.0.1536.824/1920.-231.1080.1880@1920.-231.1080.1880" timestamp="1611592908150" />
+    <state width="497" height="616" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612847603905" />
+    <state x="191" y="-919" key="SettingsEditor" timestamp="1612096972501">
+      <screen x="0" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="191" y="-919" key="SettingsEditor/0.0.1536.824/0.-1080.1920.1040@0.-1080.1920.1040" timestamp="1612096972501" />
+    <state x="2181" y="450" width="540" height="524" key="StructurePopup" timestamp="1611147903528">
+      <screen x="1920" y="-231" width="1080" height="1880" />
+    </state>
+    <state x="2181" y="450" width="540" height="524" key="StructurePopup/0.0.1536.824/1920.-231.1080.1880@1920.-231.1080.1880" timestamp="1611147903528" />
+    <state x="2303" y="480" key="refactoring.ChangeSignatureDialog" timestamp="1610898782321">
+      <screen x="1920" y="-231" width="1080" height="1880" />
+    </state>
+    <state x="2303" y="480" key="refactoring.ChangeSignatureDialog/0.0.1536.824/1920.-231.1080.1880@1920.-231.1080.1880" timestamp="1610898782321" />
+    <state x="289" y="191" width="956" height="298" key="search.everywhere.popup" timestamp="1612709824031">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="-839" width="1195" height="376" key="search.everywhere.popup/0.0.1536.824/0.-1080.1920.1040@0.-1080.1920.1040" timestamp="1612589419339" />
+    <state x="2123" y="204" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.-231.1080.1880@1920.-231.1080.1880" timestamp="1611369485085" />
+    <state x="289" y="191" width="956" height="298" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1612709824031" />
+  </component>
+</project>
