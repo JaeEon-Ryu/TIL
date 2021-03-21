@@ -1,1 +1,1 @@
-console.log("Hellow World!");
+alert("자바스크립트!");
