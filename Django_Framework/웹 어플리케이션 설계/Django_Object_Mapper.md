@@ -90,8 +90,33 @@
       + Django의 관리자 및 자동 생성 양식에서 사용되는 최소 유효성 검사 요구 사항
     + Django는 수십 개의 기본 제공 필드 유형과 함께 제공됨
     
-<br>
+  <br>
 
+  + ### 필드 옵션
+    + 각 필드는 특정 필드 별 인수 집합을 사용함
+      + ex) 위에서 볼 수 있듯이 'CharField' 에는 max_length라는 요소를 필요로 함
+      + ( max_length : 데이터를 저장하는 데 사용되는 VARCHAR 데이터베이스 필드의 사이즈를 지정해줌 )
+    + 모든 필드 유형에 사용할 수있는 공통 인수의 set도 있음 ( 선택사항 )
+    + null
+      + 참 값이면, Django는 데이터베이스에서 NULL과 같은 비어있는 값을 저장 함 ( 기본값 False )
+    + blank
+      + 참 값이면, 필드는 비워둘 수 있음 ( 기본값 False )
+      + null은 DB와 관련이 있는 반면에 blank는 유효성 검사와 관련이 있음
+      + blank = True인 경우, 양식 유효성 검사에서 빈 값 입력 가능
+    + choices
+      + 필드에 대한 선택으로서 2칸짜리의 튜플 서열을 사용 가능함
+      + 기본 양식 위젯은 표준 텍스트 필드 대신 선택 상자가 되며 주어진 선택 항목을 제공함으로써 선택을 제한함
+      ```python
+      YEAR_IN_SCHOOL_CHOICES = [
+      ('FR', 'Freshman'),
+      ('SO', 'Sophomore'),
+      ('JR', 'Junior'),
+      ('SR', 'Senior'),
+      ('GR', 'Graduate'),
+      ]
+      ```
+      + 
+    
 ### 참고 
 ###### [Django - Models](https://docs.djangoproject.com/en/3.1/topics/db/models/)
 
