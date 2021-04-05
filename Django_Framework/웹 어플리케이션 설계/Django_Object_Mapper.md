@@ -230,10 +230,140 @@
     ```
     + 관습적으로 verbose_name의 첫 번째 글자는 대문자로 만들지 않음
     
-  <br>
+  <br> 
   
   + ### 관계  
-    
+    + DB 관계를 정의하는 방법 ( 일반적 유형 소개 ) -> N:1, N:N, 1:1 관계
+    + N:1 관계 ( models.ForeignKey 사용 )
+      + ex) Car 모델이 Manufacturer를 갖고 있을 때 
+      + Manufacturer가 여러 개의 car를 만들지만, 각 Car에는 하나의 Manufacturer만 있는 경우
+      ```python
+      from django.db import models
+
+      class Manufacturer(models.Model):
+          # ...
+          pass
+
+      class Car(models.Model):
+          manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+          # ...
+      ```
+    + N:N 관계 ( models.ManyToManyField 사용 )
+      + ex) 한 pizza에 여러 topping 객체들이 있으며, 한 topping이 여러 pizza가 될 수 있는 경우 
+      ```python
+      from django.db import models
+
+      class Topping(models.Model):
+          # ...
+          pass
+
+      class Pizza(models.Model):
+          # ...
+          toppings = models.ManyToManyField(Topping)
+      ```
+      + 어떤 모델이 ManyToManyField를 갖고 있느냐는 중요하지 않지만, 두 모델 중 하나에만 있어야 함
+    + N:N 관계에 대한 추가 필드
+      + 두 모델 사이의 관계를 데이터와 연관시킬 때 사용
+      + ex) person과 group 사이의 관게를 회원과 연관시킨 예
+      ```python
+      from django.db import models
+
+      class Person(models.Model):
+          name = models.CharField(max_length=128)
+
+          def __str__(self):
+              return self.name
+
+      class Group(models.Model):
+          name = models.CharField(max_length=128)
+          members = models.ManyToManyField(Person, through='Membership')
+
+          def __str__(self):
+              return self.name
+
+      class Membership(models.Model):
+          person = models.ForeignKey(Person, on_delete=models.CASCADE)
+          group = models.ForeignKey(Group, on_delete=models.CASCADE)
+          date_joined = models.DateField()
+          invite_reason = models.CharField(max_length=64)
+      ```
+      + 중간 모델은 소스 모델에 대한 외래 키를 하나만 포함해야 함
+      + 중간 모델의 인스턴스 생성하기
+      ```python
+      >>> ringo = Person.objects.create(name="Ringo Starr")
+      >>> paul = Person.objects.create(name="Paul McCartney")
+      >>> beatles = Group.objects.create(name="The Beatles")
+      >>> m1 = Membership(person=ringo, group=beatles,
+      ...     date_joined=date(1962, 8, 16),
+      ...     invite_reason="Needed a new drummer.")
+      >>> m1.save()
+      >>> beatles.members.all()
+      <QuerySet [<Person: Ringo Starr>]>
+      >>> ringo.group_set.all()
+      <QuerySet [<Group: The Beatles>]>
+      >>> m2 = Membership.objects.create(person=paul, group=beatles,
+      ...     date_joined=date(1960, 8, 1),
+      ...     invite_reason="Wanted to form a band.")
+      >>> beatles.members.all()
+      <QuerySet [<Person: Ringo Starr>, <Person: Paul McCartney>]>
+      ```
+      + add(), create(), set() 등의 문법을 통해 관계를 생성 가능함
+      ```python
+      >>> beatles.members.add(john, through_defaults={'date_joined': date(1960, 8, 1)})
+      >>> beatles.members.create(name="George Harrison", through_defaults={'date_joined': date(1960, 8, 1)})
+      >>> beatles.members.set([john, paul, ringo, george], through_defaults={'date_joined': date(1960, 8, 1)})
+      ```
+      + 중간 모델에 의해 정의된 사용자 테이블이 고유성의 성격을 띄지 않는 경우, (여러 값을 허용하는 경우) remove() 메서드는 모든 중간 모델 인스턴스를 제거함
+      ```python
+      >>> Membership.objects.create(person=ringo, group=beatles,
+      ...     date_joined=date(1968, 9, 4),
+      ...     invite_reason="You've been gone for a month and we miss you.")
+      >>> beatles.members.all()
+      <QuerySet [<Person: Ringo Starr>, <Person: Paul McCartney>, <Person: Ringo Starr>]>
+      >>> # This deletes both of the intermediate model instances for Ringo Starr
+      >>> beatles.members.remove(ringo)
+      >>> beatles.members.all()
+      <QuerySet [<Person: Paul McCartney>]>
+      ```
+      + clear() 메서드는 인스턴스에 대한 모든 N:N 관계를 제거하는 데에 사용
+      ```
+      >>> # Beatles have broken up
+      >>> beatles.members.clear()
+      >>> # Note that this deletes the intermediate model instances
+      >>> Membership.objects.all()
+      <QuerySet []>
+      ```
+      + N:N 관계를 설정하면 쿼리를 실행할 수 있음
+      ```python
+      # Find all the groups with a member whose name starts with 'Paul'
+      >>> Group.objects.filter(members__name__startswith='Paul')
+      <QuerySet [<Group: The Beatles>]>
+      ```
+      + 중간 모델을 사용하고 있으므로 해당 속성에 대한 쿼리도 실행 가능함
+      ```python
+      # Find all the members of the Beatles that joined after 1 Jan 1961
+      >>> Person.objects.filter(
+      ...     group__name='The Beatles',
+      ...     membership__date_joined__gt=date(1961,1,1))
+      <QuerySet [<Person: Ringo Starr]>
+      ```
+      + 회원 정보에 접근해야 하는 경우 Membership 모델을 직접 쿼리하여 접근 가능함
+      ```python
+      >>> ringos_membership = Membership.objects.get(group=beatles, person=ringo)
+      >>> ringos_membership.date_joined
+      datetime.date(1962, 8, 16)
+      >>> ringos_membership.invite_reason
+      'Needed a new drummer.'
+      ```
+      + 동일한 정보에 접근하는 또 다른 방법으로 N:N관계를 역이용 하는 방법이 있음 ( Person 객체로부터 )
+      ```python
+      >>> ringos_membership = ringo.membership_set.get(group=beatles)
+      >>> ringos_membership.date_joined
+      datetime.date(1962, 8, 16)
+      >>> ringos_membership.invite_reason
+      'Needed a new drummer.'
+      ```
+      
   <br>
   
 ### 참고 
