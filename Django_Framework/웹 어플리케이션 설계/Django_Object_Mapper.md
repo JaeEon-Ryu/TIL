@@ -10,6 +10,9 @@
     + [자동 기본 키 필드](#자동-기본-키-필드)
     + [자세한 필드 이름](#자세한-필드-이름)
     + [관계](#관계)
+      + [N1 관계](#n1-관계)
+      + [N:M 관계](#nm-관계)
+      + [N:M 관계에 대한 추가 필드](#nm-관계에-대한-추가-필드)
   
 <br>
 
@@ -39,6 +42,9 @@
   ```
   + first_name 과 last_name 은 모델의 필드라고 할 수 있음
   + 각각의 필드는 클래스의 속성으로 지정되고 데이터베이스 열에 매핑됨
+  
+  <br>
+  
 + 상단의 Person 모델은 다음과 같은 데이터베이스 테이블을 생성함
   ```python
   CREATE TABLE myapp_person (
@@ -87,6 +93,9 @@
       release_date = models.DateField()
       num_stars = models.IntegerField()
   ```
+  
+  <br>
+  
   + ### 필드 타입
     + 모델의 각 필드는 적절한 Field 클래스의 인스턴스여야 함
       + 어떤 종류의 데이터를 담고 있는 데이터베이스인지 알려주는 column 타입 ( ex : INTEGER, VARCHAR, TEXT)
@@ -101,12 +110,22 @@
       + ex) 위에서 볼 수 있듯이 'CharField' 에는 max_length라는 요소를 필요로 함
       + ( max_length : 데이터를 저장하는 데 사용되는 VARCHAR 데이터베이스 필드의 사이즈를 지정해줌 )
     + 모든 필드 유형에 사용할 수있는 공통 인수의 set도 있음 ( 선택사항 )
+    
+    <br>
+  
     + null
       + 참 값이면, Django는 데이터베이스에서 NULL과 같은 비어있는 값을 저장 함 ( 기본값 False )
+     
+    
+    <br>
+  
     + blank
       + 참 값이면, 필드는 비워둘 수 있음 ( 기본값 False )
       + null은 DB와 관련이 있는 반면에 blank는 유효성 검사와 관련이 있음
       + blank = True인 경우, 양식 유효성 검사에서 빈 값 입력 가능
+    
+    <br>
+  
     + choices
       + 필드에 대한 선택으로서 2칸짜리의 튜플 서열을 사용 가능함
       + 기본 양식 위젯은 표준 텍스트 필드 대신 선택 상자가 되며 주어진 선택 항목을 제공함으로써 선택을 제한함
@@ -152,11 +171,20 @@
           name = models.CharField(max_length=60)
           medal = models.CharField(blank=True, choices=MedalType.choices, max_length=10)
        ```
+      
+    <br>
+  
     + default
       + 필드의 기본값. 값 혹은 호출 가능한 객체일 수 있음
       + 호출 가능하다면 새로운 객체가 생성될 때마다 호출됨
+    
+    <br>
+  
     + help_text
       + 양식 위젯과 함께 표시되는 도움말 텍스트
+    
+    <br>
+  
     + primary_key
       + 값이 참인 경우, 이 필드는 모델의 기본키임
       + primary_key에 참값을 지정하지 않으면 Django가 자동으로 primary_key를 보유하기 위해 IntegerField를 추가함
@@ -233,8 +261,12 @@
   <br> 
   
   + ### 관계  
-    + DB 관계를 정의하는 방법 ( 일반적 유형 소개 ) -> N:1, N:N, 1:1 관계
-    + N:1 관계 ( models.ForeignKey 사용 )
+    + DB 관계를 정의하는 방법 ( 일반적 유형 소개 ) -> N:1, N:M, 1:1 관계
+    
+    <br>
+  
+    + #### N:1 관계
+      + models.ForeignKey 사용
       + ex) Car 모델이 Manufacturer를 갖고 있을 때 
       + Manufacturer가 여러 개의 car를 만들지만, 각 Car에는 하나의 Manufacturer만 있는 경우
       ```python
@@ -248,7 +280,11 @@
           manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
           # ...
       ```
-    + N:N 관계 ( models.ManyToManyField 사용 )
+      
+    <br>
+  
+    + #### N:M 관계
+      + models.ManyToManyField 사용 
       + ex) 한 pizza에 여러 topping 객체들이 있으며, 한 topping이 여러 pizza가 될 수 있는 경우 
       ```python
       from django.db import models
@@ -262,7 +298,10 @@
           toppings = models.ManyToManyField(Topping)
       ```
       + 어떤 모델이 ManyToManyField를 갖고 있느냐는 중요하지 않지만, 두 모델 중 하나에만 있어야 함
-    + N:N 관계에 대한 추가 필드
+    
+    <br>
+  
+    + #### N:M 관계에 대한 추가 필드
       + 두 모델 사이의 관계를 데이터와 연관시킬 때 사용
       + ex) person과 group 사이의 관게를 회원과 연관시킨 예
       ```python
@@ -288,6 +327,9 @@
           invite_reason = models.CharField(max_length=64)
       ```
       + 중간 모델은 소스 모델에 대한 외래 키를 하나만 포함해야 함
+      
+      <br>
+  
       + 중간 모델의 인스턴스 생성하기
       ```python
       >>> ringo = Person.objects.create(name="Ringo Starr")
@@ -307,13 +349,20 @@
       >>> beatles.members.all()
       <QuerySet [<Person: Ringo Starr>, <Person: Paul McCartney>]>
       ```
+      
+      <br>
+  
       + add(), create(), set() 등의 문법을 통해 관계를 생성 가능함
       ```python
       >>> beatles.members.add(john, through_defaults={'date_joined': date(1960, 8, 1)})
       >>> beatles.members.create(name="George Harrison", through_defaults={'date_joined': date(1960, 8, 1)})
       >>> beatles.members.set([john, paul, ringo, george], through_defaults={'date_joined': date(1960, 8, 1)})
       ```
-      + 중간 모델에 의해 정의된 사용자 테이블이 고유성의 성격을 띄지 않는 경우, (여러 값을 허용하는 경우) remove() 메서드는 모든 중간 모델 인스턴스를 제거함
+      
+      <br>
+  
+      + 중간 모델에 의해 정의된 사용자 테이블이 고유성의 성격을 띄지 않는 경우,   
+        (여러 값을 허용하는 경우) remove() 메서드는 모든 중간 모델 인스턴스를 제거함
       ```python
       >>> Membership.objects.create(person=ringo, group=beatles,
       ...     date_joined=date(1968, 9, 4),
@@ -325,6 +374,9 @@
       >>> beatles.members.all()
       <QuerySet [<Person: Paul McCartney>]>
       ```
+      
+      <br>
+  
       + clear() 메서드는 인스턴스에 대한 모든 N:N 관계를 제거하는 데에 사용
       ```
       >>> # Beatles have broken up
@@ -333,12 +385,18 @@
       >>> Membership.objects.all()
       <QuerySet []>
       ```
+      
+      <br>
+  
       + N:N 관계를 설정하면 쿼리를 실행할 수 있음
       ```python
       # Find all the groups with a member whose name starts with 'Paul'
       >>> Group.objects.filter(members__name__startswith='Paul')
       <QuerySet [<Group: The Beatles>]>
       ```
+      
+      <br>
+  
       + 중간 모델을 사용하고 있으므로 해당 속성에 대한 쿼리도 실행 가능함
       ```python
       # Find all the members of the Beatles that joined after 1 Jan 1961
@@ -347,6 +405,9 @@
       ...     membership__date_joined__gt=date(1961,1,1))
       <QuerySet [<Person: Ringo Starr]>
       ```
+      
+      <br>
+  
       + 회원 정보에 접근해야 하는 경우 Membership 모델을 직접 쿼리하여 접근 가능함
       ```python
       >>> ringos_membership = Membership.objects.get(group=beatles, person=ringo)
@@ -355,6 +416,9 @@
       >>> ringos_membership.invite_reason
       'Needed a new drummer.'
       ```
+      
+      <br>
+  
       + 동일한 정보에 접근하는 또 다른 방법으로 N:N관계를 역이용 하는 방법이 있음 ( Person 객체로부터 )
       ```python
       >>> ringos_membership = ringo.membership_set.get(group=beatles)
