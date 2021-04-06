@@ -428,7 +428,173 @@
       'Needed a new drummer.'
       ```
       
+    <br>
+  
+    + #### 1:1 관계
+      + OneToOneField 사용
+      + 다른 객체를 확장할 때 유용함
+      + ForeignKey와 같이 재귀적인 관계는 정의될 수 있으며 아직 정의되지 않은 모델을 참조하는 것이 만들어질 수 있음
+      + option으로 parent_link 인수가 있음
+  
   <br>
+  
+  + ### 파일 간의 모델
+    + 다른 앱으로부터 모델을 연관시키기 ( ZipCode 사용 )
+    ```python
+    from django.db import models
+    from geography.models import ZipCode
+
+    class Restaurant(models.Model):
+        # ...
+        zip_code = models.ForeignKey(
+            ZipCode,
+            on_delete=models.SET_NULL,
+            blank=True,
+            null=True,
+        )
+    ```
+  
+  <br>
+  
+  + ### 필드 이름 제한
+    + 1. 필드 이름은 Python 예약어가 될 수 없음 ( 구문 오류 발생 )
+    ```python
+    class Example(models.Model):
+    pass = models.IntegerField() # 'pass' is a reserved word!
+    ```
+    + 2. 필드 이름은 한 행에 하나 이상의 밑줄을 포함 할 수 없음
+    ```python
+    class Example(models.Model):
+    foo__bar = models.IntegerField() # 'foo__bar' has two underscores!
+    ```
+    + 3. 필드 이름은 밑줄로 끝날 수 없음
+  
+  <br>
+  
+  + ### 사용자 정의 필드 유형
+    + 기존 모델 필드 중 하나를 용도에 맞게 사용할 수 없거나  
+      덜 일반적인 데이터베이스 열 유형을 활용하려는 경우  
+      고유한 필드 클래스를 만들 수 있음  
+  
+  <br>
+  
+  + ### Meta 옵션
+    + 아래와 같이 안쪽에 Meta 클래스를 사용함으로써 메타데이터 모델을 만들 수 있음 
+    ```python
+    from django.db import models
+
+    class Ox(models.Model):
+        horn_length = models.IntegerField()
+
+        class Meta:
+            ordering = ["horn_length"]
+            verbose_name_plural = "oxen"
+    ```
+  
+  <br>
+  
+  + ### 모델 속성
+    + 모델의 가장 중요한 속성 : Manager   
+      + Django 모델에 DB 쿼리 작업이 제공됨  
+      + 데이터베이스에서 인스턴스를 검색하는데에 사용되는 인터페이스  
+      + 사용자 정의 Manager가 정의 되지 않은 경우 기본 이름은 objects로 정의됨  
+      + 관리자는 모델 인스턴스가 아닌 모델 클래스를 통해서만 접근 가능함
+  
+  <br>
+  
+  + ### 모델 메서드
+    + 모델에 사용자 지정 메서드를 정의하여 객체에 'row-level' 기능을 추가
+    + Manager 메서드가 '테이블 전체' 작업을 수행하도록 설계된 반면에,   
+      모델 메서드는 특정 모델 인스턴스에서 작업을 수행함
+    ```python
+    from django.db import models
+
+    class Person(models.Model):
+        first_name = models.CharField(max_length=50)
+        last_name = models.CharField(max_length=50)
+        birth_date = models.DateField()
+
+        def baby_boomer_status(self):
+            "Returns the person's baby-boomer status."
+            import datetime
+            if self.birth_date < datetime.date(1945, 8, 1):
+                return "Pre-boomer"
+            elif self.birth_date < datetime.date(1965, 1, 1):
+                return "Baby boomer"
+            else:
+                return "Post-boomer"
+
+        @property
+        def full_name(self):
+            "Returns the person's full name."
+            return '%s %s' % (self.first_name, self.last_name)
+    ```
+    + 모델 인스턴스 참조에는 각 모델에 자동으로 제공되는 전체 메서드 목록이 있음
+    + 대부분의 항목을 재정의할 수 있지만 거의 항상 정의하고자 하는 두 가지는 다음과 같음
+    + __str__()
+      + 모든 객체의 문자열 표현을 반환하는 메서드
+      + 파이썬이나 장고에서 모델 인스턴스를 강제하고 일반 문자열로 표시해야 할 때마다 사용
+      + 대화형 콘솔이나 관리자에 개체를 표시할 때 이러한 현상이 발생
+    + get_absolute_url()
+      + Django에게 개체의 URL을 계산하는 방법을 알려줌
+      + Django는 이를 관리 인터페이스에서 사용하며, 개체의 URL을 확인해야 할 때마다 사용
+    
+    <br>
+    
+    + #### 미리 정의된 모델 메서드 재정의
+      + 여러 데이터베이스의 동작을 캡슐화하는 또 다른 모델 방법이 존재함
+      + 특히 save() 및 delete() 작업 방식을 변경하는 경우가 많음  
+        -> 메서드를 재정의하여 동작을 변경할 수 있음
+      
+      <br>
+      
+      + 개체를 저장할 때마다 작업이 수행되기를 원하는 경우 ( 일반적인 방법 )
+      ```python
+      from django.db import models
+
+      class Blog(models.Model):
+          name = models.CharField(max_length=100)
+          tagline = models.TextField()
+
+          def save(self, *args, **kwargs):
+              do_something()
+              super().save(*args, **kwargs)  # Call the "real" save() method.
+              do_something_else()
+      ```
+      
+      <br>
+      
+      + 저장을 방지 할 수도 있음 ( 조건문을 통하여 )
+      ```python
+      from django.db import models
+
+      class Blog(models.Model):
+          name = models.CharField(max_length=100)
+          tagline = models.TextField()
+
+          def save(self, *args, **kwargs):
+              if self.name == "Yoko Ono's blog":
+                  return # Yoko shall never have her own blog!
+              else:
+                  super().save(*args, **kwargs)  # Call the "real" save() method.
+      ```
+      
+      <br>
+      
+      + super().save(*args, *\*kwargs) 에 관련하여
+        + 수퍼클래스 메소드를 호출하여 개체가 데이터베이스에 저장되어 있는지 확인해야 함
+        + 수퍼클래스 메서드를 호출하는 것을 잊으면 기본 동작이 발생하지 않고 데이터베이스가 터치되지 않음
+        + *args, *\*kgs 비트가 하는 것처럼 모델 메서드에 전달할 수 있는 인수를 전달하는 것이 중요함
+        + *args, *\*kwags를 메서드 정의에 사용하는 경우, 코드가 추가될 때 해당 인수를 자동으로 지원함
+      + 재정의 된 모델 메서드는 대량 작업에서 호출되지 않음
+    
+    <br>
+    
+    + #### 사용자 정의 SQL 실행
+      + 또 다른 일반적인 패턴으로 model 메서드와 module_level 메서드에 사용자 정의 SQL문을 작성하는 방법이 있음
+    
+    <br>
+    
   
 ### 참고 
 ###### [Django - Models](https://docs.djangoproject.com/en/3.1/topics/db/models/)
