@@ -610,6 +610,174 @@
     
     <br>
     
+  + ### 모델 상속
+    + Django의 모델 상속은 Python에서 일반 클래스 상속이 작동하는 방식과 거의 동일함  
+      but, base 클래스 부분은 Django 서브 클래스를 따라야 함 ( django.db.models.Model )
+    + parents 모델 자체가 권한을 가지길 원하는지, 아니면 공통된 정보를 가진 parents가 child 모델을 통하여 권한을 가지길 원하는지 선택해야함  
+    + Django에서 가능한 상속에는 세 가지 스타일이 있음
+      + child 모델에 대해 입력하지 않아도 되는 정보를 저장하는 경우가 있음  
+        ->  이 클래스는 분리되어 사용되지 않으므로 추상 기본 클래스를 사용함
+      + 기존 모델을 하위 분류하고 각 모델에 고유한 데이터베이스 테이블을 사용하려는 경우   
+        -> 다중 테이블 상속 사용
+      + 모델의 Python 수준 동작만 수정하려는 경우  
+        -> 모델 필드를 변경하지 않고 Proxy 모델을 사용 가능함
+        
+    <br>
+    
+    + #### 추상 기본 클래스
+      + 추상 기본 클래스는 몇 가지 공통 정보를 다른 모델에 넣으려는 경우에 유용함 
+      + 기본 클래스를 작성하고 Meta 클래스에 abstract=True 를 삽입
+      + 이 모델은 데이터베이스 테이블을 만드는 데 사용되지 않음
+      + 다른 모델의 기본 클래스로 사용될 때 해당 필드는 하위 클래스의 필드에 추가됨
+
+      <br>
+      
+      + ex)
+      ```python
+      from django.db import models
+
+      class CommonInfo(models.Model):
+          name = models.CharField(max_length=100)
+          age = models.PositiveIntegerField()
+
+          class Meta:
+              abstract = True
+
+      class Student(CommonInfo):
+          home_group = models.CharField(max_length=5)
+      ```
+      + 이 때 Student 모델의 필드는 세 개 ( name, age, home_group )
+      + CommonInfo모델은 추상 기본 클래스이기 때문에 일반 Django 모델로 사용할 수 없음
+      + 데이터베이스 테이블을 생성하지 않음 -> 관리자가 없음 -> 인스턴스화하거나 직접 저장할 수 없음
+      + 추상 기본 클래스에서 상속된 필드는 다른 필드 또는 값으로 재정의하거나 'None' 으로 제거할 수 있음
+      
+      <br>
+    
+      + ##### Meta 상속
+        + 추상 기본 클래스가 생성되면 Django는 기본 클래스에서 선언 한 Meta 내부 클래스를 속성으로 사용할 수 있도록 함
+        +  자식 클래스가 자신의 Meta 클래스를 선언하지 않으면 부모의 Meta를 상속받음
+        + 하위 클래스가 상위 Meta 클래스를 확장하려는 경우 하위 클래스가 될 수 있음
+        ```python
+        from django.db import models
+
+        class CommonInfo(models.Model):
+            # ...
+            class Meta:
+                abstract = True
+                ordering = ['name']
+
+        class Student(CommonInfo):
+            # ...
+            class Meta(CommonInfo.Meta):
+                db_table = 'student_info'
+        ```
+        + Django는 추상 기본 클래스의 Meta 클래스를 한 번 조정함
+        + Meta 속성을 설치하기 전에 abstract = False를 설정함  
+          -> 추상 기본 클래스의 하위 클래스들이 자동으로 추상 클래스가되지 않음을 의미
+        + 다른 추상 기본 클래스에서 상속하는 추상 기본 클래스를 만들려면 abstract = True 를 명시적으로 설정해야 함
+        
+        <br>
+        
+        + 자식 클래스가 여러 추상 기본 클래스에서 상속되는 경우 기본적으로 첫 번째 나열된 클래스의 Meta 옵션만 상속됨 
+        + 여러 추상 기본 클래스에서 Meta 옵션을 상속하려면 Meta 상속을 명시적으로 선언해야 함
+        ```python
+        from django.db import models
+
+        class CommonInfo(models.Model):
+            name = models.CharField(max_length=100)
+            age = models.PositiveIntegerField()
+
+            class Meta:
+                abstract = True
+                ordering = ['name']
+
+        class Unmanaged(models.Model):
+            class Meta:
+                abstract = True
+                managed = False
+
+        class Student(CommonInfo, Unmanaged):
+            home_group = models.CharField(max_length=5)
+
+            class Meta(CommonInfo.Meta, Unmanaged.Meta):
+                pass
+        ```
+      
+      <br>
+    
+      + ##### related_name 과 related_query_name에 대한 주의사항
+        + 만약 related_name 이나 related_query_name 를 ForeignKey 혹은 ManyToManyField 에서 사용한다면,   
+          필드를 위해 고유한 reverse이름과 쿼리 이름을 지정해야 함
+        + 이 클래스의 필드는 각 자식 클래스에 포함되고 매번 속성( related_name, related_query_name)에 대한 값이    
+          정확히 같기 때문에 일반적으로 추상 기본 클래스에 문제가 발생할 수 있음
+        + 이 문제를 해결하려면, 추상 기본 클래스에서 related_name 이나 related_query_name를 사용할 때,   
+          값의 일부분은 '%(app_label)s' 및 '%(class)s' 가 포함되어야 함
+          + '%(class)s' 는 필드가 사용되는 하위 클래스의 소문자로 대체됨
+          + '%(app_label)s' 는 하위 클래스가 포함된 앱의 소문자로 대체됨  
+            설치된 각 응용 프로그램 이름은 고유해야 하며, 각 응용 프로그램 내의 모델 클래스 이름도 고유해야 하므로 결과적으로 이름이 달라지게 됨
+        + ex)
+        ```python
+        # common/models.py
+        from django.db import models
+
+        class Base(models.Model):
+            m2m = models.ManyToManyField(
+                OtherModel,
+                related_name="%(app_label)s_%(class)s_related",
+                related_query_name="%(app_label)s_%(class)ss",
+            )
+
+            class Meta:
+                abstract = True
+
+        class ChildA(Base):
+            pass
+
+        class ChildB(Base):
+            pass
+        ```
+        ```python
+        # rare/models.py
+        from common.models import Base
+
+        class ChildB(Base):
+            pass
+        ```
+        + common.ChildA.m2m 필드의 역 이름은 common_childa_related, 그리고 역 쿼리 이름은 common_childas가 됨
+        + common.ChildB.m2m 필드의 역 이름은 common_childb_related, 그리고 역 쿼리 이름은 common_childbs가 됨
+        + rare.ChildB.m2m 필드의 역 이름은 rare_childb_related, 그리고 역 쿼리 이름은 rare_childbs가 됨 
+        + '%(class)s' 및 '%(app_label)s' 부분을 사용하여 관련 이름 또는 관련 쿼리 이름을 구성하는 방법은 사용자에게 달려 있지만,   
+          이를 사용하지 않으면 시스템 검사(또는 마이그레이션)를 수행할 때 Django에서 오류가 발생함
+
+        <br>
+        
+        + 추상 기본 클래스의 필드에 related_name 속성을 지정하지 않으면, 기본 역 이름으로 자식 클래스의 이름 뒤에 '_set'이 붙여지게 됨  
+        + 예를 들어, 위의 코드에서 related_name 특성이 생략된 경우,  
+           m2m 필드의 역명은 ChildA 케이스에서 childa_set이고 ChildB 케이스에서 childb_set
+     
+    <br>
+    
+    + #### 다중 테이블 상속
+      
+      <br>
+    
+      + ##### Meta 및 다중 테이블 상속
+      
+      <br>
+    
+      + ##### 상속과 반대 관계
+      
+      <br>
+    
+      + ##### 상위 링크 필드 지정하기
+      
+    <br>
+    
+  + ### 프록시 모델
+  
+  
+  <br>
+    
   
 ### 참고 
 ###### [Django - Models](https://docs.djangoproject.com/en/3.1/topics/db/models/)
