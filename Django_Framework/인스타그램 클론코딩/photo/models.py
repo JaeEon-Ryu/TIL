@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 # 모델 구현 - DB에 저장될 데이터들을 클래스 형태로 구현
 # 데이터의 동작을 함께 정의한다 ( CRUD : 저장, 읽기, 수정, 삭제 )
@@ -17,3 +18,6 @@ class Photo(models.Model):
     # ordering 정렬
     class Meta:
         ordering = ['-created']
+
+    def get_absolute_url(self):
+        return reverse('photo:detail',args=[self.id])
