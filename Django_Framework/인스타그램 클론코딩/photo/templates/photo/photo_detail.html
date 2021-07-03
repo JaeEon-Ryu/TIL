@@ -1,14 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--</body>-->
-<!--</html>-->
-
 {% extends 'base.html' %}
 {% block title %}
 {% endblock %}
@@ -24,8 +13,18 @@
                 <p class="card-text"> {{ object.text }} </p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">수정일 : {{ object.updated }}</li>
                 <li class="list-group-itme">생성일 : {{ object.created }}</li>
+
+<!--                댓글달기-->
+                <li class="list-group-item">
+                    {% load disqus_tags %}
+                    <div class="card-body">
+                        {% disqus_show_comments %}
+                    </div>
+                </li>
+
+
+
             </ul>
             <div class="card-body">
                 <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>
@@ -36,3 +35,5 @@
 
     <dic class="col"></dic>
 </div>
+
+{% endblock %}

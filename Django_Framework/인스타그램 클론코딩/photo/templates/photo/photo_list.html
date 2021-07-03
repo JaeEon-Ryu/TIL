@@ -1,14 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--</body>-->
-<!--</html>-->
-
 {% extends 'base.html' %}
 {% block title %}
 {% endblock %}
@@ -31,12 +20,14 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">생성일 : {{ object.created }}</li>
-                    <li class="list-group-item">생성일 : {{ object.updated }}</li>
+                    <li class="list-group-item">수정일 : {{ object.updated }}</li>
                 </ul>
                 <div class="card-body">
                     <a href="{% url 'photo:detail' object.id %}" class="card-link">댓글달기</a>
+                    {% if user == object.author %}
                     <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>
-                    <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제달기</a>
+                    <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제하기</a>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
