@@ -13,8 +13,17 @@
                 <p class="card-text"> {{ object.text }} </p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-itme">생성일 : {{ object.created }}</li>
+                <li class="list-group-item">
+                    <a href="{% url 'photo:like' object.id %}" class="float-left btn-like {%if user in object.like.all %} active {%endif%}">좋아요!</a>
+                    {% if object.like.all.count %}
+                    <span class = 'float-left'>
+                        {{object.like.all.count}}
+                    </span>
+                    {% endif %}
+                    <a href="{% url 'photo:saved' object.id %}" class="float-right btn-favorite {%if user in object.saved.all %} active {%endif%}">저장하기!</a>
+                </li>
 
+                <li class="list-group-itme">생성일 : {{ object.created }}</li>
 <!--                댓글달기-->
                 <li class="list-group-item">
                     {% load disqus_tags %}

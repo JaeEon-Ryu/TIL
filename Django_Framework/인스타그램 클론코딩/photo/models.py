@@ -11,6 +11,9 @@ class Photo(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    like = models.ManyToManyField(User, related_name='like_post', blank=True)
+    saved = models.ManyToManyField(User, related_name='saved_post',blank=True)
+
     # adming 사이트 화면 표시 구현
     def __str__(self):
         return "text : " + self.text
