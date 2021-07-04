@@ -135,3 +135,13 @@ class PhotoSavedList(ListView):
         user = self.request.user
         queryset = user.saved_post.all()
         return queryset
+
+class PhotoMyList(ListView):
+    model = Photo
+    template_name = 'photo/photo_mylist.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated: # 로그인 확인
+            messages.warning(request,'로그인부터 해야합니다.')
+            return HttpResponseRedirect('/')
+        return super(PhotoMyList,self).dispatch(request,*args,**kwargs)

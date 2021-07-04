@@ -20,7 +20,7 @@
                         {{object.like.all.count}}
                     </span>
                     {% endif %}
-                    <a href="{% url 'photo:saved' object.id %}" class="float-right btn-favorite {%if user in object.saved.all %} active {%endif%}">저장하기!</a>
+                    <a href="{% url 'photo:saved' object.id %}" class="float-right btn-saved {%if user in object.saved.all %} active {%endif%}">저장하기!</a>
                 </li>
 
                 <li class="list-group-itme">생성일 : {{ object.created }}</li>
