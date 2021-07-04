@@ -136,6 +136,7 @@ class PhotoSavedList(ListView):
         queryset = user.saved_post.all()
         return queryset
 
+
 class PhotoMyList(ListView):
     model = Photo
     template_name = 'photo/photo_mylist.html'
@@ -145,3 +146,24 @@ class PhotoMyList(ListView):
             messages.warning(request,'로그인부터 해야합니다.')
             return HttpResponseRedirect('/')
         return super(PhotoMyList,self).dispatch(request,*args,**kwargs)
+
+
+
+from django.contrib.auth.models import User
+def signup(request):
+    if request.method == 'POST':
+        # 입력 받은 내용을 이용해서 회원 객체 생성
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        password2 = request.POST.get('password2')
+        user = User()
+        user.username = username
+        user.set_password(password)
+        user.save()
+        return render(request, 'acceounts/signup_complete.html')
+    else:
+        # from 객체를 만들어서 전달
+        context_values = {'form':'this is form'}
+        return render(request, 'accounts/signup.html',context_values)
+
+

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col"></div>
+    <div class="'col-6">
+        <div class="alert alert-primary" role="alert">
+            you are successfully signedup
+        </div>
+        <a href="{% url 'accounts:login' %}">you can login</a>
+    </div>
+    <div class="dol"></div>
+</div>
+{% endblock %}
