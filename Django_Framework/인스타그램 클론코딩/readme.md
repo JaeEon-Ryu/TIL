@@ -1,4 +1,9 @@
-## INDEX 
+## 구현 화면
+
+<img src="https://user-images.githubusercontent.com/52907116/124490611-47694100-dded-11eb-8a51-8d91710719a0.png" width="70%" height="70%"><img src="https://user-images.githubusercontent.com/52907116/124490626-4b955e80-dded-11eb-973e-13422947654d.png" width="30%" height="30%">
+
+
+## 구현 목록
 
 <br>
 
@@ -37,13 +42,22 @@
 12. 좋아요한 포스팅만 보기 기능 구현하기  
 13. 포스팅 저장하기 기능 구현하기  
 14. 저장한 포스팅 리스트 페이지 구현하기  
-15. 좋아요한 포스팅 및 저장한 포스팅 리스트 보기는 로그인한 사람만 보여주기  
-  15-1. view단에서 시행  
-    &nbsp; &nbsp; 15-1-1. dispatch 활용  
-    &nbsp; &nbsp; 15-1-2. LoginRequiredmixin  
-  15-2. html 활용  
-16. my page에 내가 올린 사진들만 나오도록 구현하기 
-17. my page에 팔로우 기능 추가하기  
+15. 모델 폼을 통해 회원가입 기능 구현하기  
+  15-1. views를 통해 로직 구현하기  
+    &nbsp; &nbsp; 15-1-1. POST형태로 받을 때와 처음 실행할 때 화면 구현   
+    &nbsp; &nbsp; 15-1-2. render의 특징  
+    &nbsp; &nbsp; 15-1-3. POST형태의 데이터 저장하기  
+  15-2. 템플릿 만들기  
+  15-3. url 연결하기  
+  15-4. 비밀번호 암호화하기  
+  15-5. forms.py를 구현하여 views.py를 간락햐게 만들기  
+    &nbsp; &nbsp; 15-5-1. forms.py 오버라이딩하기  
+    &nbsp; &nbsp; 15-5-2. views.py 간략히 수정하기  
+    &nbsp; &nbsp; 15-5-3. 중복 입력 받기(commit=False)  
+    &nbsp; &nbsp; 15-5-4. signup_complete에 회원가입한 사람 이름 띄어주기  
+    &nbsp; &nbsp; 15-5-5. form을 통해 받은 자료 암호화하기  
+  15-6. 비밀번호 재입력창 만들기  
+    &nbsp; &nbsp; 15-6-1. 비밀번호 중복 확인하기  
 
 <br>
 
