@@ -1,31 +1,90 @@
 
-from flask import Flask, g, Response, make_response, request, session
+from flask import Flask, g, Response, make_response
+from flask import request, session, render_template, Markup
 from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
 app.debug = True
+app.jinja_env.trim_blocks = True
+
+
+class Nav:
+    def __init__(self, title, url='#', children=[]):
+        self.title = title
+        self.url = url
+        self.children = children
+
+
+@app.route('/main')
+def main():
+    return render_template('main.html', title="MAIN!!")
+
+
+@app.route('/tmpl3')
+def tmpl3():
+    py = Nav("파이썬", "https://search.naver.com")
+    java = Nav("자바", "https://search.naver.com")
+    t_prg = Nav("프로그래밍 언어", "https://search.naver.com", [py, java])
+
+    jinja = Nav("Jinja", "https://search.naver.com", [])
+    gc = Nav("Genshi,Cheetah", "https://search.naver.com", [])
+    flask = Nav("플라스크", "https://search.naver.com", [jinja, gc])
+
+    spr = Nav("스프링", "https://search.naver.com", [])
+    ndjs = Nav("노드JS", "https://search.naver.com", [])
+    t_webf = Nav("웹 프레임워크", "https://search.naver.com", [flask, spr, ndjs])
+
+    my = Nav("나의 일상", "https://search.naver.com", [])
+    issue = Nav("이슈 게시판", "https://search.naver.com", [])
+    t_others = Nav("기타", "https://search.naver.com", [my, issue])
+
+    return render_template("index.html", navs=[t_prg, t_webf, t_others])
+
 
 app.config.update(
-    SECRET_KEY = 'X1243yRH!mMwf',
-    SESSION_COOKIE_NAME = 'pyweb_flask_session',
-    PERMANENT_SESSION_LIFETIME = timedelta(31) # 31days
+    SECRET_KEY='X1243yRH!mMwf',
+    SESSION_COOKIE_NAME='pyweb_flask_session',
+    PERMANENT_SESSION_LIFETIME=timedelta(31)  # 31days
 )
 
 # python start_helloflask.py
+
+
+@app.route('/tmpl2')
+def tmpl2():
+    a = (1, "오르막길1", "윤종신", False, [])
+    b = (2, "오르막길2", "윤종신", True, [a])
+    c = (3, "오르막길3", "익명1", False, [a, b])
+    d = (4, "오르막길4", "익명2", False, [a, b, c])
+
+    return render_template("index.html", lst2=[a, b, c, d])
+
+
+@app.route('/tmpl')
+def t():
+    tit = Markup("<strong>Title</strong>")
+    mu = Markup("<h1>iii = <i>%s</i></h1>")
+    h = mu % "Italic"
+    print("h=", h)
+
+    lst = [("오르막길1", "윤종신"), ("오르막길2", "정인")]
+
+    return render_template('index.html', title=tit, mu=h, lst=lst)
+
 
 @app.route('/wc')
 def wc():
     key = request.args.get('key')
     val = request.args.get('val')
     res = Response('SET COOKIE')
-    res.set_cookie(key,val)
+    res.set_cookie(key, val)
     session['Token'] = '123X'
     return make_response(res)
 
 
 @app.route('/rc')
 def rc():
-    key = request.args.get('key') # token
+    key = request.args.get('key')  # token
     val = request.cookies.get(key)
     return "cookie[" + key + "] = " + val + " , " + session.get('Token')
 
@@ -40,31 +99,32 @@ def delsess():
 @app.route('/reqenv')
 def reqenv():
     return ('REQUEST_METHOD: %(REQUEST_METHOD) s <br>'
-        'SCRIPT_NAME: %(SCRIPT_NAME) s <br>'
-        'PATH_INFO: %(PATH_INFO) s <br>'
-        'QUERY_STRING: %(QUERY_STRING) s <br>'
-        'SERVER_NAME: %(SERVER_NAME) s <br>'
-        'SERVER_PORT: %(SERVER_PORT) s <br>'
-        'SERVER_PROTOCOL: %(SERVER_PROTOCOL) s <br>'
-        'wsgi.version: %(wsgi.version) s <br>'
-        'wsgi.url_scheme: %(wsgi.url_scheme) s <br>'
-        'wsgi.input: %(wsgi.input) s <br>'
-        'wsgi.errors: %(wsgi.errors) s <br>'
-        'wsgi.multithread: %(wsgi.multithread) s <br>'
-        'wsgi.multiprocess: %(wsgi.multiprocess) s <br>'
-        'wsgi.run_once: %(wsgi.run_once) s') % request.environ
+            'SCRIPT_NAME: %(SCRIPT_NAME) s <br>'
+            'PATH_INFO: %(PATH_INFO) s <br>'
+            'QUERY_STRING: %(QUERY_STRING) s <br>'
+            'SERVER_NAME: %(SERVER_NAME) s <br>'
+            'SERVER_PORT: %(SERVER_PORT) s <br>'
+            'SERVER_PROTOCOL: %(SERVER_PROTOCOL) s <br>'
+            'wsgi.version: %(wsgi.version) s <br>'
+            'wsgi.url_scheme: %(wsgi.url_scheme) s <br>'
+            'wsgi.input: %(wsgi.input) s <br>'
+            'wsgi.errors: %(wsgi.errors) s <br>'
+            'wsgi.multithread: %(wsgi.multithread) s <br>'
+            'wsgi.multiprocess: %(wsgi.multiprocess) s <br>'
+            'wsgi.run_once: %(wsgi.run_once) s') % request.environ
 
 
 #app.config['SERVER_NAME'] = 'localll.com:5000'
 # request 처리용 함수
 def ymd(fmt):
     def trans(date_str):
-        return datetime.strptime(date_str,fmt)
+        return datetime.strptime(date_str, fmt)
     return trans
+
 
 @app.route('/dt')
 def dt():
-    datestr = request.values.get('date',date.today(),type=ymd('%Y-%m-%d'))
+    datestr = request.values.get('date', date.today(), type=ymd('%Y-%m-%d'))
     return "우리나라 시간 형식: " + str(datestr)
 
 # @app.route('/sd')

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %} {{ title }} {% endblock %}
+
+{% for item in [1,2,3] %}
+{% block title2 scoped %} <p>XXXXXXXXXXX {{item}}</p>{% endblock %}
+{% endfor %}
+
+{% block section %}
+<div>
+    {{ super() }}
+    aaaaaaa
+</div>
+{% endblock %}
+
+{% block outer_block %}
+<p>111111111111</p>
+{% block inner_block %}BBBBBBBBB{% endblock inner_block %}
+{% endblock outer_block %}
