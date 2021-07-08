@@ -50,6 +50,11 @@ app.config.update(
 # python start_helloflask.py
 
 
+@app.route('/')
+def idx():
+    return render_template('app.html', title="MAIN!!")
+
+
 @app.route('/tmpl2')
 def tmpl2():
     a = (1, "오르막길1", "윤종신", False, [])

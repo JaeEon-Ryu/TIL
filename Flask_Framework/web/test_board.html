@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <style>
+        .ptr {
+            cursor: pointer
+        }
+
+        span.badge {
+            margin-right: 10px;
+            margin-top: 6px;
+            float: right;
+        }
+
+        .btn-sm {
+            float: right;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+    <script>
+        var ICODE = 3;
+        var URL = "http://berryservice.net:8080/Berry/g/tests/";
+
+        $(document).ready(function () {
+            setList();
+            $('#btn-add').on('click', function (evt) {
+                evt.preventDefault();
+                appendTest(111, 'tttt', 23);
+            });
+        });
+
+        function setList() {
+            var p = { cmd: "test-by-icode", icode: 2 };
+            $.ajax({
+                url: URL,
+                type: "GET",
+                data: p,
+                dataType: "json"
+
+            }).done(function (json) {
+                var content = JSON.stringify(json, null, "  ");
+                $("<pre class=\"content\">").html(content).appendTo("body");
+
+            }).fail(function (xhr, status, errorThrown) {
+                console.error("Sorry, there was a problem!", status);
+            }).always(function (xhr, status) {
+                console.log("The request is complete!", URL + '?' + $.param(p));
+            });
+        }
+
+        function appendTest(id, name, icode) {
+            var btn = $("<button>");
+            btn.addClass('list-group-item').addClass('list-group-item-action');
+            btn.text(name);
+            btn.appendTo($('div.list-group'));
+
+            var a = $('<a>');
+            a.addClass('btn').addClass('btn-sm').addClass('btn-danger');
+            a.text('X');
+            a.attr('href', '#')
+            a.appendTo(btn);
+
+            var spn = $('<span>');
+            spn.addClass('badge').addClass('badge-primary').addClass('badge-pill');
+            spn.text(icode);
+            spn.appendTo(btn);
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Test Board</h1>
+
+        <div class="list-group">
+            <button type="button" class="list-group-item list-group-item-action ptr">
+                Cras juso odio
+                <btn href="#" class="btn btn-sm btn-danger">x</btn>
+                <span class="badge badge-primary badge-pill">14</span>
+            </button>
+        </div>
+
+        <div class="my-3">
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" class="form-control" id="name" placeholder="name...">
+                    <input type="text" class="form-control" value="10" id="icode" placeholder="icode...">
+                </div>
+                <button id='btn-add' type="submit" id="btn-add" class="btn btn-primary mb-2">+</button>
+            </form>
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>

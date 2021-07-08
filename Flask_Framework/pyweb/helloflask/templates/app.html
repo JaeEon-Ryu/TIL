@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% from "macro/forms.html" import input, radio, radios, textarea, checkbox, select, modal, cal, song %}
+
+{% block test %}
+{% endblock %}
+
+{% block main %}
+<!--Section: Magazine v.1-->
+<section id="magazine" class="wow fadeIn">
+
+    <!--Section heading-->
+    <h2 class="h1 text-center my-5 font-weight-bold">K-POP Top 100</h2>
+
+    <!--Grid row-->
+    <div class="row text-left">
+
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-6 col-sm-6">
+
+            <h3><a><strong>Live Top 100</strong></a></h3>
+
+            {% for s in lives %}
+            {{song(s)}}
+            {% endfor %}
+            <!--/Small news-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <h3><a><strong>Today's Top 100</strong></a></h3>
+
+            {% for s in todays %}
+            {{song(s)}}
+            {% endfor %}
+        </div>
+        <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+</section>
+<!--/Section: Magazine v.1-->
+
+<script>
+    function addToMyalbum(songno) {
+        var url = "/myalbum";
+        console.log("url>>", url, songno)
+        // url, method, data, dataType, fn
+        var $star = $('#star-' + songno);
+        send_ajax(url, 'POST', { songno: songno }, 'json', function (res) {
+            console.log("res>>", res, res.result, res.result === 'OK')
+            if (res && res.result === 'OK') {
+                console.log("----------------", $star)
+                $star.removeClass('far').addClass('fas');
+            }
+        });
+    }
+
+    function openSongInfo(songno) {
+        var url = "/songinfo/" + songno
+        console.log("url>>", url)
+        // url, method, data, dataType, fn
+        var $songinfo = $('#' + songno);
+        $('.songinfo').css('display', 'none');
+        send_ajax(url, 'GET', '', '', function (res) {
+            console.log("res>>", res)
+            $songinfo.html(res);
+            $songinfo.css('display', 'block');
+        });
+    }
+
+
+
+</script>
+{% endblock %}

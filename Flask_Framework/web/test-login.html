@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <style>
+        * {
+            font-size: 32px;
+        }
+
+        .content {
+            font-size: 16px;
+        }
+    </style>
+    <!-- <script src="login.js" /> -->
+    <script>
+        $(window).on("load", console.debug('onload!!'));
+        $(document).ready(function () {
+            console.log("ready!");
+            $('#err').hide();
+            $('#userid').val('a');
+            $('#userpw').val('1');
+
+            $('#get1').on("click", function (evt) {
+                // console.log("evt>>", evt);
+                // evt.preventDefault(); // 브라우저 기본 이벤트는 하지마!!
+                // evt.stopPropagation(); // 상위 이벤트는 수행하지마!
+                console.log('evt>>', evt)
+                //getJson();
+                getJson2();
+                // test_ajax();
+                // test_ajax2();
+                // test_ajax_add();
+                // test_ajax_del();
+            });
+        });
+
+        function checkLogin() {
+            var uid = $('#userid').val(),
+                upw = $('#userpw').val();
+            console.log(">>>>>>", uid, upw)
+
+            var frm = $('#frm'),
+                msg = $('#msg'),
+                err = $('#err');
+
+            if (uid === 'a' && upw === '1') {
+                frm.hide();
+                msg.show();
+                err.hide();
+
+            } else {
+                err.show();
+                frm.show();
+            }
+
+            return false;
+        }
+
+        var URL = "http://berryservice.net:8080/Berry/g/tests/";
+
+        function test_ajax_del() {
+            var test28_url = "http://berryservice.net:8080/Berry/g/tests/28";
+            $.ajax({
+                url: test28_url,
+                type: "DELETE"
+
+            }).done(function (json) {
+                var content = JSON.stringify(json, null, "  ");
+                $("<pre class=\"content\">").html(content).appendTo("body");
+
+            }).fail(function (xhr, status, errorThrown) {
+                console.error("Sorry, there was a problem!", status);
+            }).always(function (xhr, status) {
+                console.log("The request is complete!");
+            });
+        }
+        function test_ajax_add() {
+            $.ajax({
+                url: URL,
+                data: { name: "test333-1", icode: 3 },
+                type: "POST",
+                dataType: "json"
+
+            }).done(function (json) {
+                var content = JSON.stringify(json, null, "  ");
+                $("<pre class=\"content\">").html(content).appendTo("body");
+
+            }).fail(function (xhr, status, errorThrown) {
+                console.error("Sorry, there was a problem!", status);
+            }).always(function (xhr, status) {
+                console.log("The request is complete!");
+            });
+        }
+
+        function test_ajax2() {
+            var p = { cmd: "test-by-icode", icode: 3 };
+            $.ajax({
+                url: URL,
+                type: "GET",
+                data: p,
+                dataType: "json"
+
+            }).done(function (json) {
+                var content = JSON.stringify(json, null, "  ");
+                $("<pre class=\"content\">").html(content).appendTo("body");
+
+            }).fail(function (xhr, status, errorThrown) {
+                console.error("Sorry, there was a problem!", status);
+            }).always(function (xhr, status) {
+                console.log("The request is complete!", URL + '?' + $.param(p));
+            });
+        }
+
+        function test_ajax() {
+            $.ajax({
+                url: URL,
+                type: "GET"
+            }).done(function (json) {
+                var content = JSON.stringify(json, null, "  ");
+                $("<pre class=\"content\">").html(content).appendTo("body");
+
+            }).fail(function (xhr, status, errorThrown) {
+                // console.error("Sorry, there was a problem!", err.status, err);
+                console.error("Error>>", xhr.responseJSON);
+                var $err = $('#err');
+                $err.text(xhr.responseJSON.message);
+                $err.show();
+
+            }).always(function (xhr, status) {
+                console.log("The request is complete!");
+            });
+        }
+
+        function getJson2() {
+            $.ajax({
+                url: URL,
+                type: "GET",
+                dataType: "json"
+
+            }).done(function (json) {
+                var content = JSON.stringify(json, null, "  ");
+                $("<pre class=\"content\">").html(content).appendTo("body");
+
+            }).fail(function (xhr, status, errorThrown) {
+                console.error("Sorry, there was a problem!", err.status, err);
+            }).always(function (xhr, status) {
+                console.log("The request is complete!");
+            });
+        }
+
+        function getJson3() {
+            $.get(URL).always(function (xhr, status) {
+                console.log("The request is complete!", xhr, status);
+                if (status === 'success') {
+                    var content = JSON.stringify(xhr, null, "  ");
+                    console.log("cccccc>>", content)
+                    $("<h1>").text(xhr.test.length).appendTo("body");
+                    $("<pre class=\"content\">").html(content).appendTo("body");
+                } else {
+                    console.log(">>>", xhr.responseText, xhr.status)
+                }
+            });
+        }
+
+        function getJson() {
+            $.get(URL).then(function (json) {
+                var content = JSON.stringify(json, null, "  ");
+                $("<h1>").text(json.test.length).appendTo("body");
+                $("<pre class=\"content\">").html(content).appendTo("body");
+
+            }, function (err) {
+                console.error("Sorry, there was a problem!", err.status, err);
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div id="test_div">
+        <button onclick="getJson()" id="get1">Get 1</button>
+    </div>
+    <form id="frm" onsubmit="return checkLogin()" method="post">
+        <input type="text" id="userid" value="" placeholder="니 ID ...">
+        <input type="password" id="userpw" value="" placeholder="니 암호 ...">
+        <button>Sign-IN</button>
+    </form>
+
+    <p id="msg" style="text-align:center; color: green; display: none;">로그인되셨습니다!!
+    <div>
+        <span id="spn">TTT</span>
+    </div>
+    </p>
+
+    <p id="err" style="text-align:center; color: green;">로그인실패!!</p>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block document_title %}K-POP Top 100{% endblock %}</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!--Main Navigation-->
+    <header>
+
+        <!-- Navbar -->
+        {% include "inc/navbars.html" ignore missing %}
+        <!-- Navbar -->
+
+    </header>
+    <!--Main Navigation-->
+
+    {% block test %}
+    {% endblock %}
+
+    <!--Main layout-->
+    <main class="pt-1">
+        <div class="container">
+            {% block main %}
+            {% endblock %}
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    {% include "inc/footer.html" ignore missing %}
+    <!--/.Footer-->
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/handlebars.js')}}"></script>
+
+    <!-- Initializations -->
+    <script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+
+        // $(document).ready
+
+        function openModal(modalId) {
+            $('#' + modalId).modal('show');
+        }
+        function closeModal(modalId) {
+            $('#' + modalId).modal('hide');
+        }
+
+        function send_ajax(url, method, data, dataType, fn) {
+            $.ajax({
+                url: url,
+                data: data,
+                type: method,
+                dataType: dataType
+
+            }).done(function (res) {
+                if (fn)
+                    fn(res)
+
+            }).fail(function (xhr, status, errorThrown) {
+                console.error("Sorry, there was a problem!", xhr, status, errorThrown);
+
+            }).always(function (xhr, status) {
+                console.log("The request is complete!");
+            });
+        }
+
+        Handlebars.registerHelper('dateformat', function (dt, fmt) {
+            console.log("dt=", dt)
+            // return moment(dt).utc().format(fmt);
+            return moment(dt).format(fmt);
+        });
+
+        function hbs(sourceId, data, resultId) {
+            var source = document.getElementById(sourceId).innerHTML;
+            var template = Handlebars.compile(source);
+            var html = template(data);
+            document.getElementById(resultId).innerHTML = html;
+        }
+
+        $(document).ready(function () {
+            var path = '{{request.path}}';
+            // console.log("path>>", path)
+            if (path === '/') {
+                send_ajax('/myalbum', 'GET', '', 'json', function (res) {
+                    console.log("res>>", res)
+                    if (!res || !res.length) return;
+
+                    res.forEach(function (r) {
+                        console.log("rrrr>>", r.songno)
+                        $('#star-' + r.songno).removeClass('far').addClass('fas');
+                    });
+                    // if (res && res.result === 'OK') {
+                    //     console.log("----------------", $star)
+                    // $star.removeClass('far').addClass('fas');
+                    // }
+                });
+            }
+        })
+    </script>
+</body>
+
+</html>
