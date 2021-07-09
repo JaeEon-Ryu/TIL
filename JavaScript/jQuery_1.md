@@ -107,5 +107,5 @@ $.ajax({
 <br>
 
 ### reference 
-[시니어코딩indiflex - jQuery 한방에 정리하기 1-1](https://www.youtube.com/watch?v=mLemCf-mZ90&list=PLEOnZ6GeucBWCR_eYjmKuFykGAQylAl9M&index=12)  
+[시니어코딩indiflex - jQuery 한방에 정리하기 1-1](https://www.youtube.com/watch?v=kSBvMUo4GTs&list=PLEOnZ6GeucBWCR_eYjmKuFykGAQylAl9M&index=6)  
 [시니어코딩indiflex - 강의 슬라이드](https://docs.google.com/presentation/d/12tfiKPdr64z6Eo_7soZAXG3vo54qeEv0B2I0_vmWE00/edit)

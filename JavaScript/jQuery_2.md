@@ -3,7 +3,7 @@
 <br>
 
 ### JAX (Asynchronous JavaScript and XML) : Parameter
-``` javascipt
+```javascript
 var URL = "http://berryservice.net:8080/Berry/g/tests/",
     p = { cmd: "test-by-icode", icode: 3 };
 $.ajax({
@@ -26,7 +26,7 @@ $.ajax({
 <br>
 
 ### AJAX (Asynchronous JavaScript and XML) : POST
-``` javascipt
+``` javascript
 var URL = "http://berryservice.net:8080/Berry/g/tests/";
 $.ajax({
     url: URL,
@@ -48,7 +48,7 @@ $.ajax({
 <br>
 
 ### AJAX (Asynchronous JavaScript and XML) : DELETE
-``` javascipt
+``` javascript
 var test28_url = "http://berryservice.net:8080/Berry/g/tests/28";
 $.ajax({
     url: test28_url,
