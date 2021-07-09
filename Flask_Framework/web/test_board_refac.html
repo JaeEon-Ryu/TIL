@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Board</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <style>
+        .ptr {
+            cursor: pointer
+        }
+
+        span.badge {
+            margin-right: 10px;
+            margin-top: 6px;
+            float: right;
+        }
+
+        a.btn-sm {
+            float: right;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+    <script>
+        var ICODE = 10;
+        var URL = "http://berryservice.net:8080/Berry/g/tests/";
+
+        $(document).ready(function () {
+            setList();
+
+            $('#btn-add').on('click', function (evt) {
+                evt.preventDefault();
+                addTest();
+            });
+        });
+
+        function delTest(id) {
+            sendAjax(URL + id, 'DELETE', null,
+                function (json) {
+                    $('#' + id).remove();
+                }
+            );
+        }
+
+        function addTest() {
+            var $name = $('#name'),
+                $icode = $('#icode');
+            var name = $name.val();
+            var icode = $icode.val();
+            if (!name) {
+                alert("Input the name!!");
+                $name.focus();
+                return;
+
+            } else if (!icode) {
+                alert("Input the icode!!");
+                $icode.focus();
+                return;
+            }
+
+            sendAjax(URL, 'POST', { name: name, icode: icode },
+                function (json) {
+                    console.log("jjjjjjj>>", json)
+                    appendTest(json.test.id, name, icode);
+                }
+            );
+        }
+
+        function setList() {
+            console.log("------------------------- setList starting!!")
+            var p = { cmd: "test-by-icode", icode: ICODE };
+            sendAjax(URL, 'GET', p,
+                function (json) {
+                    var test = json.test;
+                    test.forEach(function (t) {
+                        appendTest(t.id, t.name, t.icode);
+                    });
+                    $('#cnt').text(test.length);
+                }
+            );
+        }
+
+        function sendAjax(url, type, data, fn) {
+            var options = {
+                url: url,
+                type: type
+            };
+
+            if (data) {
+                options.data = data;
+                options.dataType = "json"
+            }
+
+            $.ajax(options).done(function (json) {
+                fn(json); //callback function!!
+
+            }).fail(function (xhr, status, errorThrown) {
+                console.error("Sorry, there was a problem!", status);
+
+            }).always(function (xhr, status) {
+                var sentUrl = URL;
+                if (data)
+                    sentUrl += '?' + $.param(data);
+
+                console.log("The request is complete!", sentUrl);
+            });
+        }
+
+        function appendTest(id, name, icode) {
+            var btn = $("<button>");
+            btn.attr('id', id);
+            btn.addClass('list-group-item').addClass('list-group-item-action');
+            btn.text(id + '. ' + name);
+            btn.appendTo($('div.list-group'));
+
+            var a = $('<a>');
+            a.addClass('btn').addClass('btn-sm').addClass('btn-danger');
+            a.text('X');
+            a.attr('href', '#');
+            a.attr('data-id', id);
+            a.appendTo(btn);
+
+            a.on('click', function (evt) {
+                evt.preventDefault();
+                var $btnDel = $(evt.target);
+                console.log(">>>>", $btnDel, $btnDel.data('id'));
+                delTest($btnDel.data('id'));
+            });
+
+            var spn = $('<span>');
+            spn.addClass('badge').addClass('badge-primary').addClass('badge-pill');
+            spn.text(icode);
+            spn.appendTo(btn);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Test Board (<small class="text-muted" id="cnt"></small>)</h1>
+
+        <div class="list-group">
+        </div>
+
+        <div class="my-3">
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" class="form-control" id="name" placeholder="name...">
+                    <input type="text" class="form-control" value="10" id="icode" placeholder="icode...">
+                </div>
+                <button type="submit" id="btn-add" class="btn btn-primary mb-2">+</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>
