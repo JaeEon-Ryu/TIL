@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test HBS</title>
+    <script src="../handlebars-v4.7.7.js"></script>
+</head>
+
+<body>
+
+    <script id="entry-template" type="text/x-handlebars-template">
+        <div class="entry">
+          <h1>{{title}}</h1>
+          <div class="body">
+            {{body}}
+          </div>
+        </div>
+    </script>
+
+    <div id="result"></div>
+
+    <hr>
+    <h1>Comments</h1>
+    <div id="result_comments"></div>
+
+    <script id="comments-template" type="text/x-handlebars-template">
+        <div class="comments">
+            <ul>
+                {{#each comments}}
+                <li>
+                    {{id_title}} - {{{body}}}
+                    {{#if author}}
+                        by {{fullname author}}
+                    {{/if}}
+                    {{#unless isGuest}}
+                        <button>삭제</button>
+                    {{/unless}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </script>
+
+    <script>
+        Handlebars.registerHelper('fullname', function (a) {
+            return a.firstname + ' ' + a.lastname;
+        });
+
+        Handlebars.registerHelper('id_title', function (a) {
+            id = Handlebars.escapeExpression(this.id);
+            title = Handlebars.escapeExpression(this.title);
+            h = '<small>' + id + '<small> <strong>' + title + '<strong>'
+            return new Handlebars.SafeString(h);
+        });
+
+
+
+
+        var context = {
+            title: 'Title',
+            body: 'body!'
+        };
+
+        // var source = document.getElementById("entry-template").innerHTML;
+        // //console.log("source >> ", source);
+        hbs('entry-template', context, 'result');
+        // var template = makeTemplate(source);
+        // var html = template(context);
+        // //console.log("html>>", html);
+        // document.getElementById('result').innerHTML = html;
+
+        var data = {
+            comments: [
+                {
+                    id: 1, title: '제목1', body: '내용1',
+                    author: { firstname: "Ryu", lastname: 'Jae-eon' },
+                    isGuest: true
+                },
+                {
+                    id: 2, title: '제목2', body: '내용2',
+                    author: { firstname: "Kim", lastname: 'Kang-Min' }
+                },
+                { id: 3, title: '제목3', body: '내용<strong>3</strong>' }
+            ]
+        }
+        hbs("comments-template", data, 'result_comments');
+
+        function hbs(sourceId, data, resultId) {
+            var source = document.getElementById(sourceId).innerHTML;
+            var template = Handlebars.compile(source);
+            var html = template(data);
+            //console.log("html>>", html);
+            document.getElementById(resultId).innerHTML = html;
+        }
+
+        // {{author.firstname}} {{author.lastname}}
+    </script>
+
+
+
+</body>
+
+</html>
