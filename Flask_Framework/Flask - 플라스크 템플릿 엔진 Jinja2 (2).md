@@ -19,8 +19,27 @@
 
 <br>
 
-### 
+### Callable Macro
+'''블록을 만들어서 실행 가능'''
 ```python
+# {% call macro_name(args…) %} ~ {% endcall %}
+{% macro test_macro2(name, class='red') -%}
+	<h3 class="{{class}}">
+		TEST MACRO2: {{name}} - {{test_macro2.caller}}   # True cf. hasBlock
+		<div> {{caller()}} </div>
+	</h3>
+{%- endmacro %}
+
+# main.html
+{% block … %}
+    {% call test_macro2('Hong') %}
+	  <p>This is main.macro.call</p>
+    {% endcall %}
+{% endblock %}
+
+# call with args
+{% call(x) test_macro('password') $}  {{x}} {% endcall %}
+  ⇐  in macro: caller(x=200)
 
 ```
 
