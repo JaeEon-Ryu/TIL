@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Melon Top 100</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="./static/css/mdb.min.css" />
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="./static/css/mdb.rtl.min.css" />
+</head>
+
+<body>
+    <!--Main Navigation-->
+    <header>
+        <!-- Intro settings -->
+        <style>
+            #intro {
+                /* Margin to fix overlapping fixed navbar */
+                margin-top: 58px;
+            }
+
+            @media (max-width: 991px) {
+                #intro {
+                    /* Margin to fix overlapping fixed navbar */
+                    margin-top: 45px;
+                }
+            }
+        </style>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+            <div class="container-fluid">
+                <!-- Navbar brand -->
+                <a class="navbar-brand" target="_blank" href="https://mdbootstrap.com/docs/standard/">
+                    Top 100
+                </a>
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarExample01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                        <!-- <li class="nav-item">
+              <a class="nav-link" href="#magazine">About MDB</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://mdbootstrap.com/docs/standard/" target="_blank">Download MDB UI KIT</a>
+            </li> -->
+                    </ul>
+
+                    <ul class="navbar-nav d-flex flex-row">
+                        <!-- Icons -->
+                        <li class="nav-item me-3 me-lg-0">
+
+                            <a class="nav-link" href="#" id='btnSignIn' rel="nofollow" class="btn btn-primary"
+                                data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                                <i class="fas fa-sign-in-alt"></i> Sign-In
+                            </a>
+                        </li>
+
+                        <li class="nav-item me-3 me-lg-0">
+                            <a class="nav-link" href="#" rel="nofollow" target="_blank">
+                                <i class="fas fa-user"></i> 홍길동
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://www.facebook.com/mdbootstrap" rel="nofollow" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://twitter.com/MDBootstrap" rel="nofollow" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li> -->
+                        <li class="nav-item me-3 me-lg-0">
+                            <a class="nav-link" href="https://github.com/JaeEon-Ryu/TIL/tree/main/Flask_Framework/pyweb"
+                                rel="nofollow" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar -->
+
+        <!-- Jumbotron -->
+        <div id="intro" class="p-5 text-center bg-light">
+            <h1 class="mb-3 h2">Melon Top 100</h1>
+        </div>
+        <!-- Jumbotron -->
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main class="my-5">
+        <div id="magazine" class="container">
+
+            {% block main %}
+            {% endblock %}
+
+
+            <!--Section: Content-->
+            <section>
+                <div class="row gx-5">
+                    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                        <!-- News block -->
+                        <div>
+                            <!-- Featured image -->
+                            <div class="bg-image hover-overlay shadow-1-strong ripple mb-4"
+                                data-mdb-ripple-color="light">
+                                <img src="https://mdbootstrap.com/img/new/fluid/city/113.jpg" class="img-fluid" />
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                            </div>
+
+                            <!-- Article data -->
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <a href="" class="text-info">
+                                        <i class="fas fa-music"></i>
+                                        Songs
+                                    </a>
+                                </div>
+
+                                <div class="col-6 text-end">
+                                    <u> 2021-07-10</u>
+                                </div>
+                            </div>
+
+                            <!-- Article title and description -->
+                            <a href="" class="text-dark">
+                                <h5>Today's 100</h5>
+
+                                <!-- <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iste aliquid. Sed
+                  id nihil magni, sint vero provident esse numquam perferendis ducimus dicta
+                  adipisci iusto nam temporibus modi animi laboriosam?
+                </p> -->
+                            </a>
+
+                            <hr />
+
+                            <!-- News -->
+                            <a href="" class="text-dark">
+                                <div class="row mb-4 border-bottom pb-2">
+                                    <div class="col-2">
+                                        <h1 class='text-primary'>100</h1>
+                                    </div>
+                                    <div class="col-2">
+                                        <img src="https://lh3.googleusercontent.com/KNsrHsBN2Hg32tJhw_S5iXDdvXxU9DFon_4-I509EmWYaTyw8qh9MpzyO_hYXLnSnpTiXJtiNhMrK1ev=w544-h544-l90-rj"
+                                            class="img-fluid shadow-1-strong rounded" alt="" />
+                                    </div>
+
+                                    <div class="col-8">
+                                        <p class="mb-2">
+                                            <strong>처음 그대를 사랑했었던</strong> - 하동균
+                                        </p>
+                                        <p><small class="text-muted"><i class="fas fa-compact-disc"></i> 앨범: Traveller,
+                                                No.201</small>
+                                            <i class='fas fa-angle-left float-right'></i>
+                                        </p>
+                                    </div>
+
+                                    <div class='row'>
+                                        <div class="col-2">
+                                        </div>
+                                        <div class="col">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item"><i class="far fa-thumbs-up text-muted"></i>
+                                                    <strong class="float-right">홍길동</strong></li>
+                                                <li class="list-group-item"><small class="text">작곡</small> <strong
+                                                        class="float-right">홍길동</strong></li>
+                                                <li class="list-group-item"><small class="text">작사</small> <strong
+                                                        class="float-right">홍길동</strong></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <!-- News -->
+                            <a href="" class="text-dark">
+                                <div class="row mb-4 border-bottom pb-2">
+                                    <div class="col-3">
+                                        <img src="https://mdbootstrap.com/img/new/standard/city/042.jpg"
+                                            class="img-fluid shadow-1-strong rounded" alt="" />
+                                    </div>
+
+                                    <div class="col-9">
+                                        <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                                        <p>
+                                            <u> 15.07.2020</u>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- News -->
+                            <a href="" class="text-dark">
+                                <div class="row mb-4 border-bottom pb-2">
+                                    <div class="col-3">
+                                        <img src="https://mdbootstrap.com/img/new/standard/city/043.jpg"
+                                            class="img-fluid shadow-1-strong rounded" alt="" />
+                                    </div>
+
+                                    <div class="col-9">
+                                        <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                                        <p>
+                                            <u> 15.07.2020</u>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- News -->
+                            <a href="" class="text-dark">
+                                <div class="row mb-4 border-bottom pb-2">
+                                    <div class="col-3">
+                                        <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg"
+                                            class="img-fluid shadow-1-strong rounded" alt="" />
+                                    </div>
+
+                                    <div class="col-9">
+                                        <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                                        <p>
+                                            <u> 15.07.2020</u>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- News block -->
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
+                        <!-- News block -->
+                        <div>
+                            <!-- Featured image -->
+                            <div class="bg-image hover-overlay shadow-1-strong ripple mb-4"
+                                data-mdb-ripple-color="light">
+                                <img src="https://mdbootstrap.com/img/new/fluid/city/011.jpg" class="img-fluid" />
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                            </div>
+
+                            <!-- Article data -->
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <a href="" class="text-danger">
+                                        <i class="fas fa-chart-pie"></i>
+                                        Business
+                                    </a>
+                                </div>
+
+                                <div class="col-6 text-end">
+                                    <u> 15.07.2020</u>
+                                </div>
+                            </div>
+
+                            <!-- Article title and description -->
+                            <a href="" class="text-dark">
+                                <h5>This is title of the news</h5>
+
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iste aliquid. Sed
+                                    id nihil magni, sint vero provident esse numquam perferendis ducimus dicta
+                                    adipisci iusto nam temporibus modi animi laboriosam?
+                                </p>
+                            </a>
+
+                            <hr />
+
+                            <!-- News -->
+                            <a href="" class="text-dark">
+                                <div class="row mb-4 border-bottom pb-2">
+                                    <div class="col-3">
+                                        <img src="https://mdbootstrap.com/img/new/standard/city/031.jpg"
+                                            class="img-fluid shadow-1-strong rounded" alt="" />
+                                    </div>
+
+                                    <div class="col-9">
+                                        <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                                        <p>
+                                            <u> 15.07.2020</u>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- News -->
+                            <a href="" class="text-dark">
+                                <div class="row mb-4 border-bottom pb-2">
+                                    <div class="col-3">
+                                        <img src="https://mdbootstrap.com/img/new/standard/city/032.jpg"
+                                            class="img-fluid shadow-1-strong rounded" alt="" />
+                                    </div>
+
+                                    <div class="col-9">
+                                        <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                                        <p>
+                                            <u> 15.07.2020</u>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- News -->
+                            <a href="" class="text-dark">
+                                <div class="row mb-4 border-bottom pb-2">
+                                    <div class="col-3">
+                                        <img src="https://mdbootstrap.com/img/new/standard/city/033.jpg"
+                                            class="img-fluid shadow-1-strong rounded" alt="" />
+                                    </div>
+
+                                    <div class="col-9">
+                                        <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                                        <p>
+                                            <u> 15.07.2020</u>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- News -->
+                            <a href="" class="text-dark">
+                                <div class="row mb-4 border-bottom pb-2">
+                                    <div class="col-3">
+                                        <img src="https://mdbootstrap.com/img/new/standard/city/034.jpg"
+                                            class="img-fluid shadow-1-strong rounded" alt="" />
+                                    </div>
+
+                                    <div class="col-9">
+                                        <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                                        <p>
+                                            <u> 15.07.2020</u>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- News block -->
+                    </div>
+                </div>
+            </section>
+            <!--Section: Content-->
+
+            <!-- Pagination -->
+            <nav class="my-4" aria-label="...">
+                <ul class="pagination pagination-circle justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer class="bg-light text-lg-start">
+        <div class="py-4 text-center">
+            <a role="button" class="btn btn-primary btn-lg m-2"
+                href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank">
+                Learn Bootstrap 5
+            </a>
+            <a role="button" class="btn btn-primary btn-lg m-2" href="https://mdbootstrap.com/docs/standard/"
+                target="_blank">
+                Download MDB UI KIT
+            </a>
+        </div>
+
+        <hr class="m-0" />
+
+        <div class="text-center py-4 align-items-center">
+            <p>Follow MDB on social media</p>
+            <a href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" class="btn btn-primary m-1" role="button"
+                rel="nofollow" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.facebook.com/mdbootstrap" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/MDBootstrap" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://github.com/mdbootstrap/mdb-ui-kit" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--Footer-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><strong>Sign In</strong></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <input type="email" id="form2Example1" class="form-control" />
+                            <label class="form-label" for="form2Example1">Email address</label>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                            <input type="password" id="form2Example2" class="form-control" />
+                            <label class="form-label" for="form2Example2">Password</label>
+                        </div>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                                <!-- Checkbox -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="form2Example3"
+                                        checked />
+                                    <label class="form-check-label" for="form2Example3"> Remember me </label>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <!-- Simple link -->
+                                <a href="#!">Forgot password?</a>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+                        <!-- Register buttons -->
+                        <div class="text-center">
+                            <p>Not a member? <a href="#!">Register</a></p>
+
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+        Close
+      </button>
+      <button type="button" class="btn btn-primary">Save changes</button>
+    </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="js/script.js"></script>
+    <!-- Initializations -->
+    <script class="text/javascript">
+        // Animations initialization
+        new WOW().init();
+
+      // $(document).ready
+      //$('#exampleModal').modal('show');
+
+    </script>
+</body>
+
+</html>

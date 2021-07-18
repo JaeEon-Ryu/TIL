@@ -15,6 +15,13 @@ class Nav:
         self.children = children
 
 
+@app.template_filter('ymd')
+def datetime_ymd(dt,fmt='%m-%d'):
+    if isinstance(dt,date):
+        return dt.strftime(fmt)
+    else:
+        return dt
+
 @app.route('/main')
 def main():
     return render_template('main.html', title="MAIN!!")

@@ -1,0 +1,98 @@
+{% macro input(type='text',id='inp',name='inp',value='inp',class='') -%}
+<input type="{{type}}" 
+    {% if id %}id="{{id}}"{% endif %}
+    name="{{name}}" 
+    value="{{value}}"
+    class='form-control {{class}}'>
+{%- endmacro %}
+
+{% macro textarea(id='',name='',value='',class='') -%}
+<div class='form-group'>
+    <textarea 
+    {% if id %}id={{id}} {% endif %} 
+    name='{{name}}' 
+    value="{{value}}" 
+    class='form-control {{class}}'>
+    {{value}}
+</textarea>
+</div>
+{%- endmacro %}
+
+
+{% macro checkbox(d) -%}
+<div class='form-group'>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="{{d.id}}" {{d.checked}}>
+        <label class="custom-control-label" for="{{d.id}}">{{d.text}}</label>
+    </div>
+</div>
+{%- endmacro %}
+
+
+{% macro select(lst, tit) -%}
+<div class="form-group">
+    <select class="custom-select">
+        {% if tit %}
+            <option selected>{{tit}}</option>
+        {% endif %}
+        {% for d in lst %}
+        <option value="{{d.value}}" {% if d.selected %}selected{% endif %}>{{d.text}}</option>
+        {% endfor %}
+    </select>
+</div>
+{%- endmacro %}
+
+
+{% macro radio(id, name, value='', text='', checked='', class='') -%}
+<div class='form-check'>
+    <input class='form-check-input {{class}}' type='radio'
+        name = '{{name}}'
+        id='{{id}}'
+        value='{{value}}'
+        {{checked}}>
+    <label class='form-check-label' for='{{id}}'>
+        {{text}}
+    </label>
+</div>
+{%- endmacro %}
+
+{% macro radios(lst, class='') -%}
+<div class='form-group'>
+    {% for r in lst %}
+    {{radio(r.id,r.name,r.value,r.text,r.checked)}}
+    {% endfor %}
+</div>
+{%- endmacro %}
+
+
+{% macro modal(id, title, icon='', isShowFooter=True, ok_fn='') %}
+<div class="modal fade" id="{{id}}" tabindex="-1" role="dialog"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <strong>
+                        {% if icon %}
+                        <i class="{{icon}}"></i>
+                        {% endif %}
+                        {{title}}
+                    </strong>
+                </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{caller()}}
+            </div>
+            {% if isShowFooter %}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" onclick="{{ok_fn}}" class="btn btn-primary">확인</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endmacro %}

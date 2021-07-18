@@ -1,77 +1,295 @@
 {% extends "base.html" %}
-{% from "macro/forms.html" import input, radio, radios, textarea, checkbox, select, modal, cal, song %}
+{% import "macro/tests.html" as cm with context %}
+{% from "macro/tests.html" import test_macro %}
+{% from "macro/forms.html" import input,radio,radios,textarea,checkbox,select,modal %}
 
 {% block test %}
-{% endblock %}
+    <p>{{ttt}}::{ cm.test_macro('TTTTTTTTTTT') }}</p>
+    <p>{{ test_macro('QQQQQQQQQ') }}</p>
+
+    {% call(x) cm.test_macro2('Hong','bbb') %}
+    <p>This is app.html.call block: <strong>{{x}}</strong></p>
+    {% endcall %}
+
+    <input type="text" id="userid" name="userid" value="123" class="form-control">
+    {{input('password', 'pw')}}
+    <textarea if='' name='' rows='5' class='form-control'></textarea>
+    
+    <form class='container'>
+        <div class='form-group'>
+            {{radio('r1','rdo','val1','Value1')}}
+            {{radio('r2','rdo','val1','Value2')}}
+            {{radio('r3','rdo','val1','Value3')}}
+        </div>
+
+        <!-- {{radios(radioList)}} -->
+        {{textarea('idta','content','default value')}}
+
+        {{checkbox(dict(id='chk1',name='chkname1',checked='checked',text='TEXT'))}}
+
+        {{select([ dict(id='selid1',text='seltext1',selected=False), 
+        dict(id='selid2',text='seltext2',selected=True),
+        dict(id='selid3',text='seltext3',selected=False) ]) }}
+    </form>
+
+    <button type='button' onclick="openModal('mdl1')" class='btn btn-primary'>Open modal Test</button>
+
+    {% call modal('mdl1','테스트 모달','fas fas-users',True,"fn_test()" ) %}
+        <h3>Modal body</h3>
+        <script>
+            function fn_test(){
+                alert('qqqqqqqqqq')
+                closeModal('mdl1')
+            }
+        </script>
+    {% endcall %}
+
+{% endblock %}a
 
 {% block main %}
-<!--Section: Magazine v.1-->
-<section id="magazine" class="wow fadeIn">
+<!--Section: Content-->
+<section>
+    <div class="row gx-5">
+        <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+            <!-- News block -->
+            <div>
+                <!-- Featured image -->
+                <div class="bg-image hover-overlay shadow-1-strong ripple mb-4" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/fluid/city/113.jpg" class="img-fluid" />
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
 
-    <!--Section heading-->
-    <h2 class="h1 text-center my-5 font-weight-bold">K-POP Top 100</h2>
+                <!-- Article data -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <a href="" class="text-info">
+                            <i class="fas fa-music"></i>
+                            Songs
+                        </a>
+                    </div>
 
-    <!--Grid row-->
-    <div class="row text-left">
+                    <div class="col-6 text-end">
+                        <u> 2021-07-10</u>
+                    </div>
+                </div>
 
-        <!--Grid column-->
-        <div class="col-lg-6 col-md-6 col-sm-6">
+                <!-- Article title and description -->
+                <a href="" class="text-dark">
+                    <h5>Today's 100</h5>
 
-            <h3><a><strong>Live Top 100</strong></a></h3>
+                    <!-- <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iste aliquid. Sed
+              id nihil magni, sint vero provident esse numquam perferendis ducimus dicta
+              adipisci iusto nam temporibus modi animi laboriosam?
+            </p> -->
+                </a>
 
-            {% for s in lives %}
-            {{song(s)}}
-            {% endfor %}
-            <!--/Small news-->
+                <hr />
 
+                <!-- News -->
+                <a href="" class="text-dark">
+                    <div class="row mb-4 border-bottom pb-2">
+                        <div class="col-2">
+                            <h1 class='text-primary'>100</h1>
+                        </div>
+                        <div class="col-2">
+                            <img src="https://lh3.googleusercontent.com/KNsrHsBN2Hg32tJhw_S5iXDdvXxU9DFon_4-I509EmWYaTyw8qh9MpzyO_hYXLnSnpTiXJtiNhMrK1ev=w544-h544-l90-rj"
+                                class="img-fluid shadow-1-strong rounded" alt="" />
+                        </div>
+
+                        <div class="col-8">
+                            <p class="mb-2">
+                                <strong>처음 그대를 사랑했었던</strong> - 하동균
+                            </p>
+                            <p><small class="text-muted"><i class="fas fa-compact-disc"></i> 앨범: Traveller,
+                                    No.201</small>
+                                <i class='fas fa-angle-left float-right'></i>
+                            </p>
+                        </div>
+
+                        <div class='row'>
+                            <div class="col-2">
+                            </div>
+                            <div class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><i class="far fa-thumbs-up text-muted"></i> <strong
+                                            class="float-right">홍길동</strong></li>
+                                    <li class="list-group-item"><small class="text">작곡</small> <strong
+                                            class="float-right">홍길동</strong></li>
+                                    <li class="list-group-item"><small class="text">작사</small> <strong
+                                            class="float-right">홍길동</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+
+                <!-- News -->
+                <a href="" class="text-dark">
+                    <div class="row mb-4 border-bottom pb-2">
+                        <div class="col-3">
+                            <img src="https://mdbootstrap.com/img/new/standard/city/042.jpg"
+                                class="img-fluid shadow-1-strong rounded" alt="" />
+                        </div>
+
+                        <div class="col-9">
+                            <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                            <p>
+                                <u> 15.07.2020</u>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- News -->
+                <a href="" class="text-dark">
+                    <div class="row mb-4 border-bottom pb-2">
+                        <div class="col-3">
+                            <img src="https://mdbootstrap.com/img/new/standard/city/043.jpg"
+                                class="img-fluid shadow-1-strong rounded" alt="" />
+                        </div>
+
+                        <div class="col-9">
+                            <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                            <p>
+                                <u> 15.07.2020</u>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- News -->
+                <a href="" class="text-dark">
+                    <div class="row mb-4 border-bottom pb-2">
+                        <div class="col-3">
+                            <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg"
+                                class="img-fluid shadow-1-strong rounded" alt="" />
+                        </div>
+
+                        <div class="col-9">
+                            <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                            <p>
+                                <u> 15.07.2020</u>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- News block -->
         </div>
-        <!--Grid column-->
 
-        <!--Grid column-->
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <h3><a><strong>Today's Top 100</strong></a></h3>
+        <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
+            <!-- News block -->
+            <div>
+                <!-- Featured image -->
+                <div class="bg-image hover-overlay shadow-1-strong ripple mb-4" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/fluid/city/011.jpg" class="img-fluid" />
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
 
-            {% for s in todays %}
-            {{song(s)}}
-            {% endfor %}
+                <!-- Article data -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <a href="" class="text-danger">
+                            <i class="fas fa-chart-pie"></i>
+                            Business
+                        </a>
+                    </div>
+
+                    <div class="col-6 text-end">
+                        <u> 15.07.2020</u>
+                    </div>
+                </div>
+
+                <!-- Article title and description -->
+                <a href="" class="text-dark">
+                    <h5>This is title of the news</h5>
+
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iste aliquid. Sed
+                        id nihil magni, sint vero provident esse numquam perferendis ducimus dicta
+                        adipisci iusto nam temporibus modi animi laboriosam?
+                    </p>
+                </a>
+
+                <hr />
+
+                <!-- News -->
+                <a href="" class="text-dark">
+                    <div class="row mb-4 border-bottom pb-2">
+                        <div class="col-3">
+                            <img src="https://mdbootstrap.com/img/new/standard/city/031.jpg"
+                                class="img-fluid shadow-1-strong rounded" alt="" />
+                        </div>
+
+                        <div class="col-9">
+                            <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                            <p>
+                                <u> 15.07.2020</u>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- News -->
+                <a href="" class="text-dark">
+                    <div class="row mb-4 border-bottom pb-2">
+                        <div class="col-3">
+                            <img src="https://mdbootstrap.com/img/new/standard/city/032.jpg"
+                                class="img-fluid shadow-1-strong rounded" alt="" />
+                        </div>
+
+                        <div class="col-9">
+                            <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                            <p>
+                                <u> 15.07.2020</u>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- News -->
+                <a href="" class="text-dark">
+                    <div class="row mb-4 border-bottom pb-2">
+                        <div class="col-3">
+                            <img src="https://mdbootstrap.com/img/new/standard/city/033.jpg"
+                                class="img-fluid shadow-1-strong rounded" alt="" />
+                        </div>
+
+                        <div class="col-9">
+                            <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                            <p>
+                                <u> 15.07.2020</u>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- News -->
+                <a href="" class="text-dark">
+                    <div class="row mb-4 border-bottom pb-2">
+                        <div class="col-3">
+                            <img src="https://mdbootstrap.com/img/new/standard/city/034.jpg"
+                                class="img-fluid shadow-1-strong rounded" alt="" />
+                        </div>
+
+                        <div class="col-9">
+                            <p class="mb-2"><strong>Lorem ipsum dolor sit amet</strong></p>
+                            <p>
+                                <u> 15.07.2020</u>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- News block -->
         </div>
-        <!--Grid column-->
-
     </div>
-    <!--Grid row-->
-
 </section>
-<!--/Section: Magazine v.1-->
-
-<script>
-    function addToMyalbum(songno) {
-        var url = "/myalbum";
-        console.log("url>>", url, songno)
-        // url, method, data, dataType, fn
-        var $star = $('#star-' + songno);
-        send_ajax(url, 'POST', { songno: songno }, 'json', function (res) {
-            console.log("res>>", res, res.result, res.result === 'OK')
-            if (res && res.result === 'OK') {
-                console.log("----------------", $star)
-                $star.removeClass('far').addClass('fas');
-            }
-        });
-    }
-
-    function openSongInfo(songno) {
-        var url = "/songinfo/" + songno
-        console.log("url>>", url)
-        // url, method, data, dataType, fn
-        var $songinfo = $('#' + songno);
-        $('.songinfo').css('display', 'none');
-        send_ajax(url, 'GET', '', '', function (res) {
-            console.log("res>>", res)
-            $songinfo.html(res);
-            $songinfo.css('display', 'block');
-        });
-    }
-
-
-
-</script>
+<!--Section: Content-->
 {% endblock %}

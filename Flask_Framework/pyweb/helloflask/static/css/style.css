@@ -1,3 +1,31 @@
+body {
+  margin-top: 75px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+tr > :first-child {
+  color: red;
+}
+tr > :last-child {
+  color: blue;
+}
+
+.card-comments img {
+  width: 4rem;
+}
+
+.aaa {
+  font-weight: 700;
+}
+.bbb {
+  color: red;
+}
+.sub {
+  color: blue;
+}
 .font-sm {
-    font-size: 0.9rem
+  font-size: 0.9rem;
 }
