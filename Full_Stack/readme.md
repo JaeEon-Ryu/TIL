@@ -63,7 +63,30 @@
   1. freenom : ga, ka 등으로 끝나는 도메인을 무료로 얻을 수 있음 ( 무료일 경우 최대 1년 )
   2. gabia : 여러가지 도메인 주소 중 'shop'으로 끝나는 도메인 1년에 500원으로 구입 가능 ( freenom을 사용할 수 없을 때 사용 ) 
   ```
+ 
+  <br>
 
++ ### 리눅스(Linux) - docker image 만들기  
+  <img src="https://user-images.githubusercontent.com/52907116/126788759-03bd366c-dd58-4adb-a093-a2e8c954f671.png" width="50%" >    
+  <br>
+  ( 윈도우 cmd에서 Docker를 활용하여 Linux를 쓰는 모습 )
+  
+  ### 참고) Docker 명령어 정리
+  ```python
+  # 컨테이너 확인(실행중인 image 확인)
+  docker ps : 실행중인 컨테이너의 목록을 확인
+  docker ps -a : 이전에 종료되었던 컨테이너들을 포함한 컨테이너의 목록을 확인
+  
+  # start (종료된 컨테이너 시작)
+  docker start "container ID" : 컨테이너 실행 ( 컨테이너를 실행한다고 해서 Host OS의 쉘을 벗어나진 않음 )
+  
+  # attach (컨테이너에 접속하기)
+  docker attach "container ID" : 컨테이너 접속 ( Host OS의 쉘을 벗어남 ) 
+  
+  reference : https://captcha.tistory.com/49
+  ```
+  
+  
 <br>
 
 #### reference  
