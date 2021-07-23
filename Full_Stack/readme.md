@@ -23,6 +23,7 @@
 
 + ### 리눅스(Linux) - Linux CentOS7에 MySQL8 설치  
   <img src="https://user-images.githubusercontent.com/52907116/126426061-ba4fed10-3188-4cdf-a933-9d0743e8ff94.png" width="30%" ><img src="https://user-images.githubusercontent.com/52907116/126426064-ab8f2849-0286-40a9-9ac2-f988f607dd31.png" width="30%" >  
+  
   ### 참고) mysql - root 패스워드 초기화하는 방법
   ```python
   1. 먼저 mysql이 떠있으면 중지
@@ -53,6 +54,15 @@
   ```
 
   <br>
+
++ ### 리눅스(Linux) - Nginx 셋팅 및 무료 HTTPS 인증서 설치  
+  <img src="https://user-images.githubusercontent.com/52907116/126777294-06271179-5851-4d60-a3b4-7767822b0fff.png" width="30%" >  
+    
+  ### 참고) 도메인 등록
+  ```python
+  1. freenom : ga, ka 등으로 끝나는 도메인을 무료로 얻을 수 있음 ( 무료일 경우 최대 1년 )
+  2. gabia : 여러가지 도메인 주소 중 'shop'으로 끝나는 도메인 1년에 500원으로 구입 가능 ( freenom을 사용할 수 없을 때 사용 ) 
+  ```
 
 <br>
 
