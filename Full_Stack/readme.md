@@ -67,9 +67,11 @@
   <br>
 
 + ### 리눅스(Linux) - docker image 만들기  
-  <img src="https://user-images.githubusercontent.com/52907116/126788759-03bd366c-dd58-4adb-a093-a2e8c954f671.png" width="50%" >    
+  <img src="https://user-images.githubusercontent.com/52907116/126788759-03bd366c-dd58-4adb-a093-a2e8c954f671.png" width="40%" ><img src="https://user-images.githubusercontent.com/52907116/126859567-0e6f6079-99c6-4547-9326-f0b2b4c110a4.png" width="40%" >       
   <br>
-  ( 윈도우 cmd에서 Docker를 활용하여 Linux를 쓰는 모습 )
+  ( 윈도우 cmd에서 Docker를 활용하여 Linux를 쓰는 모습, 이미지 제작 후, tar 확장자의 압축파일로 배포 준비 완료 )
+  
+  <br>
   
   ### 참고) Docker 명령어 정리
   ```python
@@ -82,10 +84,13 @@
   
   # attach (컨테이너에 접속하기)
   docker attach "container ID" : 컨테이너 접속 ( Host OS의 쉘을 벗어남 ) 
-  
-  reference : https://captcha.tistory.com/49
+ 
+  # .bashrc
+  컨테이너에 접속했을 때, 실행되는 프로세스를 지정 가능
+  ex) 별칭 지정, 시간 지정, nginx 실행, cd(최초 파일경로 - root) 등
+  . .bashrc : 바뀐 bashrc 적용 
   ```
-  
+  <br>
   
 <br>
 
