@@ -106,11 +106,45 @@
   grep
   ```
   
+  <br>
+  
++ ### 리눅스(Linux) - 실무에서 꼭 필요한 기술
+  + #### sudo 권한 부여
+  ```
+  # 설정 확인
+  #root> visudo
+    %wheel  ALL=(ALL)       ALL
+    %wheel  ALL=(ALL)       NOPASSWD: ALL
+  #root> usermod -aG wheel <user>
+  
+  $user> sudo bash
+  $user> sudo vi /etc/hosts
+  ```
+  + #### 파일 압축
+  ```
+  $> gzip x.log         # x.log → x.log.gz
+  $> gzip x.log.gz -d   # x.log.gz → x.log
+  $> gzip x.log.gz -l   # compress status & list
+  ```
+  + #### ftp vs sftp vs samba vs ownCloud
+  ```
+  ftp:   21 port
+  sftp:  22 port (ssh)
+  samba: windows remote directory
+  ownCloud: 클라우드 파일 서버(mariadb, httpd, php, etc)
+  ```
+  + #### 지난 log 파일 정리
+  ```
+  $> find . -name "*.gz"
+  $> find . -name \*.gz | sort
+  $> find . -name \*.gz -mtime +30
+  $> find . -name \*.gz -mtime +30 -delete
+  ```
+  
 <br>
 
 #### reference  
 ##### [시니어코딩 - {SSAC} 스타트업 풀스택 개발자 과정](https://www.youtube.com/watch?v=Y__GznCpioo&list=PLEOnZ6GeucBWaUzqrMvrl-_ernhNwLHOr&ab_channel=%EC%8B%9C%EB%8B%88%EC%96%B4%EC%BD%94%EB%94%A9indiflex)  
 ##### [시니어코딩 - Linux 실무](https://docs.google.com/presentation/d/1S2WtAXDpFNzWG72AOMnAfPJCrTXmf1TjNxrFLNgosy4/edit#slide=id.gab11b71d47_0_93)  
-##### [시니어코딩 - Linux 기본 명령어](https://docs.google.com/presentation/d/1CrOcTTrRRHlredMRwie9WKSo7ChIF4bRylvUxhinRYU/edit#slide=id.p)
-
+##### [시니어코딩 - Linux 기본 명령어](https://docs.google.com/presentation/d/1CrOcTTrRRHlredMRwie9WKSo7ChIF4bRylvUxhinRYU/edit#slide=id.p)  
 
