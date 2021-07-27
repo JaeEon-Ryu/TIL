@@ -140,6 +140,57 @@
   $> find . -name \*.gz -mtime +30
   $> find . -name \*.gz -mtime +30 -delete
   ```
+  + #### vmstat (Virtual Memory STATistics) 시스템 모니터링  
+  프로세스, 메모리, 페이징, I/O 블럭, CPU 활동 사항들의 정보를 출력하는 기능  
+  ```
+  $> vmstat
+  $> vmstat 1         # 1초에 한번씩 출력
+  $> vmstat 1 3       # 1초에 한번씩 3번
+  $> vmstat -a        # active 한것과 그렇지 않은 것을 보여줌
+  $> vmstat -d        # 디스크 사용량
+  $> vmstat -s        # 메모리 스탯
+  ```
+  + #### sar (System Activity Reporter) 지난 시스템 모니터링
+  ```
+  # CPU average
+  $> sar
+  $> sar -f /var/log/sa/sa20
+  
+  # memory average
+  $> sar -r
+  $> sar -f /var/log/sa/sa20 -r
+  
+  # load average
+  $> sar -q
+  ```
+  + #### netstat (NETwork STATistics)  &  ss  네트워크 상태 보기
+  ```
+  $> netstat
+  $> netstat -an
+  $> netstat -anl
+  $> netstat -an | grep 3306
+  
+  # cf. ss (more fast)
+  $> ss -an | grep 3306
+  ```
+  + #### Load Balancing
+  ```
+  하나의 인터넷 서비스가 발생하는 트래픽이 많을 때, 여러 대의 서버가 분산처리하여 해결해주는 서비스
+  ( 서버의 로드율 증가, 부하량, 속도저하 등 고려 )
+  
+  Load Balancer : 여러 대의 Server에게 균등하게 Traffic을 분산시켜주는 역할을 하는 것
+  
+  NAT(Network Address Translation)
+  사설 IP 주소를 공인 IP 주소로 바꾸는 데 사용하는 통신망의 주소 변조기
+  
+  Tunneling
+  인터넷상에서 눈에 보이지 않는 통로를 만들어 통신할 수 있게 하는 개념
+  데이터를 캡슐화해서 연결된 상호 간에만 캡슐화된 패킷을 구별해 캡슐화를 해제할 수 있음
+  
+  DSR(Dynamic Source Routing protocol)
+  서버에서 클라이언트로 되돌아가는 경우, 목적지 주소를 클라이언트의 IP 주소로 전달해서 찾아가는 개념
+  ( 네트워크 스위치를 거치지 않음 )
+  ```
   
 <br>
 
