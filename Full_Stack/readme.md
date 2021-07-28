@@ -192,10 +192,79 @@
   ( 네트워크 스위치를 거치지 않음 )
   ```
   
+  <br>
+  
++ ### MySQL 시작 - 샘플 데이터 생성
+  + #### 기본설정
+    ```
+    1. ncloud 서버 접속 후, vi /etc/my.cnf   ->  mysqld 하단에 두줄 추가
+
+    sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+    log_bin_trust_function_creators=1
+    
+    2. mysql 접속해서 권한 부여
+      ( 2-1 방법이 되지 않을 경우, 2-2 방법을 쓸 것 )
+    
+    2-1)  grant all privileges on testdb.* to 이름@'%';
+          flush privileges;
+    
+    
+    2-2)  update mysql.user set Super_priv='Y' where user = '이름';
+          flush privileges;
+    ```
+    
+    <br>
+    
+  + #### 함수예제
+    ```
+    CREATE DEFINER=`test0114`@`%` FUNCTION `f_rand1`(_str varchar(255)) RETURNS varchar(31) CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci
+    BEGIN
+      declare v_ret varchar(31);
+      declare v_len tinyint;
+
+      set v_len = char_length(_str);
+      set v_ret = substring(_str,CEIL(rand() * v_len),1);
+
+    RETURN v_ret;
+    END
+    ```
+    
+    <br>
+    
+  + #### 프로시저 예제
+    ```
+    CREATE DEFINER=`test0114`@`%` PROCEDURE `sp_test_emp`(_cnt int)
+    BEGIN
+      declare v_idx int default 0;
+
+      while v_idx < _cnt
+      do
+        insert into Emp(ename, dept, salary) values (f_randname(), f_rand1('34567'), f_rand1('123456789') * 100);
+        set v_idx = v_idx + 1;
+      end while;
+    END
+    
+    
+    CREATE DEFINER=`test0114`@`%` FUNCTION `f_randname`() RETURNS varchar(31) CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci
+    BEGIN
+      declare v_ret varchar(31);
+      declare v_lasts varchar(255) default '김이박조회전천방지마우배원';
+      declare v_firsts varchar(255) default '순신세종성호지혜가은세호윤국가나다라마바사아자차카결찬희';
+
+      set v_ret = concat( f_rand1(v_lasts), f_rand1(v_firsts), f_rand1(v_firsts));
+
+    RETURN v_ret;
+    END
+    ```
+    
+    <br>
+ 
+  
 <br>
 
 #### reference  
 ##### [시니어코딩 - {SSAC} 스타트업 풀스택 개발자 과정](https://www.youtube.com/watch?v=Y__GznCpioo&list=PLEOnZ6GeucBWaUzqrMvrl-_ernhNwLHOr&ab_channel=%EC%8B%9C%EB%8B%88%EC%96%B4%EC%BD%94%EB%94%A9indiflex)  
 ##### [시니어코딩 - Linux 실무](https://docs.google.com/presentation/d/1S2WtAXDpFNzWG72AOMnAfPJCrTXmf1TjNxrFLNgosy4/edit#slide=id.gab11b71d47_0_93)  
 ##### [시니어코딩 - Linux 기본 명령어](https://docs.google.com/presentation/d/1CrOcTTrRRHlredMRwie9WKSo7ChIF4bRylvUxhinRYU/edit#slide=id.p)  
+##### [시니어코딩 - MySQL 실무](https://docs.google.com/presentation/d/1fhtpdjbIPi0fvZbY9TlUKJRqIeqoIsJIzeWCaRktwBI/edit#slide=id.p)
 
