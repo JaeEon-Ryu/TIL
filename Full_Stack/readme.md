@@ -259,6 +259,29 @@
     
     <br>
  
++ ### MySQL 정리
+  + #### DCL, DDL 관련
+  ```
+  # A와 같은 구조의 테이블 만들기
+  create table <table-name> like A;
+  # A와 같은 구조, 같은 데이터의 테이블 만들기
+  create table <table-name> AS
+    select * from A;
+    
+  show create table <table-name>
+  truncate table <table-name>
+  drop table <table-name>
+  ```
+  
+  <br>
+  
+  + #### DML, TCL 관련
+  
+  <br>
+  
+  + #### View, Trigger, Function, Procedure
+  
+ 
   
 <br>
 
