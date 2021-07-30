@@ -263,10 +263,10 @@
   + #### DCL, DDL 관련
   ```
   # A와 같은 구조의 테이블 만들기
-  create table <table-name> like A;
+    create table <table-name> like A;
   # A와 같은 구조, 같은 데이터의 테이블 만들기
-  create table <table-name> AS
-    select * from A;
+    create table <table-name> AS
+      select * from A;
     
   show create table <table-name>
   truncate table <table-name>
@@ -276,10 +276,57 @@
   <br>
   
   + #### DML, TCL 관련
+  ```
+  # insert
+    insert (ignore) into table ~
   
+  # select
+    select * from table ~
+    
+  # update
+    update table set ~
+    
+  # delete
+    delete from table
+    truncate table
+  
+  # commit, rollback
+    Session 단위로 Tx 제어
+    start transaction - commit or rollback
+    DDL에 대해서는 Rollback 적용 X
+  
+  # savepoint
+    start transaction;
+    savepotint x
+    rollback to savepotin x; 
+  ```
+
   <br>
   
   + #### View, Trigger, Function, Procedure
+  ```
+  # View ( not Updatable )
+    CREATE VIEW <view-name> AS
+      SELECT …  ;
+
+     장점 : 보안성, 간결성, 성능 등
+
+  # Trigger
+   특정 테이블에 INSERT, DELETE, UPDATE 같은 DML 문이 수행되었을 때, 
+   데이터베이스에서 자동으로 동작하도록 작성된 프로그램
+   
+  # Function
+    사용자가 임의로 작성한 함수
+    반드시 값을 리턴해야 함
+    작성시 권한 필요
+    
+  # Procedure
+    Transact-SQL 문장의 집합
+    어떠한 동작을 절차적 일괄처리 작업하는데 사용
+    SQL Server에서 사용하는 프로그래밍 기능
+    
+    장점 : 성능, 유지보수, 모듈화, 절차적 배치 작업 등
+  ```
   
  
   
