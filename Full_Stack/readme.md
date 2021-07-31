@@ -327,7 +327,32 @@
     
     장점 : 성능, 유지보수, 모듈화, 절차적 배치 작업 등
   ```
-  
+
+<br>
+
++ ### {Tip&Tech - linux} getopts, getopt - 셸 스크립트에 프로다운 우아한 옵션 주기
+  + #### 셸 스크립트나 함수가 파라미터(argument)를 받는 기본 방식
+  ```
+  $@ 	: 모든 옵션(파라미터)           $1, $2, ...     첫 번째 파라미터, 두 번째 파라미터, ....
+  $#  : 파라미터의 개수               shift n	
+  ```
+  + #### getopts
+  ```
+  option_string 	옵션을 정의하는 문자, 뒤에 콜론(:)이 있으면 옵션값을 받는 다는 의미 (d:u:f:h)
+  varname         옵션 명(d,u,f,h)을 받을 변수, OPTARG 변수에는 실제 옵션의 값이 세팅됨!!
+  ```
+  + #### getopt
+  ```
+  shortopts		    옵션을 정의하는 문자
+  longopts		    긴 옵션을 정의하는 문자 (--diffs와 같은 긴 옵션 정의) ,(콤마)로 구분한다.
+  progname        오류 발생시 리포팅할 프로그램 명칭(현재 셸 스크립트 파일명)
+  parameters      옵션에 해당하는 실제 명령 구문(보통은 모든 파라미터를 뜻하는 $@ 사용)
+  ```
+  + #### 시스템 명령 등록
+  ```
+  o.bashrc나 .bash_profile 에 해당 셸 스크립트의 alias를 주어 등록
+    ex)    alias datefmt='/root/bin/datefmt.sh'
+  ```
  
   
 <br>
@@ -337,4 +362,5 @@
 ##### [시니어코딩 - Linux 실무](https://docs.google.com/presentation/d/1S2WtAXDpFNzWG72AOMnAfPJCrTXmf1TjNxrFLNgosy4/edit#slide=id.gab11b71d47_0_93)  
 ##### [시니어코딩 - Linux 기본 명령어](https://docs.google.com/presentation/d/1CrOcTTrRRHlredMRwie9WKSo7ChIF4bRylvUxhinRYU/edit#slide=id.p)  
 ##### [시니어코딩 - MySQL 실무](https://docs.google.com/presentation/d/1fhtpdjbIPi0fvZbY9TlUKJRqIeqoIsJIzeWCaRktwBI/edit#slide=id.p)
+##### [카카오 다니는 개발자 아저씨 '김용환' - getopt() 함수](https://knight76.tistory.com/entry/30026565533)
 
