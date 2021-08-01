@@ -353,8 +353,29 @@
   o.bashrc나 .bash_profile 에 해당 셸 스크립트의 alias를 주어 등록
     ex)    alias datefmt='/root/bin/datefmt.sh'
   ```
- 
+
+<br>
+
++ ### MySQL - With - CTE 로 복잡한 쿼리도 쉽게 코딩하자
+  + With - CTE
+  ```
+  MySQL 8.0+, ANSI-SQL99, 메모리에 임시 결과 셋으로 올려놓고 재사용!  (cf. View, Function)
+
+  장점 : 순서에 의한 절차적으로 작성 → 작성하기 쉽고, 읽기 쉽다!
   
+  WITH [RECURSIVE]
+      cte_name [(col_name [, col_name] ...)] AS (subquery)
+      [, cte_name [(col_name [, col_name] ...)] AS (subquery)] 
+  select * from cte_name;
+
+
+  ! MySQL의 CTE에는 아래와 같이 2가지 CTE를 제공함
+   1) Common Table Expressions (기본 CTE)
+     - 순차적으로 쿼리 작성 가능
+   2) Recursive Common Table Expressions (재귀 CTE)
+     - 스스로 추가적인 Row를 생성할 수 있음 
+  ```
+
 <br>
 
 #### reference  
