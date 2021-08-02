@@ -393,6 +393,8 @@
    - Returning JSON format directly
              c.f. MySQL X DevAPI
   ```
+  + #### Functions  
+  <img src="https://user-images.githubusercontent.com/52907116/127808379-9da4033f-7c0a-411d-a186-82f9c793804e.png" width="70%" >    
 
 <br>
 
