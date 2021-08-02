@@ -357,7 +357,7 @@
 <br>
 
 + ### MySQL - With - CTE 로 복잡한 쿼리도 쉽게 코딩하자
-  + With - CTE
+  + #### With - CTE
   ```
   MySQL 8.0+, ANSI-SQL99, 메모리에 임시 결과 셋으로 올려놓고 재사용!  (cf. View, Function)
 
@@ -374,6 +374,24 @@
      - 순차적으로 쿼리 작성 가능
    2) Recursive Common Table Expressions (재귀 CTE)
      - 스스로 추가적인 Row를 생성할 수 있음 
+  ```
+
++ ### MySQL - JSON 데이터 타입 사용하기
+  + #### Json 데이터 다루기
+  ```
+  JSON : JavaScript Object Notation
+  데이터 = 정형 데이터 + 비정형 데이터
+   - 비정형 데이터의 필요성 급증
+   - 비정형 데이터를 마치 정형 테이블 처럼!
+    (정형 테이블과 비정형 데이터의 조인?)
+  MySQL JSON Data Type is
+   - Same as LONGBLOB, LONGTEXT
+   - Access directly
+     (by key or array index)
+   - Very Fast, More Efficiently
+     (use JSON Function)
+   - Returning JSON format directly
+             c.f. MySQL X DevAPI
   ```
 
 <br>
