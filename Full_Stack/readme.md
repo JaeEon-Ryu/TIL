@@ -395,6 +395,21 @@
   ```
   + #### Functions  
   <img src="https://user-images.githubusercontent.com/52907116/127808379-9da4033f-7c0a-411d-a186-82f9c793804e.png" width="70%" >    
+ 
+  <br>
+  
++ ### MySQL - Tip&Tech:Rollup & Pivot
+  + Rollup
+  ```
+  ROLLUP을 활용하면 GROUP BY에서 선택한 기준에 따라 합계가 구해짐
+  MySQL에서는 WITH ROLLUP을 사용
+  ```
+  + Pivot
+  ```
+  row와 column의 위치 교체 가능
+  집계함수인 Avg를 Group by절과 함께 사용 시, 이미 평균 값을 한 컬럼 내에 정의할 수 있음
+  UNION을 써가며 행 추가
+  ```
 
 <br>
 
