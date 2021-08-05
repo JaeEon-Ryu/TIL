@@ -399,16 +399,54 @@
   <br>
   
 + ### MySQL - Tip&Tech:Rollup & Pivot
-  + Rollup
+  + #### Rollup
   ```
   ROLLUP을 활용하면 GROUP BY에서 선택한 기준에 따라 합계가 구해짐
   MySQL에서는 WITH ROLLUP을 사용
   ```
-  + Pivot
+  + #### Pivot
   ```
   row와 column의 위치 교체 가능
   집계함수인 Avg를 Group by절과 함께 사용 시, 이미 평균 값을 한 컬럼 내에 정의할 수 있음
   UNION을 써가며 행 추가
+  ```
+  
+  <br>
+  
++ ### MySQL - 데이터 모델 설계
+  + #### DB Modeling
+  ```
+  개념적(Conceptual, Contextual) 모델링
+    → Entity 도출
+
+  논리적(Logical) 모델링
+    → Data 구조 및 속성 정의
+    → 무결성 정의 및 정규화(Normal Form, NF)
+
+  물리적(Physical) 모델링
+    → Schema, Table, Index 생성
+  ```  
+  
+  + #### 정규화
+  ```
+  중복 데이터를 없애고 관계를 단순하게 가져 가기 위함
+  ```  
+
+  + #### 모델링 요령
+  ```
+  1.  PK (기본키)가 가장 중요함
+      유일값을 갖는 기본키 필수
+      변경이 없는 안정적인 값 ( null X )
+      가능한 1개 컬럼, 실수형 보다는 정수형 (자동증가 컬럼)
+
+  2.  적절한 정규화를 할 것
+      1NF(원자성)을 준수하고 최대한 중복 데이터가 없도록 함
+      계산 결과 컬럼을 최대한 자제함
+      Nullable 할 필요가 없다면 Not Null로 할 것
+
+  3.  참조(데이터) 무결성을 위해 FK를 정의
+
+  4.  서로 다른 성격의 컬럼들은 테이블 분리
   ```
 
 <br>
