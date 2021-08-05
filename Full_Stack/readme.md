@@ -447,7 +447,10 @@
   3.  참조(데이터) 무결성을 위해 FK를 정의
 
   4.  서로 다른 성격의 컬럼들은 테이블 분리
-  ```
+  ```  
+  
+  + #### MySQL WorkBench에서 EERD 그리기  
+  <img src="https://user-images.githubusercontent.com/52907116/128361382-f79b97be-9ef7-496f-9969-6946f301ec41.png" width="50%" >    
 
 <br>
 
