@@ -449,7 +449,7 @@
   4.  서로 다른 성격의 컬럼들은 테이블 분리
   ```  
   
-  + #### MySQL WorkBench에서 EERD 그리기  
+  + #### MySQL WorkBench에서 EERD 그리기 ( 데이터 모델 )
   <img src="https://user-images.githubusercontent.com/52907116/128361382-f79b97be-9ef7-496f-9969-6946f301ec41.png" width="50%" >    
 
   <br>
@@ -487,7 +487,24 @@
   4. 저렴하게 정교한 도구 사용
   5. 지리적으로 분산된 개발 팀 지원
   6. 애플리케이션 수명 주기를 효율적으로 관리
+  ```   
+
+  + #### Transaction
   ```
+  session.startTransaction()
+  session.rollback()
+  session.commit() 
+  session.setSavepoint('tx-id')
+  session.rollbackTo('tx-id')
+  ```   
+  
+  + #### tip
+  ```
+  MongoDB 데이터를 그대로 MySQL에 불러올 수 있는 기능을 제공함 ( 파이썬 언어 지원 )
+  ```  
+  
+  + #### 채팅 구현
+  <img src="https://user-images.githubusercontent.com/52907116/128585287-e06a3ece-fabe-4f78-8f43-9331e7c79def.png" width="30%" ><img src="https://user-images.githubusercontent.com/52907116/128585288-0223134e-8502-4b14-ab94-0ed2140931ad.png" width="60%" >    
 
 <br>
 
