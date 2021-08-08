@@ -505,6 +505,62 @@
   
   + #### 채팅 구현
   <img src="https://user-images.githubusercontent.com/52907116/128585287-e06a3ece-fabe-4f78-8f43-9331e7c79def.png" width="30%" ><img src="https://user-images.githubusercontent.com/52907116/128585288-0223134e-8502-4b14-ab94-0ed2140931ad.png" width="60%" >    
+  
+  <br>
+  
++ ### MySQL 성능 향상 기법 - 인덱스(Index), Fulltext Search, 파티션(Partition)
+  + #### 인덱스
+  ```
+  컬럼의 값과 해당 레코드가 저장된 주소를 키와 값의 쌍으로 인덱스를 만들어 두는 것
+  ```  
+  ```
+  클러스터(Clustered) 인덱스는 데이터 파일과 직접 연관
+  데이터 크기가 너무 클 경우 : 페이지 분할이 빈번하여 쓰기 성능 절하됨
+  카디널리티(Cardinality)가 높을수록 유리함
+  cluster index : 읽기 성능은 보조 인덱스보다 빠르지만 쓰기는 느림
+  페이지 분할은 시스템 부담
+  다중 컬럼 인덱스는 순서를 고려해서 할 것
+  인덱스는 꼭 필요한 것만 할 것 
+  전체 테이블의 10~15% 이상을 읽을 경우 보조 인덱스 사용 X
+  ```  
+  + #### Sargable(Search ARGument ABLE) Query
+  ```
+  where, order by, group by 등에는 가능한 index가 걸린 컬럼을 사용 할 것
+  범위 보다는 in 절을 사용하는 게 좋고, in 보다는 exists가 더 좋음
+  꼭 필요한 경우가 아니라면 서브 쿼리보다는 조인(Join)을 사용 할 것
+  
+  Sargable 하지 않은 경우
+  1. where 절에 함수, 연산, Like(시작 부분 %)문
+  2. between, like, 대소비교(>, < 등)의 범위가 클 경우
+  3. or 연산자 ( 필터링의 반대 개념, 즉 로우수를 늘려가는 개념이므로 )
+  4. offset이 길어질 경우
+  ```  
+  + #### Fulltext Search
+  ```
+  OPTIMIZE TABLE
+  저장된 단어들을 INFORMATION_SCHEMA.INNODB_FT_INDEX_TABLE에서 확인해 볼 수 있음
+  ```  
+  ```
+  Search Expression
+    *   Partial Search
+    +   Required Search
+    -   Excluded Search
+  ```  
+  + #### 파티션
+  ```
+  MySQL 서버 입장 : 데이터를 별도의 테이블로 분리해서 저장
+  사용자 입장 : 하나의 테이블로 읽기와 쓰기를 할 수 있음
+  
+  장점
+  1. INSERT와 범위 SELECT의 빠른 처리
+  2. 주기적으로 삭제 등의 작업이 이루어지는 이력성 데이터의 효율적인 관리
+  3. 데이터의 물리적인 저장소를 분리
+  ```
+  ```
+  8,192개까지 가능
+  FK 지정 불가
+  PK를 지정할 경우 PK가 Partition Key
+  ```  
 
 <br>
 
