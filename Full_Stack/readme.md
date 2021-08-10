@@ -395,6 +395,172 @@
   ```
   + #### Functions  
   <img src="https://user-images.githubusercontent.com/52907116/127808379-9da4033f-7c0a-411d-a186-82f9c793804e.png" width="70%" >    
+ 
+  <br>
+  
++ ### MySQL - Tip&Tech:Rollup & Pivot
+  + #### Rollup
+  ```
+  ROLLUP을 활용하면 GROUP BY에서 선택한 기준에 따라 합계가 구해짐
+  MySQL에서는 WITH ROLLUP을 사용
+  ```
+  + #### Pivot
+  ```
+  row와 column의 위치 교체 가능
+  집계함수인 Avg를 Group by절과 함께 사용 시, 이미 평균 값을 한 컬럼 내에 정의할 수 있음
+  UNION을 써가며 행 추가
+  ```
+  
+  <br>
+  
++ ### MySQL - 데이터 모델 설계
+  + #### DB Modeling
+  ```
+  개념적(Conceptual, Contextual) 모델링
+    → Entity 도출
+
+  논리적(Logical) 모델링
+    → Data 구조 및 속성 정의
+    → 무결성 정의 및 정규화(Normal Form, NF)
+
+  물리적(Physical) 모델링
+    → Schema, Table, Index 생성
+  ```  
+  
+  + #### 정규화
+  ```
+  중복 데이터를 없애고 관계를 단순하게 가져 가기 위함
+  ```  
+
+  + #### 모델링 요령
+  ```
+  1.  PK (기본키)가 가장 중요함
+      유일값을 갖는 기본키 필수
+      변경이 없는 안정적인 값 ( null X )
+      가능한 1개 컬럼, 실수형 보다는 정수형 (자동증가 컬럼)
+
+  2.  적절한 정규화를 할 것
+      1NF(원자성)을 준수하고 최대한 중복 데이터가 없도록 함
+      계산 결과 컬럼을 최대한 자제함
+      Nullable 할 필요가 없다면 Not Null로 할 것
+
+  3.  참조(데이터) 무결성을 위해 FK를 정의
+
+  4.  서로 다른 성격의 컬럼들은 테이블 분리
+  ```  
+  
+  + #### MySQL WorkBench에서 EERD 그리기 ( 데이터 모델 )
+  <img src="https://user-images.githubusercontent.com/52907116/128361382-f79b97be-9ef7-496f-9969-6946f301ec41.png" width="50%" >    
+
+  <br>
+  
++ ### MySQL - X DevAPI를 이용한 NoSQL 구현 및 채팅 데이터 모델 구성
+  + #### MySQL X-DevAPI 를 쓰는 이유
+  ```
+  배경 : 클라우드와 빅데이터의 시대가 도래함에 따라 비정형 데이터가 많아짐
+  만약 RDBMS와 NoSQL DBMS를 같이 사용한다면?
+    -> 개발하기 어려움
+    -> 백업과 복구를 각각 해야함
+    -> 운영, 장애, 점검 등 모든것이 두 배가 됨
+    -> 데이터가 나누어져 있어 서버 애플리케이션 코드가 복잡해지고,
+      서로 조인이 바로 되지 않아 data mapping이 번거로우며, Transaction 처리가 힘들어짐
+  ```   
+  
+  + #### info
+  ```
+  실제로 서버가 없는 구조는 아님
+    -> 서버에서 처리하는 작업을 클라우드 기반의 서비스로 처리
+    -> 서부 구축 및 관리 비용을 줄이는 구조
+  따라서 
+    1. 개발 기간과 비용 단축 가능
+    2. 서버 운영과 유지 보수의 어려움을 줄일 수 있음
+    3. 플랫폼 종속에서 벗어날 수 있음
+  ```
+  
+  + #### PaaS의 장점
+  ```
+  인프라를 서비스로 제공함으로써 PaaS는 IaaS와 같은 장점을 제공함
+  But, 미들웨어, 개발 도구, 기타 업무 도구 등의 추가기능은 다음과 같은 장점을 추가로 제공함
+  1. 코딩 시간 단축 ( 미리 코딩된 앱 구성 요소 기본 제공 )
+  2. 직원 추가 없이 개발 능력 추가
+  3. 모바일을 비롯한 여러 플랫폼용으로 더 쉽게 개발
+  4. 저렴하게 정교한 도구 사용
+  5. 지리적으로 분산된 개발 팀 지원
+  6. 애플리케이션 수명 주기를 효율적으로 관리
+  ```   
+
+  + #### Transaction
+  ```
+  session.startTransaction()
+  session.rollback()
+  session.commit() 
+  session.setSavepoint('tx-id')
+  session.rollbackTo('tx-id')
+  ```   
+  
+  + #### tip
+  ```
+  MongoDB 데이터를 그대로 MySQL에 불러올 수 있는 기능을 제공함 ( 파이썬 언어 지원 )
+  ```  
+  
+  + #### 채팅 구현
+  <img src="https://user-images.githubusercontent.com/52907116/128585287-e06a3ece-fabe-4f78-8f43-9331e7c79def.png" width="30%" ><img src="https://user-images.githubusercontent.com/52907116/128585288-0223134e-8502-4b14-ab94-0ed2140931ad.png" width="60%" >    
+  
+  <br>
+  
++ ### MySQL 성능 향상 기법 - 인덱스(Index), Fulltext Search, 파티션(Partition)
+  + #### 인덱스
+  ```
+  컬럼의 값과 해당 레코드가 저장된 주소를 키와 값의 쌍으로 인덱스를 만들어 두는 것
+  ```  
+  ```
+  클러스터(Clustered) 인덱스는 데이터 파일과 직접 연관
+  데이터 크기가 너무 클 경우 : 페이지 분할이 빈번하여 쓰기 성능 절하됨
+  카디널리티(Cardinality)가 높을수록 유리함
+  cluster index : 읽기 성능은 보조 인덱스보다 빠르지만 쓰기는 느림
+  페이지 분할은 시스템 부담
+  다중 컬럼 인덱스는 순서를 고려해서 할 것
+  인덱스는 꼭 필요한 것만 할 것 
+  전체 테이블의 10~15% 이상을 읽을 경우 보조 인덱스 사용 X
+  ```  
+  + #### Sargable(Search ARGument ABLE) Query
+  ```
+  where, order by, group by 등에는 가능한 index가 걸린 컬럼을 사용 할 것
+  범위 보다는 in 절을 사용하는 게 좋고, in 보다는 exists가 더 좋음
+  꼭 필요한 경우가 아니라면 서브 쿼리보다는 조인(Join)을 사용 할 것
+  
+  Sargable 하지 않은 경우
+  1. where 절에 함수, 연산, Like(시작 부분 %)문
+  2. between, like, 대소비교(>, < 등)의 범위가 클 경우
+  3. or 연산자 ( 필터링의 반대 개념, 즉 로우수를 늘려가는 개념이므로 )
+  4. offset이 길어질 경우
+  ```  
+  + #### Fulltext Search
+  ```
+  OPTIMIZE TABLE
+  저장된 단어들을 INFORMATION_SCHEMA.INNODB_FT_INDEX_TABLE에서 확인해 볼 수 있음
+  ```  
+  ```
+  Search Expression
+    *   Partial Search
+    +   Required Search
+    -   Excluded Search
+  ```  
+  + #### 파티션
+  ```
+  MySQL 서버 입장 : 데이터를 별도의 테이블로 분리해서 저장
+  사용자 입장 : 하나의 테이블로 읽기와 쓰기를 할 수 있음
+  
+  장점
+  1. INSERT와 범위 SELECT의 빠른 처리
+  2. 주기적으로 삭제 등의 작업이 이루어지는 이력성 데이터의 효율적인 관리
+  3. 데이터의 물리적인 저장소를 분리
+  ```
+  ```
+  8,192개까지 가능
+  FK 지정 불가
+  PK를 지정할 경우 PK가 Partition Key
+  ```  
 
 <br>
 
