@@ -25,12 +25,12 @@
 
 <br>
 
-## API타입
+## API 타입
 + 퍼블릭 클라우드속에 설치되어 있는 SW 패키지를 API 형태로 제공하여 ERP 시스템에 접목 후 사용
 + 기업의 ERP 또는 CRM과의 연동이 가능함
 
 <br>
 
 #### reference
-[ Microsoft - Saas란? ](https://azure.microsoft.com/ko-kr/overview/what-is-saas/)
+[ Microsoft - Saas란? ](https://azure.microsoft.com/ko-kr/overview/what-is-saas/)  
 [ 강일용 - 기업이 SaaS를 주목해야 하는 세 가지 이유 ](https://it.donga.com/25782/)
