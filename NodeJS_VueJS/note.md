@@ -22,8 +22,16 @@
 
 <br>
 
+## bluebird
++ 비동기 처리의 실패, 이행 등의 상태를 담은 객체
++ 콜백 함수보다 효율적으로 비동기 처리를 도와줌
++ .then() 및 .catch() 를 사용해 구현
+
+<br>
+
 #### reference
 [ 시니어코딩 - { node & vue.js 시작하기 } ](https://www.youtube.com/watch?v=pc1jgmuS02M&list=PLEOnZ6GeucBX5H60GtICsoDs9LaFQVDPz&ab_channel=%EC%8B%9C%EB%8B%88%EC%96%B4%EC%BD%94%EB%94%A9)  
 [ 시니어코딩 - 강의 슬라이드 ](https://docs.google.com/presentation/d/1mi1Qp6vsb8H09ChmuCwnGLUfEmb1ZRRhOy0YMJzfSbw/edit#slide=id.g448eca9d39_0_46)  
 [ 시니어코딩 - github ](https://github.com/indiflex/nodevue)  
 [ 나무위키 - nodejs ](https://namu.wiki/w/Node.js?from=Nodejs)   
+[ 발모스토리 - nodejs bluebird promisify 예제 ](https://balmostory.tistory.com/72)
