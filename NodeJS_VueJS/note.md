@@ -37,6 +37,30 @@
 
 <br>
 
+## WebPack
++ js, css, sass, fonts, image 등을 모두 package화   
+  -> 네트워크 비용이 적게 발생함  
+
+<br>
+
+## MVVM
++ Model View ViewModel Pattern
++ MVC, MVP : View와 Controller 또는 Presenter가 강하게 연결
+
+<br>
+
+## Vue.js
++ Progressive Javascript Framework   
+  ( 매번 Html을 받아서 처리하는 것 뿐만아니라 화면 처리 등을 모두 포함하기 때문 )  
++ SPA - Single Page Application  
+  ( 모든 page를 각각 refresh? (X) -> 한 페이지에서 작동 (O) )  
++ 접근성, 유연성, 고성능
++ vue-cli
++ vue-devtools
+
+<br>
+  
+
 #### reference
 [ 시니어코딩 - { node & vue.js 시작하기 } ](https://www.youtube.com/watch?v=pc1jgmuS02M&list=PLEOnZ6GeucBX5H60GtICsoDs9LaFQVDPz&ab_channel=%EC%8B%9C%EB%8B%88%EC%96%B4%EC%BD%94%EB%94%A9)  
 [ 시니어코딩 - 강의 슬라이드 ](https://docs.google.com/presentation/d/1mi1Qp6vsb8H09ChmuCwnGLUfEmb1ZRRhOy0YMJzfSbw/edit#slide=id.g448eca9d39_0_46)  
