@@ -29,9 +29,19 @@
 
 <br>
 
+## Socket.io
++ 실시간으로 상호작용하는 웹 서비스를 만드는 기술인 웹 소켓을 사용할 수 있게 해주는 모듈
++ JavaScript를 이용하여 브라우저 종류에 상관없이 실시간 웹을 구현할 수 있도록 한 기술
++ 전송 할 때 : socket.emit('Event',data)
++ 수신 할 때 : socket.on('Event',function(data))
+
+<br>
+
 #### reference
 [ 시니어코딩 - { node & vue.js 시작하기 } ](https://www.youtube.com/watch?v=pc1jgmuS02M&list=PLEOnZ6GeucBX5H60GtICsoDs9LaFQVDPz&ab_channel=%EC%8B%9C%EB%8B%88%EC%96%B4%EC%BD%94%EB%94%A9)  
 [ 시니어코딩 - 강의 슬라이드 ](https://docs.google.com/presentation/d/1mi1Qp6vsb8H09ChmuCwnGLUfEmb1ZRRhOy0YMJzfSbw/edit#slide=id.g448eca9d39_0_46)  
 [ 시니어코딩 - github ](https://github.com/indiflex/nodevue)  
 [ 나무위키 - nodejs ](https://namu.wiki/w/Node.js?from=Nodejs)   
-[ 발모스토리 - nodejs bluebird promisify 예제 ](https://balmostory.tistory.com/72)
+[ 발모스토리 - nodejs bluebird promisify 예제 ](https://balmostory.tistory.com/72)  
+[ 김승엽 - Node.js와 Socket.io를 이용한 채팅 구현 ](https://berkbach.com/node-js%EC%99%80-socket-io%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%B1%84%ED%8C%85-%EA%B5%AC%ED%98%84-1-cb215954847b)  
+[ Nesoy Blog - Socket.io이란? ](https://nesoy.github.io/articles/2017-04/Socket.io)  
