@@ -1,0 +1,11 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*!
+ * base64id v0.1.0
+ */
+
+/*! https://mths.be/utf8js v2.1.2 by @mathias */
