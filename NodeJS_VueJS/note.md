@@ -38,25 +38,41 @@
 <br>
 
 ## WebPack
++ JavaScript는 언어 자체가 지원하는 모듈 시스템이 없음   
+  -> webpack 등장  
 + js, css, sass, fonts, image 등을 모두 package화   
   -> 네트워크 비용이 적게 발생함  
++ 모던 JavaScript 애플리케이션을 위한 정적 모듈 번들러  
++ 로더 사용, 빠른 컴파일 속도 등의 장정이 있음
++ Node.js가 설치된 환경에서 실행 가능
 
 <br>
 
 ## MVVM
 + Model View ViewModel Pattern
-+ MVC, MVP : View와 Controller 또는 Presenter가 강하게 연결
++ 목표 : 비즈니스 로직과 프레젠테이션 로직을 UI로부터 분리
+  -> 테스트, 유지 보수, 재사용이 쉬워지도록  
++ MVC, MVP : View와 Controller 또는 Presenter가 강하게 연결  
+```
+ View : UI 와 UI 로직을 다룸
+ View Model : 프레젠테이션 로직과 뷰를 위한 상태를 다룸
+ Model : 비즈니스 로직과 데이터를 다룸
+```  
 
 <br>
 
 ## Vue.js
++ MVVM 패턴에서 ViewModel 레이어에 해당하는 화면단 라이브러리
++ 데이터 바인딩과 화면 단위를 컴포넌트 형태로 제공하며, 관련 API를 지원하는 목적
++ Angular에서 지원하는 양방향 데이터 바인딩을 동일하게 제공  
+  ( 하지만 컴포넌트 간 통신의 기본 골격은 React의 단방향 데이터 흐름을 사용 )  
++ 다른 프론트엔드 프레임워크 (Angular, React)와 비교했을 때, 상대적으로 가볍고 빠름
++ 문법이 단순하고 간결하여 초기 학습 비용이 낮고, 누구나 쉽게 접근 가능
 + Progressive Javascript Framework   
   ( 매번 Html을 받아서 처리하는 것 뿐만아니라 화면 처리 등을 모두 포함하기 때문 )  
 + SPA - Single Page Application  
   ( 모든 page를 각각 refresh? (X) -> 한 페이지에서 작동 (O) )  
 + 접근성, 유연성, 고성능
-+ vue-cli
-+ vue-devtools
 
 <br>
   
@@ -69,3 +85,7 @@
 [ 발모스토리 - nodejs bluebird promisify 예제 ](https://balmostory.tistory.com/72)  
 [ 김승엽 - Node.js와 Socket.io를 이용한 채팅 구현 ](https://berkbach.com/node-js%EC%99%80-socket-io%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%B1%84%ED%8C%85-%EA%B5%AC%ED%98%84-1-cb215954847b)  
 [ Nesoy Blog - Socket.io이란? ](https://nesoy.github.io/articles/2017-04/Socket.io)  
+[ webpack - concepts ](https://webpack.kr/concepts/)  
+[ 김양귀 - JavaScript 모듈화 도구, webpack ](https://d2.naver.com/helloworld/0239818)  
+[ k7120792 - MVVM 패턴 ](https://velog.io/@k7120792/Model-View-ViewModel-Pattern)  
+[ Captain Pangyo - Vue.js 입문서 - 프론트엔드 개발자를 위한 ](https://joshua1988.github.io/web-development/vuejs/vuejs-tutorial-for-beginner/)  
