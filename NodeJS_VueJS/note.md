@@ -75,7 +75,92 @@
 + 접근성, 유연성, 고성능
 
 <br>
+
+## axios
++ Promise 기반의 자바스크립트 비동기 처리방식 사용  
+  ( 요청후 .then()으로 결과값을 받아서 처리하는 형식 )  
++ get
+  + 서버로부터 데이터를 가져오는데 사용  
+ ```javascript
+  axios.get('/api/data') .then(res => { // 불러온 값을 Console에 뿌려줌
+  console.log(res.data) })
+ ```  
++ post
+  + 값을 입력할 때 사용  
+ ```javascript
+  axios.post('/api/data', {title: "vue.js"}) 
+   .then(res => { console.log(res.data) })
+ ```  
++ patch
+  + 특정 값을 수정할 때 사용  
+ ```javascript
+  axios.patch('/api/data/3', {title: "vue.js"}) 
+   .then(res => { console.log(res.data) })
+ ```  
++ delete
+  + 특정 값을 삭제할 때 사용  
+ ```javascript
+  axios.delete('/api/data/3') 
+   .then(res => { console.log(res.data) })
+ ```  
+
+<br>
+
+## Vue Routers
++ SPA : 페이지를 이동할 때 서버에 요청해 갱신 ? (X)  
+  -> 미리 해당 페이지를 구성해놓고 클라이언트의 라우팅을 이용하여 화면을 갱신 (O)  
++ 라우팅을 이용하면 매끄럽게 화면 전환을 할 수 있음
++ Vue, React, Angular 모두 라우팅을 이용하여 화면을 전환함
++ Vue Router란? : Vue에서 라우팅 기능을 구현할 수 있도록 지원하는 공식 라이브러리
+
+<br>
+
+## Lodash
++ 자바스크립트 라이브러리 중 하나
++ 데이터를 쉽게 다룰 수 있게 도와줌
++ 특히, 배열 안의 객체들의 값을 핸들링할 때 유용함
++ 예제 5가지  
+```javascript
+1. indexOf : 어느 위치에 있는지 리턴 ( 여러개가 있을 경우 처음 위치 리턴 )
+_.indexOf(array, value, [fromIndex=0])
+
+2. fill : array를 원하는 문자 혹은 숫자로 채워넣음
+_.fill(array, value, [start=0], [end=array.length])
+
+3. join : array에 seperator를 따로 설정할 수 있게 해줌
+_.join(array, [separator=','])
+
+4. find : Collection에 대해서 검색 기능을 담당하고, 첫번째 요소를 가져옴
+_.find(collection, [predicate=_.identity], [fromIndex=0])
+
+5. foreach : Collection의 각 요소에 대해 작업을 할 때 사용함
+_.forEach(collection, [iteratee=_.identity])
+```  
+
+<br>
+
+## Event Bus
++ Vue의 기본적인 컴포넌트 관계 => 상-하위 컴포넌트간 통신
++ 하나의 상위 컴포넌트와 두개의 하위 컴포넌트 구조에서 두 하위 컴포넌트끼리 통신을 해야한다면?  
+  -> 상위 컴포넌트를 강제로 거쳐야 하는 상황 발생  
+  -> 불필요한 컴포넌트를 만들어야 하는 상황을 해결하기 위해 Event Bus 등장  
++ Event Bus : 컴포넌트 계층 구조와 관계 없이 두 컴포넌트 사이에 데이터 전달 가능  
++ 이벤트와 데이터 송신 : $emit()
++ 이벤트와 데이터 수신 : $on()
   
+<br>
+
+## Mixin
++ 컴포넌트에 무언가를 섞어 원하는 것을 구현하는 기능
++ 동작 과정
+  1. 믹스인할 개체를 생성
+  2. 컴포넌트에 객체를 믹스인
+  3. 나머지 부분을 구현하여 완성
++ 같은 코드를 반복하지 않게 되거, 특정 '기능'을 나타내는 파일을 캡슐화 가능
++ 유지보수 및 협업 측면에서 훌륭한 구조 완성 가능
+
+<br>
+
 
 #### reference
 [ 시니어코딩 - { node & vue.js 시작하기 } ](https://www.youtube.com/watch?v=pc1jgmuS02M&list=PLEOnZ6GeucBX5H60GtICsoDs9LaFQVDPz&ab_channel=%EC%8B%9C%EB%8B%88%EC%96%B4%EC%BD%94%EB%94%A9)  
@@ -89,3 +174,8 @@
 [ 김양귀 - JavaScript 모듈화 도구, webpack ](https://d2.naver.com/helloworld/0239818)  
 [ k7120792 - MVVM 패턴 ](https://velog.io/@k7120792/Model-View-ViewModel-Pattern)  
 [ Captain Pangyo - Vue.js 입문서 - 프론트엔드 개발자를 위한 ](https://joshua1988.github.io/web-development/vuejs/vuejs-tutorial-for-beginner/)  
+[ 어쩌다보니여기까지 - Vue.js에서 axios를 사용하여 서버통신하는 방법 ](https://uxgjs.tistory.com/138)    
+[ hyemz - Vue.js 라우팅에 대해 알아보자 ](https://velog.io/@hyemz/Vue.js-%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%97%90-%EB%8C%80%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90-1)  
+[ jhhan - lodash ](https://jhhan009.tistory.com/48)  
+[ 탱구탱구 개발자 일기 - Event Bus를 통한 컴포넌트 통신 ](https://tangoo91.tistory.com/9)  
+[ bluestragglr - Vue.js Mixin: 기능 캡슐화하기 ](https://velog.io/@bluestragglr/Vue.js-Mixin-%EA%B8%B0%EB%8A%A5-%EB%B0%98%EB%B3%B5-%EC%A0%9C%EA%B1%B0%ED%95%98%EA%B8%B0)  
